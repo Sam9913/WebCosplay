@@ -25,5 +25,16 @@ namespace Assignment
             HiddenField1.Value = i.ToString();
             Image1.ImageUrl = "~/image/h" + i.ToString() + ".jpg";
         }
+
+        protected void buttonLeft_Click(object sender, ImageClickEventArgs e)
+        {
+            i = Int32.Parse(HiddenField1.Value.ToString()) - 1;
+            if (i < 1)
+            {
+                i = 3;
+            }
+            HiddenField1.Value = i.ToString();
+            Image1.ImageUrl = "~/image/h" + i.ToString() + ".jpg";
+        }
     }
 }

@@ -76,6 +76,7 @@
     <Content Include="image\4.jpg" />
     <Content Include="image\5.jpg" />
     <Content Include="image\arrow.jpg" />
+    <Content Include="image\arrowL.jpg" />
     <Content Include="image\h1.jpg" />
     <Content Include="image\h2.jpg" />
     <Content Include="image\h3.jpg" />
@@ -124,9 +125,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="Web.sitemap">
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
