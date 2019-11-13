@@ -1,0 +1,28 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="Assignment.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    
+    </head>
+<body>
+    <form id="form1" runat="server">
+        <div><asp:ImageMap ID="ImageMap1" runat="server" ImageUrl="~/image/webLogo.png" Height="47px" Width="47px"></asp:ImageMap></div>
+            <asp:Menu ID="Menu1" runat="server" BackColor="#F7F6F3" DynamicHorizontalOffset="2" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#2D1300" StaticSubMenuIndent="10px" DataSourceID="Gallery">
+                <DynamicHoverStyle BackColor="#DE9967" ForeColor="White" />
+                <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                <DynamicMenuStyle BackColor="#F7F6F3" />
+                <DynamicSelectedStyle BackColor="#985321" />
+                <StaticHoverStyle BackColor="#DE9967" ForeColor="White" />
+                <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                <StaticSelectedStyle BackColor="#985321" />
+            </asp:Menu>
+            <asp:SiteMapDataSource runat="server" ID="Gallery"></asp:SiteMapDataSource>
+            <div></div>
+        <div><asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder></div>
+    </form>
+</body>
+</html>
