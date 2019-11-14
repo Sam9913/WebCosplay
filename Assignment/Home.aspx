@@ -9,7 +9,7 @@
     
             <asp:ImageButton ID="buttonRight" CssClass="buttonR" runat="server" ImageUrl="~/image/arrowR.svg" OnClick="buttonRight_Click" />
             <asp:ImageButton ID="buttonLeft" CssClass="buttonL" runat="server" ImageUrl="~/image/arrowL.svg" OnClick="buttonLeft_Click" />
-            <asp:Image ID="Image1" runat="server" style="width:100%; height:25%;" ImageUrl="~/image/h1.jpg" />
+            <asp:Image ID="Image1" runat="server" CssClass="slideshow" ImageUrl="~/image/header_1.jpg" />
             <asp:HiddenField ID="hiddenField" runat="server" Value="1"/>
         </ContentTemplate>
     </asp:UpdatePanel>
@@ -22,7 +22,7 @@
 
     <table style="width: 100%; padding-top:2.5%; padding-left:10%; padding-right:10%; padding-bottom:2.5%;">
         <tr>
-            <td style="width: 200px; padding-bottom:2.5%"><u><b>Hot Sales</b></u></td>
+            <td style="width: 200px; padding-bottom:2.5%; padding-top:2.5%"><u><b>Hot Sales</b></u></td>
         </tr>
         <tr>
             <td style="text-align:center; width: 200px;">

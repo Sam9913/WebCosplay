@@ -82,9 +82,10 @@
     <Content Include="image\cart.svg" />
     <Content Include="image\commentBox.svg" />
     <Content Include="image\gallery.svg" />
-    <Content Include="image\h1.jpg" />
-    <Content Include="image\h2.jpg" />
-    <Content Include="image\h3.jpg" />
+    <Content Include="image\header_1.jpg" />
+    <Content Include="image\header_2.jpg" />
+    <Content Include="image\header_3.jpg" />
+    <Content Include="image\header_4.jpg" />
     <Content Include="image\home.svg" />
     <Content Include="image\login.svg" />
     <Content Include="image\review.svg" />

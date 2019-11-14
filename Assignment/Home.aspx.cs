@@ -18,12 +18,12 @@ namespace Assignment
         protected void buttonRight_Click(object sender, ImageClickEventArgs e)
         {
             i = Int32.Parse(hiddenField.Value.ToString()) + 1;
-            if (i > 3)
+            if (i > 4)
             {
                 i = 1;
             }
             hiddenField.Value = i.ToString();
-            Image1.ImageUrl = "~/image/h" + i.ToString() + ".jpg";
+            Image1.ImageUrl = "~/image/header_" + i.ToString() + ".jpg";
         }
 
         protected void buttonLeft_Click(object sender, ImageClickEventArgs e)
@@ -31,21 +31,21 @@ namespace Assignment
             i = Int32.Parse(hiddenField.Value.ToString()) - 1;
             if (i < 1)
             {
-                i = 3;
+                i = 4;
             }
             hiddenField.Value = i.ToString();
-            Image1.ImageUrl = "~/image/h" + i.ToString() + ".jpg";
+            Image1.ImageUrl = "~/image/header_" + i.ToString() + ".jpg";
         }
 
         protected void Timer1_Tick(object sender, EventArgs e)
         {
             i = Int32.Parse(hiddenField.Value.ToString()) + 1;
-            if (i > 3)
+            if (i > 4)
             {
                 i = 1;
             }
             hiddenField.Value = i.ToString();
-            Image1.ImageUrl = "~/image/h" + i.ToString() + ".jpg";
+            Image1.ImageUrl = "~/image/header_" + i.ToString() + ".jpg";
         }
     }
 }
