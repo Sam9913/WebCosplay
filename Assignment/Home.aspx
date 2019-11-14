@@ -2,12 +2,23 @@
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-    <asp:ImageButton ID="buttonRight" runat="server" ImageUrl="~/image/arrow.jpg" style="margin-top:10%; width:3%; height:5%; position: absolute;
-            margin-left: 95.5%;" OnClick="buttonRight_Click" />
-    <asp:ImageButton ID="buttonLeft" runat="server" ImageUrl="~/image/arrowL.jpg" style="margin-top:10%; width:3%; height:5%; position: absolute;
-            margin-left:0.5% " OnClick="buttonLeft_Click" />
-    <asp:Image ID="Image1" runat="server" style="width:100%; height:25%;" ImageUrl="~/image/h1.jpg" />
-    <asp:HiddenField ID="HiddenField1" runat="server" Value="1"/>
+
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <ContentTemplate>
+            <asp:Timer ID="Timer1" runat="server" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
+    
+            <asp:ImageButton ID="buttonRight" CssClass="buttonR" runat="server" ImageUrl="~/image/arrowR.svg" OnClick="buttonRight_Click" />
+            <asp:ImageButton ID="buttonLeft" CssClass="buttonL" runat="server" ImageUrl="~/image/arrowL.svg" OnClick="buttonLeft_Click" />
+            <asp:Image ID="Image1" runat="server" style="width:100%; height:25%;" ImageUrl="~/image/h1.jpg" />
+            <asp:HiddenField ID="hiddenField" runat="server" Value="1"/>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+
+    <div class="descriptionEffect">
+        <br />
+            <asp:Label ID="Label1" runat="server" Text="We help cosplayer and anime fans to trade and buy cosplay costume efficiently." CssClass="labelDescription"></asp:Label>
+        <br />
+    </div>
 
     <table style="width: 100%; padding-top:2.5%; padding-left:10%; padding-right:10%; padding-bottom:2.5%;">
         <tr>

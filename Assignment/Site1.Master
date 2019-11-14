@@ -4,46 +4,12 @@
 <html>
 <head runat="server">
     <title></title>
-    <style>
-
-        body{
-            margin:0 auto;
-        }
-
-        ul {
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
-          overflow: hidden;
-          background-color: #333;
-        }
-
-        #logo{
-            float:left;
-        }
-
-        li {
-          float: right;
-        }
-
-        li a {
-          display: block;
-          color: white;
-          text-align: center;
-          padding: 14px 16px;
-          text-decoration: none;
-        }
-
-        /* Change the link color to #111 (black) on hover */
-        li a:hover {
-          background-color: #111;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="StyleSheet1.css"/>
     </head>
 <body><div style="width:100%;">
     <ul>
         <li id="logo"><asp:ImageMap ID="ImageMap1" runat="server" ImageUrl="~/image/webLogo.png" Height="47px" Width="47px"></asp:ImageMap></li>
-        <li><a>Login/Logout</a></li>
+        <li><a href="Login.aspx">Login/Logout</a></li>
         <li><a>Wishlist</a></li>
         <li><a>Cart</a></li>
         <li><a href="Gallery.aspx">Gallery</a></li>

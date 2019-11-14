@@ -1,2 +1,65 @@
 ﻿body {
+    margin: 0 auto;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#logo {
+    float: left;
+}
+
+li {
+    float: right;
+}
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        /* Change the link color to #111 (black) on hover */
+        li a:hover {
+            background-color: #111;
+        }
+
+.buttonR ,.buttonL{
+    padding-top: 10%;
+    width: 3%;
+    height: 5%;
+    position: absolute;
+    padding-bottom: 10.7%;
+    background-color: lightslategrey;
+    opacity:0.0;
+}
+
+.buttonR {
+    margin-left: 97%;
+}
+
+.buttonR:hover, .buttonL:hover {
+    opacity:1.0;
+}
+
+.descriptionEffect {
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.labelDescription {
+    color: white;
+    background-color: black;
+    padding-left: 30%;
+    padding-right: 24.2%;
+    padding-top: 12.5%;
+    padding-bottom: 12.5%;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
