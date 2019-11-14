@@ -88,10 +88,10 @@
     <Content Include="image\header_4.jpg" />
     <Content Include="image\home.svg" />
     <Content Include="image\login.svg" />
+    <Content Include="image\logo.jpg" />
     <Content Include="image\review.svg" />
     <Content Include="image\round.jpg" />
     <Content Include="image\star.svg" />
-    <Content Include="image\webLogo.png" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="StyleSheet1.css" />

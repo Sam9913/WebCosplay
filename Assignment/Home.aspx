@@ -4,6 +4,9 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+        <Triggers>
+            <asp:AsyncPostBackTrigger controlid="Timer1" eventname="Tick" />
+        </Triggers>
         <ContentTemplate>
             <asp:Timer ID="Timer1" runat="server" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
     
@@ -14,11 +17,7 @@
         </ContentTemplate>
     </asp:UpdatePanel>
 
-    <div class="descriptionEffect">
-        <br />
-            <asp:Label ID="Label1" runat="server" Text="We help cosplayer and anime fans to trade and buy cosplay costume efficiently." CssClass="labelDescription"></asp:Label>
-        <br />
-    </div>
+    
 
     <table style="width: 100%; padding-top:2.5%; padding-left:10%; padding-right:10%; padding-bottom:2.5%;">
         <tr>

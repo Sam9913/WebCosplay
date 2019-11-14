@@ -8,7 +8,7 @@
     </head>
 <body><div style="width:100%;">
     <ul>
-        <li id="logo"><asp:ImageMap ID="ImageMap1" runat="server" ImageUrl="~/image/webLogo.png" Height="47px" Width="47px"></asp:ImageMap></li>
+        <li id="logo"><asp:ImageMap ID="ImageMap1" runat="server" ImageUrl="~/image/logo.jpg" Height="50px" Width="140px"></asp:ImageMap></li>
         <li><a href="Login.aspx">Login/Logout</a></li>
         <li><a>Wishlist</a></li>
         <li><a>Cart</a></li>
@@ -18,7 +18,14 @@
     <form id="form1" runat="server">
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-     
     </form></div>
+
+    <footer>
+        <div class="about_contact">
+            About Us<br />
+            An online platform that allow cosplayer and anime fans to buy cosplay costume in more efficient way.<br />
+            
+        </div>
+    </footer>
 </body>
 </html>

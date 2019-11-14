@@ -50,7 +50,7 @@ li {
 }
 
 .descriptionEffect {
-    margin-top: 20%;
+    margin-top: 10%;
     margin-bottom: 10%;
 }
 
@@ -66,4 +66,14 @@ li {
 
 .slideshow{
     width:100%;
+}
+
+footer{
+    background-color:black;
+}
+
+footer .about_contact{
+    float:left;
+    color:white;
+    margin-bottom:10%;
 }
