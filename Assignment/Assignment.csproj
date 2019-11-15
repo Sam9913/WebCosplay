@@ -43,7 +43,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -67,6 +75,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Kosupure.mdf" />
+    <Content Include="App_Data\Kosupure_log.ldf">
+      <DependentUpon>Kosupure.mdf</DependentUpon>
+    </Content>
     <Content Include="changePassword.aspx" />
     <Content Include="Costume1.aspx" />
     <Content Include="CustomerPage.aspx" />
@@ -89,6 +101,10 @@
     <Content Include="image\home.svg" />
     <Content Include="image\login.svg" />
     <Content Include="image\logo.jpg" />
+    <Content Include="image\mail.png" />
+    <Content Include="image\mail.svg" />
+    <Content Include="image\phone.png" />
+    <Content Include="image\phone.svg" />
     <Content Include="image\review.svg" />
     <Content Include="image\round.jpg" />
     <Content Include="image\star.svg" />
@@ -165,6 +181,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace assignmentWEB {
+namespace Assignment {
     
     
     public partial class changePassword {
