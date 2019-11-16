@@ -108,3 +108,23 @@
     padding-left: 4%;
     float: left;
 }
+
+.square {
+    width: 100px;
+    height: 100px;
+    margin: 25px;
+    -ms-transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    overflow: hidden;
+}
+
+.pic {
+    background: url(image/1.jpg);
+    width: 150px;
+    height: 150px;
+    margin: -25px;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+}

@@ -13,5 +13,17 @@ namespace Assignment
         {
 
         }
+
+        protected void wishButton_Click(object sender, ImageClickEventArgs e)
+        {
+            if(wishButton.ImageUrl.Equals("~/image/wish_blank.svg"))
+            {
+                wishButton.ImageUrl = "~/image/wish.svg";
+            }
+            else
+            {
+                wishButton.ImageUrl = "~/image/wish_blank.svg";
+            }
+        }
     }
 }

@@ -13,15 +13,6 @@ namespace Assignment {
     public partial class Costume1 {
         
         /// <summary>
-        /// Image1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
-        
-        /// <summary>
         /// Image2 control.
         /// </summary>
         /// <remarks>
@@ -47,6 +38,15 @@ namespace Assignment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image Image4;
+        
+        /// <summary>
+        /// Image1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
         /// Table1 control.
@@ -76,12 +76,21 @@ namespace Assignment {
         protected global::System.Web.UI.WebControls.Button cartButton;
         
         /// <summary>
-        /// wishlistButton control.
+        /// wishButton control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button wishlistButton;
+        protected global::System.Web.UI.WebControls.ImageButton wishButton;
+        
+        /// <summary>
+        /// commentButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button commentButton;
     }
 }

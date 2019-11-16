@@ -80,6 +80,7 @@
       <DependentUpon>Kosupure.mdf</DependentUpon>
     </Content>
     <Content Include="changePassword.aspx" />
+    <Content Include="Collection.aspx" />
     <Content Include="Costume1.aspx" />
     <Content Include="CustomerPage.aspx" />
     <Content Include="Gallery.aspx" />
@@ -108,6 +109,8 @@
     <Content Include="image\review.svg" />
     <Content Include="image\round.jpg" />
     <Content Include="image\star.svg" />
+    <Content Include="image\wish.svg" />
+    <Content Include="image\wish_blank.svg" />
     <Content Include="Login.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="StyleSheet1.css" />
@@ -120,6 +123,13 @@
     </Compile>
     <Compile Include="changePassword.aspx.designer.cs">
       <DependentUpon>changePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Collection.aspx.cs">
+      <DependentUpon>Collection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Collection.aspx.designer.cs">
+      <DependentUpon>Collection.aspx</DependentUpon>
     </Compile>
     <Compile Include="Costume1.aspx.cs">
       <DependentUpon>Costume1.aspx</DependentUpon>
