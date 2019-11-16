@@ -2,9 +2,5 @@
 
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
-        <div class="square">
-          <div class="pic">
-
-          </div>
-        </div>
-    </asp:Content>
+    <asp:ListView ID="ListView1" runat="server"></asp:ListView>
+</asp:Content>
