@@ -91,7 +91,7 @@
 }
 
 .about{
-    padding-bottom: 4%;
+    padding-bottom: 3.95%;
 }
 
 .contact{
@@ -107,4 +107,25 @@
     padding-top: 2%;
     padding-left: 4%;
     float: left;
+}
+
+.login {
+    float: right;
+}
+
+    .login:hover, .home:hover, .hotSales:hover, .newArrival:hover {
+        opacity: 0.4;
+    }
+
+.newArrival {
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.hotSales {
+    margin-right: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    float: right;
 }

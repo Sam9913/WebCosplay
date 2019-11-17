@@ -47,5 +47,15 @@ namespace Assignment
             hiddenField.Value = i.ToString();
             Image1.ImageUrl = "~/image/header_" + i.ToString() + ".jpg";
         }
+
+        protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("/hotSales.aspx");
+        }
+
+        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("/newArrival.aspx");
+        }
     }
 }

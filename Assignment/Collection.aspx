@@ -2,5 +2,5 @@
 
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
-    <asp:ListView ID="ListView1" runat="server"></asp:ListView>
+
 </asp:Content>
