@@ -96,6 +96,7 @@
     <Content Include="image\arrowR.svg" />
     <Content Include="image\cart.svg" />
     <Content Include="image\commentBox.svg" />
+    <Content Include="image\earring.jpg" />
     <Content Include="image\gallery.svg" />
     <Content Include="image\header_1.jpg" />
     <Content Include="image\header_2.jpg" />

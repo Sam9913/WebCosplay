@@ -8,6 +8,11 @@
         </tr>
         <tr>
             <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/4.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Costume1.aspx">Costume 4</asp:HyperLink>
+            </td>
+            <td style="text-align:center; width: 200px;">
                 <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/1.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
                 <br />
                 <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Costume1.aspx">Costume 1</asp:HyperLink>
@@ -17,8 +22,15 @@
                 <br />
                 <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Costume1.aspx">Costume 2</asp:HyperLink>
             </td>
-            <td style="text-align:center; width:200px;">To be added</td>
-            <td style="text-align:center; width: 200px;">To be added</td>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/sasuke.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Costume1.aspx">Sasuke Figure</asp:HyperLink>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:center; width:200px; height:200px;">To be added</td>
+            <td style="text-align:center; width: 200px; height:200px;">To be added</td>
         </tr>
     </table>
 </asp:Content>

@@ -60,7 +60,7 @@ namespace Assignment
 
         protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
         {
-            Response.Redirect("/n");
+            Response.Redirect("/hotSales.aspx");
         }
 
         protected void ImageButton4_Click(object sender, ImageClickEventArgs e)

@@ -100,10 +100,6 @@
     float: left;
 }
 
-.login {
-    float: right;
-}
-
     .login:hover, .home:hover, .hotSales:hover, .newArrival:hover {
         opacity: 0.4;
     }
@@ -121,5 +117,5 @@
 }
 
 .footer{
-    margin-top:100%;
+    margin-bottom:0;
 }
