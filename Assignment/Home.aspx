@@ -17,7 +17,8 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     
-    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/image/1.jpg" Width="40%" Height="40%" CssClass="newArrival" OnClick="ImageButton1_Click"/>
-    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/image/2.jpg" Width="40%" Height="40%" CssClass="hotSales" OnClick="ImageButton2_Click"/>
-
+    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/image/1.jpg" Width="20%" Height="20%" CssClass="newArrival" OnClick="ImageButton1_Click"/>
+    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/image/2.jpg" Width="20%" Height="20%" CssClass="hotSales" OnClick="ImageButton2_Click"/>
+    <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/image/narutoFigure.jpg" Width="16.5%" Height="20%" CssClass="newArrival" OnClick="ImageButton3_Click" style="margin:5%;"/>
+    <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/image/sasuke.jpg" Width="15%" Height="20%" OnClick="ImageButton4_Click"/>
 </asp:Content>

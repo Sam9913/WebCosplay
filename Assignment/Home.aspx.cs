@@ -57,5 +57,15 @@ namespace Assignment
         {
             Response.Redirect("/newArrival.aspx");
         }
+
+        protected void ImageButton3_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("/n");
+        }
+
+        protected void ImageButton4_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("/n");
+        }
     }
 }

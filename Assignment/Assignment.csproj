@@ -111,10 +111,12 @@
     <Content Include="image\logo.jpg" />
     <Content Include="image\mail.png" />
     <Content Include="image\mail.svg" />
+    <Content Include="image\narutoFigure.jpg" />
     <Content Include="image\phone.png" />
     <Content Include="image\phone.svg" />
     <Content Include="image\review.svg" />
     <Content Include="image\round.jpg" />
+    <Content Include="image\sasuke.jpg" />
     <Content Include="image\star.svg" />
     <Content Include="image\wish.svg" />
     <Content Include="image\wish_blank.svg" />
