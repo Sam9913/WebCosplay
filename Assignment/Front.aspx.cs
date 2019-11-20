@@ -13,13 +13,13 @@ namespace Assignment
         {
 
         }
-
-        protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
+        
+        protected void homeButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("/Home.aspx");
         }
 
-        protected void ImageButton2_Click(object sender, ImageClickEventArgs e)
+        protected void loginButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("/Login.aspx");
         }

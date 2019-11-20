@@ -1,7 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Register.aspx.cs" Inherits="Assignment.Register" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
-        <div style="margin-left:40%">
+    <div style="text-align:center; margin-top:2%; margin-bottom:2%;">
+    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx">Login</asp:HyperLink>/<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx">Register</asp:HyperLink>
+    </div>
+
+        <div style="margin-left:37%; margin-bottom:7.4%; margin-top:2.4%;">
             <div style="margin-right:40%">
                 <asp:CreateUserWizard ID="CreateUserWizard1" runat="server" BackColor="#FFFBD6" BorderColor="#FFDFAD" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="1.0em">
                     <ContinueButtonStyle BackColor="White" BorderColor="#CC9966" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" ForeColor="#990000" />

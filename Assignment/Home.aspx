@@ -17,8 +17,59 @@
         </ContentTemplate>
     </asp:UpdatePanel>
     
-    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/image/1.jpg" Width="20%" Height="20%" CssClass="newArrival" OnClick="ImageButton1_Click"/>
-    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/image/2.jpg" Width="20%" Height="20%" CssClass="hotSales" OnClick="ImageButton2_Click"/>
-    <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/image/narutoFigure.jpg" Width="16.5%" Height="20%" CssClass="newArrival" OnClick="ImageButton3_Click" style="margin:5%;"/>
-    <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/image/sasuke.jpg" Width="15%" Height="20%" OnClick="ImageButton4_Click"/>
+    <table style="width: 100%; padding-top:2.5%; padding-left:10%; padding-right:10%; padding-bottom:2.5%;">
+        <tr>
+            <td style="width: 200px; padding-bottom:2.5%; padding-top:2.5%"><u><b>Hot Sales</b></u></td>
+        </tr>
+        <tr>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Costume1.aspx" ><img src="image/4.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Costume1.aspx">Costume 4</asp:HyperLink>
+            </td>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/5.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Costume1.aspx">Costume 5</asp:HyperLink>
+            </td>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Costume1.aspx" ><img src="image/3.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Costume1.aspx">Costume 3</asp:HyperLink>
+            </td>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/narutoFigure.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Costume1.aspx">Naruto Figure</asp:HyperLink>
+            </td>
+        </tr>
+    </table>
+
+    <table style="width: 100%; padding-top:2.5%; padding-left:10%; padding-right:10%; padding-bottom:2.5%;">
+        <tr>
+            <td style="width: 200px; padding-bottom:2.5%;"><u><b>New Arrival</b></u></td>
+        </tr>
+        <tr>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/4.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Costume1.aspx">Costume 4</asp:HyperLink>
+            </td>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/1.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Costume1.aspx">Costume 1</asp:HyperLink>
+            </td>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/2.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/Costume1.aspx">Costume 2</asp:HyperLink>
+            </td>
+            <td style="text-align:center; width: 200px;">
+                <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/sasuke.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
+                <br />
+                <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/Costume1.aspx">Sasuke Figure</asp:HyperLink>
+            </td>
+        </tr>
+    </table>
 </asp:Content>

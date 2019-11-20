@@ -1,0 +1,673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KosupureModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Cart_ID" />
+          </Key>
+          <Property Name="Cart_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Cart_Total" Type="int" />
+          <Property Name="Cust_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cartlist">
+          <Key>
+            <PropertyRef Name="Cart_ID" />
+            <PropertyRef Name="Prod_ID" />
+          </Key>
+          <Property Name="Cart_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Prod_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Qty" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Cat_ID" />
+          </Key>
+          <Property Name="Cat_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Cat_Type" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cust_ID" />
+          </Key>
+          <Property Name="Cust_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Cust_Name" Type="nvarchar(max)" />
+          <Property Name="Cust_IC" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cust_Gender" Type="nvarchar" MaxLength="1" />
+          <Property Name="Cust_Phone" Type="nvarchar" MaxLength="15" />
+          <Property Name="Cust_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Cust_Pass" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Pay_ID" />
+          </Key>
+          <Property Name="Pay_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Pay_Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Pay_Date" Type="date" />
+          <Property Name="Pay_Amount" Type="money" />
+          <Property Name="Cart_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Trans_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Prod_ID" />
+          </Key>
+          <Property Name="Prod_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Prod_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Prod_Price" Type="money" />
+          <Property Name="Prod_Details" Type="nvarchar(max)" />
+          <Property Name="Prod_Count" Type="int" />
+          <Property Name="Prod_Rate" Type="float" />
+          <Property Name="Prod_Image" Type="varbinary(max)" />
+          <Property Name="Prod_Status" Type="nvarchar(max)" />
+          <Property Name="Cat_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Seller_ID" Type="nvarchar" MaxLength="6" />
+          <Property Name="Sort_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="Seller_ID" />
+          </Key>
+          <Property Name="Seller_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Seller_Name" Type="nvarchar(max)" />
+          <Property Name="Seller_Phone" Type="nvarchar" MaxLength="11" />
+          <Property Name="Seller_Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Seller_IC" Type="nvarchar" MaxLength="12" />
+          <Property Name="Seller_Rate" Type="float" />
+          <Property Name="Seller_Gender" Type="nvarchar" MaxLength="1" />
+          <Property Name="Seller_Pass" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sort">
+          <Key>
+            <PropertyRef Name="Sort_ID" />
+          </Key>
+          <Property Name="Sort_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Sort_Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="Wish_ID" />
+          </Key>
+          <Property Name="Wish_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Cust_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wishlist_list">
+          <Key>
+            <PropertyRef Name="Wish_ID" />
+            <PropertyRef Name="Prod_ID" />
+          </Key>
+          <Property Name="Wish_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+          <Property Name="Prod_ID" Type="nvarchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Cart_ToTable">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cartlist_ToTable">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="Cartlist" Type="Self.Cartlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Cart_ID" />
+            </Principal>
+            <Dependent Role="Cartlist">
+              <PropertyRef Name="Cart_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cartlist_ToTable_1">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Cartlist" Type="Self.Cartlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Prod_ID" />
+            </Principal>
+            <Dependent Role="Cartlist">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CatID">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Cat_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Cat_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_ToTable">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Cart_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Cart_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ToTable">
+          <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="Seller_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Seller_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ToTable_1">
+          <End Role="Sort" Type="Self.Sort" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sort">
+              <PropertyRef Name="Sort_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Sort_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_list_ToTable">
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="1" />
+          <End Role="Wishlist_list" Type="Self.Wishlist_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wishlist">
+              <PropertyRef Name="Wish_ID" />
+            </Principal>
+            <Dependent Role="Wishlist_list">
+              <PropertyRef Name="Wish_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_list_ToTable_1">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Wishlist_list" Type="Self.Wishlist_list" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Prod_ID" />
+            </Principal>
+            <Dependent Role="Wishlist_list">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_ToTable">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KosupureModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cartlist" EntityType="Self.Cartlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sort" EntityType="Self.Sort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wishlist_list" EntityType="Self.Wishlist_list" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cart_ToTable" Association="Self.FK_Cart_ToTable">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cartlist_ToTable" Association="Self.FK_Cartlist_ToTable">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Cartlist" EntitySet="Cartlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cartlist_ToTable_1" Association="Self.FK_Cartlist_ToTable_1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Cartlist" EntitySet="Cartlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CatID" Association="Self.FK_CatID">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_ToTable" Association="Self.FK_Payment_ToTable">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ToTable" Association="Self.FK_Product_ToTable">
+            <End Role="Seller" EntitySet="Seller" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ToTable_1" Association="Self.FK_Product_ToTable_1">
+            <End Role="Sort" EntitySet="Sort" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_list_ToTable" Association="Self.FK_Wishlist_list_ToTable">
+            <End Role="Wishlist" EntitySet="Wishlist" />
+            <End Role="Wishlist_list" EntitySet="Wishlist_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_list_ToTable_1" Association="Self.FK_Wishlist_list_ToTable_1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Wishlist_list" EntitySet="Wishlist_list" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_ToTable" Association="Self.FK_Wishlist_ToTable">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Wishlist" EntitySet="Wishlist" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KosupureModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Cart_ID" />
+          </Key>
+          <Property Name="Cart_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cart_Total" Type="Int32" />
+          <Property Name="Cust_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Cart_ToTable" FromRole="Cart" ToRole="Customer" />
+          <NavigationProperty Name="Cartlists" Relationship="Self.FK_Cartlist_ToTable" FromRole="Cart" ToRole="Cartlist" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_ToTable" FromRole="Cart" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Cartlist">
+          <Key>
+            <PropertyRef Name="Cart_ID" />
+            <PropertyRef Name="Prod_ID" />
+          </Key>
+          <Property Name="Cart_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prod_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Qty" Type="Int32" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Cartlist_ToTable" FromRole="Cartlist" ToRole="Cart" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Cartlist_ToTable_1" FromRole="Cartlist" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Cat_ID" />
+          </Key>
+          <Property Name="Cat_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cat_Type" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_CatID" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Cust_ID" />
+          </Key>
+          <Property Name="Cust_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cust_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_IC" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Cust_Pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_ToTable" FromRole="Customer" ToRole="Cart" />
+          <NavigationProperty Name="Wishlists" Relationship="Self.FK_Wishlist_ToTable" FromRole="Customer" ToRole="Wishlist" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Pay_ID" />
+          </Key>
+          <Property Name="Pay_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pay_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Pay_Date" Type="DateTime" Precision="0" />
+          <Property Name="Pay_Amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Cart_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Trans_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_Payment_ToTable" FromRole="Payment" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Prod_ID" />
+          </Key>
+          <Property Name="Prod_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Prod_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Prod_Price" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Prod_Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prod_Count" Type="Int32" />
+          <Property Name="Prod_Rate" Type="Double" />
+          <Property Name="Prod_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Prod_Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Cat_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Seller_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
+          <Property Name="Sort_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Cartlists" Relationship="Self.FK_Cartlist_ToTable_1" FromRole="Product" ToRole="Cartlist" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_CatID" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="Seller" Relationship="Self.FK_Product_ToTable" FromRole="Product" ToRole="Seller" />
+          <NavigationProperty Name="Sort" Relationship="Self.FK_Product_ToTable_1" FromRole="Product" ToRole="Sort" />
+          <NavigationProperty Name="Wishlists" Relationship="Self.Wishlist_list" FromRole="Product" ToRole="Wishlist" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="Seller_ID" />
+          </Key>
+          <Property Name="Seller_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Seller_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Seller_Phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="Seller_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Seller_IC" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Seller_Rate" Type="Double" />
+          <Property Name="Seller_Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Seller_Pass" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_ToTable" FromRole="Seller" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Sort">
+          <Key>
+            <PropertyRef Name="Sort_ID" />
+          </Key>
+          <Property Name="Sort_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sort_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Product_ToTable_1" FromRole="Sort" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="Wish_ID" />
+          </Key>
+          <Property Name="Wish_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cust_ID" Type="String" MaxLength="6" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Wishlist_ToTable" FromRole="Wishlist" ToRole="Customer" />
+          <NavigationProperty Name="Products" Relationship="Self.Wishlist_list" FromRole="Wishlist" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Cart_ToTable">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cartlist_ToTable">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="Cartlist" Type="Self.Cartlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Cart_ID" />
+            </Principal>
+            <Dependent Role="Cartlist">
+              <PropertyRef Name="Cart_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_ToTable">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Cart_ID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="Cart_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cartlist_ToTable_1">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Cartlist" Type="Self.Cartlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Prod_ID" />
+            </Principal>
+            <Dependent Role="Cartlist">
+              <PropertyRef Name="Prod_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CatID">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Cat_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Cat_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wishlist_ToTable">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Cust_ID" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="Cust_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ToTable">
+          <End Role="Seller" Type="Self.Seller" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="Seller_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Seller_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ToTable_1">
+          <End Role="Sort" Type="Self.Sort" Multiplicity="1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sort">
+              <PropertyRef Name="Sort_ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="Sort_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Wishlist_list">
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="KosupureEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="Cartlists" EntityType="Self.Cartlist" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Sellers" EntityType="Self.Seller" />
+          <EntitySet Name="Sorts" EntityType="Self.Sort" />
+          <EntitySet Name="Wishlists" EntityType="Self.Wishlist" />
+          <AssociationSet Name="FK_Cart_ToTable" Association="Self.FK_Cart_ToTable">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cartlist_ToTable" Association="Self.FK_Cartlist_ToTable">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Cartlist" EntitySet="Cartlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_ToTable" Association="Self.FK_Payment_ToTable">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cartlist_ToTable_1" Association="Self.FK_Cartlist_ToTable_1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Cartlist" EntitySet="Cartlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CatID" Association="Self.FK_CatID">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wishlist_ToTable" Association="Self.FK_Wishlist_ToTable">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Wishlist" EntitySet="Wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ToTable" Association="Self.FK_Product_ToTable">
+            <End Role="Seller" EntitySet="Sellers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ToTable_1" Association="Self.FK_Product_ToTable_1">
+            <End Role="Sort" EntitySet="Sorts" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="Wishlist_list" Association="Self.Wishlist_list">
+            <End Role="Wishlist" EntitySet="Wishlists" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KosupureModelStoreContainer" CdmEntityContainer="KosupureEntities1">
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="KosupureModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="Cart_ID" ColumnName="Cart_ID" />
+                <ScalarProperty Name="Cart_Total" ColumnName="Cart_Total" />
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cartlists">
+            <EntityTypeMapping TypeName="KosupureModel.Cartlist">
+              <MappingFragment StoreEntitySet="Cartlist">
+                <ScalarProperty Name="Cart_ID" ColumnName="Cart_ID" />
+                <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="KosupureModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Cat_ID" ColumnName="Cat_ID" />
+                <ScalarProperty Name="Cat_Type" ColumnName="Cat_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="KosupureModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+                <ScalarProperty Name="Cust_Name" ColumnName="Cust_Name" />
+                <ScalarProperty Name="Cust_IC" ColumnName="Cust_IC" />
+                <ScalarProperty Name="Cust_Gender" ColumnName="Cust_Gender" />
+                <ScalarProperty Name="Cust_Phone" ColumnName="Cust_Phone" />
+                <ScalarProperty Name="Cust_Email" ColumnName="Cust_Email" />
+                <ScalarProperty Name="Cust_Pass" ColumnName="Cust_Pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="KosupureModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Pay_ID" ColumnName="Pay_ID" />
+                <ScalarProperty Name="Pay_Type" ColumnName="Pay_Type" />
+                <ScalarProperty Name="Pay_Date" ColumnName="Pay_Date" />
+                <ScalarProperty Name="Pay_Amount" ColumnName="Pay_Amount" />
+                <ScalarProperty Name="Cart_ID" ColumnName="Cart_ID" />
+                <ScalarProperty Name="Trans_ID" ColumnName="Trans_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="KosupureModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+                <ScalarProperty Name="Prod_Name" ColumnName="Prod_Name" />
+                <ScalarProperty Name="Prod_Price" ColumnName="Prod_Price" />
+                <ScalarProperty Name="Prod_Details" ColumnName="Prod_Details" />
+                <ScalarProperty Name="Prod_Count" ColumnName="Prod_Count" />
+                <ScalarProperty Name="Prod_Rate" ColumnName="Prod_Rate" />
+                <ScalarProperty Name="Prod_Image" ColumnName="Prod_Image" />
+                <ScalarProperty Name="Prod_Status" ColumnName="Prod_Status" />
+                <ScalarProperty Name="Cat_ID" ColumnName="Cat_ID" />
+                <ScalarProperty Name="Seller_ID" ColumnName="Seller_ID" />
+                <ScalarProperty Name="Sort_ID" ColumnName="Sort_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sellers">
+            <EntityTypeMapping TypeName="KosupureModel.Seller">
+              <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="Seller_ID" ColumnName="Seller_ID" />
+                <ScalarProperty Name="Seller_Name" ColumnName="Seller_Name" />
+                <ScalarProperty Name="Seller_Phone" ColumnName="Seller_Phone" />
+                <ScalarProperty Name="Seller_Email" ColumnName="Seller_Email" />
+                <ScalarProperty Name="Seller_IC" ColumnName="Seller_IC" />
+                <ScalarProperty Name="Seller_Rate" ColumnName="Seller_Rate" />
+                <ScalarProperty Name="Seller_Gender" ColumnName="Seller_Gender" />
+                <ScalarProperty Name="Seller_Pass" ColumnName="Seller_Pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sorts">
+            <EntityTypeMapping TypeName="KosupureModel.Sort">
+              <MappingFragment StoreEntitySet="Sort">
+                <ScalarProperty Name="Sort_ID" ColumnName="Sort_ID" />
+                <ScalarProperty Name="Sort_Type" ColumnName="Sort_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wishlists">
+            <EntityTypeMapping TypeName="KosupureModel.Wishlist">
+              <MappingFragment StoreEntitySet="Wishlist">
+                <ScalarProperty Name="Wish_ID" ColumnName="Wish_ID" />
+                <ScalarProperty Name="Cust_ID" ColumnName="Cust_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Wishlist_list" TypeName="KosupureModel.Wishlist_list" StoreEntitySet="Wishlist_list">
+            <EndProperty Name="Wishlist">
+              <ScalarProperty Name="Wish_ID" ColumnName="Wish_ID" />
+            </EndProperty>
+            <EndProperty Name="Product">
+              <ScalarProperty Name="Prod_ID" ColumnName="Prod_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

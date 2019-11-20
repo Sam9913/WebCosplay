@@ -94,9 +94,11 @@
     <Content Include="image\5.jpg" />
     <Content Include="image\arrowL.svg" />
     <Content Include="image\arrowR.svg" />
+    <Content Include="image\black-panther-2018-movie-cosplay-necklace-accessories-mxcostume_609_670x.jpg" />
     <Content Include="image\cart.svg" />
     <Content Include="image\commentBox.svg" />
     <Content Include="image\earring.jpg" />
+    <Content Include="image\fortniteSet.jpg" />
     <Content Include="image\gallery.svg" />
     <Content Include="image\header_1.jpg" />
     <Content Include="image\header_2.jpg" />
@@ -106,22 +108,42 @@
     <Content Include="image\home.svg" />
     <Content Include="image\home_black.png" />
     <Content Include="image\home_white.png" />
+    <Content Include="image\kakashiCostume.jpg" />
+    <Content Include="image\kakashiShoes.jpg" />
     <Content Include="image\login.svg" />
     <Content Include="image\login_black.png" />
     <Content Include="image\login_white.png" />
     <Content Include="image\logo.jpg" />
     <Content Include="image\mail.png" />
     <Content Include="image\mail.svg" />
+    <Content Include="image\marvel.jpg" />
+    <Content Include="image\narutoCostume.jpg" />
     <Content Include="image\narutoFigure.jpg" />
+    <Content Include="image\narutoShoes.jpg" />
+    <Content Include="image\narutoSword.jpg" />
+    <Content Include="image\narutoWig.jpg" />
+    <Content Include="image\necklace.jpg" />
     <Content Include="image\phone.png" />
     <Content Include="image\phone.svg" />
     <Content Include="image\review.svg" />
     <Content Include="image\round.jpg" />
+    <Content Include="image\RW_wig.jpg" />
     <Content Include="image\sasuke.jpg" />
     <Content Include="image\star.svg" />
+    <Content Include="image\weapon.jpg" />
     <Content Include="image\wish.svg" />
     <Content Include="image\wish_blank.svg" />
     <Content Include="Login.aspx" />
+    <Content Include="Models\Model.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Model.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model.edmx</DependentUpon>
+      <LastGenOutput>Model.cs</LastGenOutput>
+    </Content>
     <Content Include="newArrival.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="StyleSheet1.css" />
@@ -191,6 +213,48 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cartlist.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Category.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Customer.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Payment.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Product.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Seller.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sort.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Wishlist.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="newArrival.aspx.cs">
       <DependentUpon>newArrival.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -215,6 +279,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="Models\Model.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model.edmx.diagram">
+      <DependentUpon>Model.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Site1.Master" />
     <None Include="Web.Debug.config">
@@ -227,9 +298,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

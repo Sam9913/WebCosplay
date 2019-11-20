@@ -1,43 +1,37 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Gallery.aspx.cs" Inherits="Assignment.Gallery" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
-        <div>
-            <table style="width: 100%;">
-                <tr>
-                    <td style="text-align:center;">
-                        <asp:Image ID="Image1" runat="server" ImageUrl="~/image/1.jpg" Width="217px" />
-                        <br />
-                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Costume1.aspx">Costume 1</asp:HyperLink><br />
-                        RM200.00
-                    </td>
-                    <td style="text-align:center;">
-                        <asp:Image ID="Image2" runat="server" ImageUrl="~/image/2.jpg" />
-                        <br />
-                        Costume 2<br />
-                        RM200.00
-                    </td>
-                    <td style="text-align:center;">
-                        <asp:Image ID="Image3" runat="server" ImageUrl="~/image/3.jpg" />
-                        <br />
-                        Costume 3<br />
-                        RM200.00
-                    </td>
-                </tr>
-                <tr>
-                    <td style="text-align:center;">
-                        <asp:Image ID="Image4" runat="server" ImageUrl="~/image/4.jpg" />
-                        <br />
-                        Costume 4<br />
-                        RM200.00
-                    </td>
-                    <td style="text-align:center;">
-                        <asp:Image ID="Image5" runat="server" ImageUrl="~/image/5.jpg"/>
-                        <br />
-                        Costume 5<br />
-                        RM200.00
-                    </td>
-                    <td style="text-align:center;">To be added&nbsp;</td>
-                </tr>
-            </table>
-        </div>
+    <div style="text-align:center; margin:5% 5% 0 5%;">
+        <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
+            <ItemTemplate>
+                <asp:LinkButton ID="hyperlinkButton" runat="server"><%#DataBinder.Eval(Container.DataItem,"Sort_Type") %></asp:LinkButton>&ensp;|&ensp;
+            </ItemTemplate>
+        </asp:Repeater>
+    </div>
+
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Sort]"></asp:SqlDataSource>
+
+    <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource1" CellPadding="4" ForeColor="#333333" RepeatColumns="4" RepeatDirection="Horizontal">
+        <AlternatingItemStyle BackColor="White" ForeColor="#284775"></AlternatingItemStyle>
+
+        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></FooterStyle>
+
+        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White"></HeaderStyle>
+
+        <ItemStyle BackColor="#F7F6F3" ForeColor="#333333"></ItemStyle>
+        <ItemTemplate>
+            <div style="text-align:center; margin:5%;">
+                <asp:Image ID="Image1" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image").ToString()%>' Width="50%"/><br />
+                <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_Name") %>'>
+                </asp:LinkButton><br /> 
+                RM 
+                <asp:Label Text='<%# Eval("Prod_Price") %>' runat="server" ID="Prod_PriceLabel" /><br />
+                <br />
+            </div>
+        </ItemTemplate>
+        <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedItemStyle>
+    </asp:DataList>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Image], [Prod_ID] FROM [Product]"></asp:SqlDataSource>
+    
+        
 </asp:Content>

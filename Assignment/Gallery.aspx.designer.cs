@@ -13,57 +13,39 @@ namespace Assignment {
     public partial class Gallery {
         
         /// <summary>
-        /// Image1 control.
+        /// Repeater1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.Repeater Repeater1;
         
         /// <summary>
-        /// HyperLink1 control.
+        /// SqlDataSource2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLink1;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource2;
         
         /// <summary>
-        /// Image2 control.
+        /// DataList1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image2;
+        protected global::System.Web.UI.WebControls.DataList DataList1;
         
         /// <summary>
-        /// Image3 control.
+        /// SqlDataSource1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image3;
-        
-        /// <summary>
-        /// Image4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image4;
-        
-        /// <summary>
-        /// Image5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image5;
+        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSource1;
     }
 }

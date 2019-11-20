@@ -5,7 +5,48 @@
 <head runat="server">
     <title></title>
     <link rel="stylesheet" type="text/css" href="StyleSheet1.css"/>
+    <style>
+        .linkDown {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .linkDown li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .linkTitle {
+            color: lightgrey;
+            padding-bottom: 1%;
+        }
+
+        .linkPage {
+            width: 37%;
+        }
+
+        .about {
+            width: 40%;
+        }
+
+        .contact {
+            width: 20%;
+        }
+
+        .about, .contact, .linkPage {
+            background-color: #333;
+            color: white;
+            margin-bottom: 0;
+            float: left;
+            height: 150px;
+            padding-top: 1%;
+            padding-left: 1%;
+        }
+    </style>
     </head>
+    
 <body><div style="width:100%;">
     <ul class="navDown">
         <li id="logo"><asp:ImageMap ID="ImageMap1" runat="server" ImageUrl="~/image/logo.jpg" Height="50px" Width="140px"></asp:ImageMap></li>
@@ -20,7 +61,7 @@
             </asp:ContentPlaceHolder>
 
         <div class="footer">
-            <div class="about">        
+            <div class="about">
                 About Us<br />
                 An online platform that allow cosplayer and anime fans to buy cosplay costume in more efficient way.<br />
             </div>
