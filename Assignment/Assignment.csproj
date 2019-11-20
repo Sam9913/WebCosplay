@@ -79,7 +79,6 @@
     <Content Include="App_Data\Kosupure_log.ldf">
       <DependentUpon>Kosupure.mdf</DependentUpon>
     </Content>
-    <Content Include="changePassword.aspx" />
     <Content Include="Collection.aspx" />
     <Content Include="Costume1.aspx" />
     <Content Include="CustomerPage.aspx" />
@@ -150,13 +149,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="changePassword.aspx.cs">
-      <DependentUpon>changePassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="changePassword.aspx.designer.cs">
-      <DependentUpon>changePassword.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Collection.aspx.cs">
       <DependentUpon>Collection.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
