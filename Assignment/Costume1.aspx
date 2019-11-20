@@ -1,6 +1,20 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Costume1.aspx.cs" Inherits="Assignment.Costume1" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
+    <style>
+        .changeButton{
+            border:1px solid black; 
+            background-color:snow; 
+            padding:1% 2%;
+        }
+
+        .changeButton:hover, .onChangeButton{
+            padding:1% 2%;
+            color:snow;
+            border:1px solid snow; 
+            background-color:black; 
+        }
+    </style>
 
     <table style="width: 100%; margin-top: -12%; margin-left: -10%;">
         <tr>
@@ -20,32 +34,15 @@
                 Costume 1<br />
                 RM200.00<br />
                 <br />
-                <u><strong>Details</strong></u>
-                <asp:Table ID="Table1" runat="server" Style="border-collapse: collapse;">
-                    <asp:TableRow>
-                        <asp:TableHeaderCell BorderStyle="Inset">Size</asp:TableHeaderCell>
-                        <asp:TableHeaderCell BorderStyle="Inset">Length(CM)</asp:TableHeaderCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell BorderStyle="Inset">S</asp:TableCell>
-                        <asp:TableCell BorderStyle="Inset">25</asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell BorderStyle="Inset">M</asp:TableCell>
-                        <asp:TableCell BorderStyle="Inset">30</asp:TableCell>
-                    </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell BorderStyle="Inset">L</asp:TableCell>
-                        <asp:TableCell BorderStyle="Inset">35</asp:TableCell>
-                    </asp:TableRow>
-                </asp:Table>
+                <u><strong>Details</strong></u><br />
+                On Stock<br />
+                1 item left<br />
                 <br />
-                Size:
-                <asp:RadioButtonList ID="RadioButtonList1" runat="server">
-                    <asp:ListItem>S</asp:ListItem>
-                    <asp:ListItem>M</asp:ListItem>
-                    <asp:ListItem>L</asp:ListItem>
-                </asp:RadioButtonList><br />
+                Size:<br />
+                <asp:Button ID="Button1" runat="server" Text="S" CssClass="changeButton" OnClick="Button1_Click"/>
+                <asp:Button ID="Button2" runat="server" Text="M" CssClass="changeButton" OnClick="Button2_Click"/>
+                <asp:Button ID="Button3" runat="server" Text="L" CssClass="changeButton" OnClick="Button3_Click"/>
+                <br />
                 <asp:Button ID="cartButton" runat="server" Text="Add to Cart" />
                 <asp:ImageButton ID="wishButton" runat="server" ImageUrl="~/image/wish_blank.svg" OnClick="wishButton_Click" />
             </td>

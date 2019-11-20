@@ -25,7 +25,7 @@
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_Name") %>'>
                 </asp:LinkButton><br /> 
                 RM 
-                <asp:Label Text='<%# Eval("Prod_Price") %>' runat="server" ID="Prod_PriceLabel" /><br />
+                <asp:Label Text='<%# Eval("Prod_Price","{0:0.00}") %>' runat="server" ID="Prod_PriceLabel" /><br />
                 <br />
             </div>
         </ItemTemplate>

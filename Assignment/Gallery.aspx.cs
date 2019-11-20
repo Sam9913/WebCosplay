@@ -16,7 +16,7 @@ namespace Assignment
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            Session["CostumeName"] = ((LinkButton)sender).Text;
+            Response.Redirect("~/Costume1.aspx");
         }
     }
 }

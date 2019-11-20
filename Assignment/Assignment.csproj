@@ -80,7 +80,6 @@
       <DependentUpon>Kosupure.mdf</DependentUpon>
     </Content>
     <Content Include="Costume1.aspx" />
-    <Content Include="CustomerPage.aspx" />
     <Content Include="Front.aspx" />
     <Content Include="Gallery.aspx" />
     <Content Include="Home.aspx" />
@@ -152,13 +151,6 @@
     </Compile>
     <Compile Include="Costume1.aspx.designer.cs">
       <DependentUpon>Costume1.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerPage.aspx.cs">
-      <DependentUpon>CustomerPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="CustomerPage.aspx.designer.cs">
-      <DependentUpon>CustomerPage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Front.aspx.cs">
       <DependentUpon>Front.aspx</DependentUpon>
