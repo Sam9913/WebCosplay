@@ -79,7 +79,6 @@
     <Content Include="App_Data\Kosupure_log.ldf">
       <DependentUpon>Kosupure.mdf</DependentUpon>
     </Content>
-    <Content Include="Collection.aspx" />
     <Content Include="Costume1.aspx" />
     <Content Include="CustomerPage.aspx" />
     <Content Include="Front.aspx" />
@@ -149,13 +148,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collection.aspx.cs">
-      <DependentUpon>Collection.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Collection.aspx.designer.cs">
-      <DependentUpon>Collection.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Costume1.aspx.cs">
       <DependentUpon>Costume1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
