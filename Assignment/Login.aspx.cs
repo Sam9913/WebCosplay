@@ -21,7 +21,7 @@ namespace Assignment
                 if (txtPassword.Text.Equals("123456"))
                 {
                     Response.Write("<script language=javascript>alert('Welcome TAN AH BENG!')</script>");
-                    Response.Redirect("~/Home.aspx");
+                    Response.Redirect("~/Customer_Profile.aspx");
                 }
                 else
                 {
@@ -33,7 +33,7 @@ namespace Assignment
                 if (txtPassword.Text.Equals("901222"))
                 {
                     Response.Write("<script language=javascript>alert('Welcome Stella!')</script>");
-                    Response.Redirect("~/Home.aspx");
+                    Response.Redirect("~/Seller_Gallery.aspx");
                 }
                 else
                 {
