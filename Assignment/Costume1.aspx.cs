@@ -16,7 +16,8 @@ namespace Assignment
 
         protected void wishButton_Click(object sender, ImageClickEventArgs e)
         {
-            if(wishButton.ImageUrl.Equals("~/image/wish_blank.svg"))
+            Response.Write("<script language=javascript>alert('The item had been added to wishlist.')</script>");
+            if (wishButton.ImageUrl.Equals("~/image/wish_blank.svg"))
             {
                 wishButton.ImageUrl = "~/image/wish.svg";
             }
@@ -48,6 +49,14 @@ namespace Assignment
                 Button3.CssClass = "onChangeButton";
             else
                 Button3.CssClass = "changeButton";
+        }
+
+        protected void cartButton_Click(object sender, EventArgs e)
+        {
+            if(Int32.Parse(txtQty.Text) > 1)
+                Response.Write("<script language=javascript>alert('Stock not enough. Please try again.')</script>");
+            else
+                Response.Write("<script language=javascript>alert('The item had been added to cartlist.')</script>");
         }
     }
 }

@@ -16,9 +16,9 @@
         }
     </style>
 
-    <table style="width: 100%; margin-top: -12%; margin-left: -10%;">
-        <tr>
-            <td style="width: 160px; float: right; margin-top: 38%;">
+    <table style="width: 100%; margin-top: -12%; margin-left:10%;">
+        <tr >
+            <td style="width: 160px; float: right; margin-top: 45%;">
                 <asp:Image ID="Image2" runat="server" ImageUrl="~/image/narutoCostume.jpg" Width="150px" /><br />
                 <br />
                 <asp:Image ID="Image3" runat="server" ImageUrl="~/image/narutoCostume.jpg" Width="150px" /><br />
@@ -43,7 +43,9 @@
                 <asp:Button ID="Button2" runat="server" Text="M" CssClass="changeButton" OnClick="Button2_Click"/>
                 <asp:Button ID="Button3" runat="server" Text="L" CssClass="changeButton" OnClick="Button3_Click"/>
                 <br />
-                <asp:Button ID="cartButton" runat="server" Text="Add to Cart" />
+                <br />
+                Quantity : <asp:TextBox ID="txtQty" runat="server" Width="3%"></asp:TextBox><br />
+                <asp:Button ID="cartButton" runat="server" Text="Add to Cart" OnClick="cartButton_Click"/>
                 <asp:ImageButton ID="wishButton" runat="server" ImageUrl="~/image/wish_blank.svg" OnClick="wishButton_Click" />
             </td>
         </tr>

@@ -7,14 +7,15 @@
 
         <div style="margin-top:2.8%">
             <div style="margin-bottom:2.52%">
-                <div style="margin-left:42%">
+                <div >
                     <div style="text-align:center;">
-                        <asp:Login ID="Login1" runat="server" BackColor="#FFFBD6" BorderColor="#FFDFAD" BorderPadding="4" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="1.0em" ForeColor="#333333" TextLayout="TextOnTop">
-                            <InstructionTextStyle Font-Italic="True" ForeColor="Black" />
-                            <LoginButtonStyle BackColor="White" BorderColor="#CC9966" BorderStyle="Solid" BorderWidth="1px" Font-Names="Verdana" Font-Size="0.8em" ForeColor="#990000" />
-                            <TextBoxStyle Font-Size="0.8em" />
-                            <TitleTextStyle BackColor="#990000" Font-Bold="True" Font-Size="0.9em" ForeColor="White" />
-                        </asp:Login>
+                        <asp:Label ID="name" runat="server" Text="Username: " style="margin-right:7%;"></asp:Label><br />
+                        <asp:TextBox ID="txtName" runat="server"></asp:TextBox>
+                        <br />
+                        <asp:Label ID="Label1" runat="server" Text="Password: " style="margin-right:7%;"></asp:Label><br />
+                        <asp:TextBox ID="txtPassword" runat="server"></asp:TextBox>
+                        <br />
+                        <asp:Button ID="submitButton" runat="server" Text="Submit"  OnClick="submitButton_Click"/>
                     </div>
                 </div>
                 <br /><br />

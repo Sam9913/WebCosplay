@@ -7,16 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Assignment
 {
-    public partial class Gallery : System.Web.UI.Page
+    public partial class WebForm1 : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-        }
 
-        protected void LinkButton1_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Costume1.aspx");
         }
     }
 }

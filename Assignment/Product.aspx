@@ -1,6 +1,8 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Gallery.aspx.cs" Inherits="Assignment.Gallery" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Product.aspx.cs" Inherits="Assignment.Product" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
+    <asp:SiteMapPath ID="SiteMapPath1" runat="server" ></asp:SiteMapPath>
+
     <div style="text-align:center; margin:5% 5% 0 5%;">
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
             <ItemTemplate>

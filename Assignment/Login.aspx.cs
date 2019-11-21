@@ -13,5 +13,37 @@ namespace Assignment
         {
 
         }
+
+        protected void submitButton_Click(object sender, EventArgs e)
+        {
+            if (txtName.Text.Equals("TAB"))
+            {
+                if (txtPassword.Text.Equals("123456"))
+                {
+                    Response.Write("<script language=javascript>alert('Welcome TAN AH BENG!')</script>");
+                    Response.Redirect("~/Home.aspx");
+                }
+                else
+                {
+                    Response.Write("<script language=javascript>alert('Wrong password.')</script>");
+                }
+            }
+            else if (txtName.Text.Equals("StellaYu"))
+            {
+                if (txtPassword.Text.Equals("901222"))
+                {
+                    Response.Write("<script language=javascript>alert('Welcome Stella!')</script>");
+                    Response.Redirect("~/Home.aspx");
+                }
+                else
+                {
+                    Response.Write("<script language=javascript>alert('Wrong password.')</script>");
+                }
+            }
+            else
+            {
+                Response.Write("<script language=javascript>alert('Wrong username.')</script>");
+            }
+        }
     }
 }
