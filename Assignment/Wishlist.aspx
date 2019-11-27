@@ -91,8 +91,8 @@
 
         }
 </style>
-    <div style="margin: 2%; padding: 2%; width: 100%;">
-        <h2 style="margin:auto;">Wishlist</h2>
+    <div style="margin: 2%; padding: 2%; width: 98%;">
+        <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">Wishlist</h2>
     </div>
 
          <div class="space1">
@@ -102,11 +102,11 @@
             </tr>
 
             <tr>
-                <td onclick="changePage('myCart')" id="myCart" style="cursor:pointer;">Cart</td>
+                <td onclick="changePage('myCart')" id="myCart" style="cursor:pointer;">My Cart</td>
             </tr>
 
            <tr>
-                <td class="seller_nav_onclick">Wishlist</td>
+                <td class="seller_nav_onclick">My Wishlist</td>
             </tr>
 
             <tr>

@@ -1,12 +1,17 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Product.aspx.cs" Inherits="Assignment.Product" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
-    <asp:SiteMapPath ID="SiteMapPath1" runat="server" ></asp:SiteMapPath>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-    <div style="text-align:center; margin:5% 5% 0 5%;">
+        <div style="margin: 2%; padding: 2%; width: 98%;">
+            <h2 style="margin:auto; font-size:30px; font-family: Bahnschrift; font-weight: 700""><asp:SiteMapPath ID="SiteMapPath1" runat="server" ></asp:SiteMapPath></h2>
+        </div>
+
+
+    <div style="text-align:center; margin:2.5% 5% 2.5% 5%;">
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
             <ItemTemplate>
-                <asp:LinkButton ID="hyperlinkButton" runat="server"><%#DataBinder.Eval(Container.DataItem,"Sort_Type") %></asp:LinkButton>&ensp;|&ensp;
+                <asp:LinkButton ID="sortButton" runat="server" OnClick="sortButton_Click"><%#DataBinder.Eval(Container.DataItem,"Sort_Type") %></asp:LinkButton>&ensp;|&ensp;
             </ItemTemplate>
         </asp:Repeater>
     </div>

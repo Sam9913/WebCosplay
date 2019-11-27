@@ -116,24 +116,15 @@
             margin-left: 5%;
         }
 
-        a:hover {
-            text-decoration:none;
-        }
 
-        a:active {
-            text-decoration:none;
-        }
 
 
     </style>
-    <div style="margin: 2%; padding: 2%; width: 100%;">
-        <h2 style="margin:auto;">My Profile</h2>
+    <div style="margin: 2%; padding: 2%; width: 98%;">
+        <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">My Profile</h2>
     </div>
-    <div style="min-width: 950px;">
-<%--        <div style="width:100%; padding-bottom: 5%;">
-            <button  type="button" id="btn_addProduct" runat="server" class="btn" data-toggle="modal" data-target="#modal_addProduct">Add Product</button>
-        </div>--%>
 
+    <div style="min-width: 950px;">
     <div class="space1" style="position:sticky; top:0;">
         <table class="seller_nav">
             <tr>
@@ -163,7 +154,7 @@
                 <ItemTemplate>
 
                     <div class="image" style="text-align:center; ">
-                        <asp:Image ID="Image1" ImageUrl="~/image/sasuke2.png" CssClass="profile_pic" runat="server" />
+                        <asp:Image ID="Image1" ImageUrl='<%# "~/image/" + DataBinder.Eval(Container.DataItem,"Seller_Image").ToString() %>' CssClass="profile_pic" runat="server" />
                     </div>
 
                     <div style="text-align:center; margin-top: 2%;" >
@@ -183,9 +174,9 @@
                         <asp:ImageButton ID="ImageButton2" ToolTip="Account Settings" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
                         <asp:ImageButton ID="ImageButton3" ToolTip="Add new Post" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
                     </div>
-                    <%# Eval("Seller_ID") %>
                 </ItemTemplate>
             </asp:DataList>
+
 
             <!-- Gallery Post -->
             <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource2">
@@ -200,7 +191,7 @@
                 <%--<asp:Label ID="lbl_Gallery_ID" runat="server" style="" Text='<%#Eval("Gallery_ID") %>'></asp:Label>--%>
                 
                 <div style="margin: 2%; padding-right:2%; padding-left:2%; float:left; width: 28%; min-width: 235px;">
-                    <asp:Image ID="Image2" Width="200px" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Gallery_Img").ToString() %>' runat="server" />
+                    <asp:Image ID="Image2" Width="200px" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Gallery_Image").ToString() %>' runat="server" />
                 </div>
 
                 <div style="margin: 2%; float:left; width: 55%; min-width: 465px;">
@@ -216,17 +207,13 @@
                         </ItemTemplate>
                     </asp:ListView>--%>
                             
-                        
-
-
-
-<%--                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource3">
+                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource3">
                         <ItemTemplate>
                             <span><b><%#DataBinder.Eval(Container.DataItem,"User_ID") %></b></span>
                             <span><%#DataBinder.Eval(Container.DataItem,"Comment") %></span><br />
                             
                         </ItemTemplate>
-                    </asp:Repeater>--%>
+                    </asp:Repeater>
                     <asp:TextBox ID="tbx_comment" runat="server" style="width: 100%; visibility:hidden;"></asp:TextBox>
                 </div>
 
@@ -243,6 +230,7 @@
 
                     </ItemTemplate>
             </asp:ListView>
+
         </div>
         
     </div>
@@ -255,16 +243,17 @@
 
 
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Seller_ID], [Seller_Name], [Seller_Phone], [Seller_Email], [Seller_UserName], [Seller_Image] FROM [Seller] WHERE ([Seller_ID] = @Seller_ID)">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Seller_ID], [Seller_Name], [Seller_Phone], [Seller_Email], [Seller_IC], [Seller_Details], [Seller_Gender], [Seller_UserName], [Seller_Pass], [Seller_Image] FROM [Seller] WHERE ([Seller_ID] = @Seller_ID)">
         <SelectParameters>
             <asp:Parameter DefaultValue="SE1001" Name="Seller_ID" Type="String"></asp:Parameter>
         </SelectParameters>
     </asp:SqlDataSource>
 
 
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Gallery]">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT Gallery.Gallery_ID, Gallery.Gallery_Image, Gallery.Gallery_Desc, Gallery.Gallery_Date, Gallery.Gallery_Tag, Gallery.Status, Gallery.User_ID, Seller.Seller_UserName AS Expr8, Seller.Seller_ID FROM Gallery INNER JOIN Seller ON Gallery.User_ID = Seller.Seller_ID">
     </asp:SqlDataSource>
 
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Comment]"></asp:SqlDataSource>
 
 
     <div class="container">
@@ -346,7 +335,7 @@
                 window.location.href = "Seller_Product.aspx";
 
             else if (id == document.getElementById("transHis").id)
-                window.location.href = "#";
+                window.location.href = "TransactionHistorySell.aspx";
 
 
         }

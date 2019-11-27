@@ -1,392 +1,55 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="WebForm1.aspx.cs" Inherits="Assignment.WebForm1" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
-    
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
-
-
     <style>
+        /*.home{
+            float:left;
+            margin-top:5%;
+            margin-left:10%;
+            margin-bottom:5%;
+            display:block;
+            width:10%;
+        }*/
 
-        .space1 {
-            width: 20%;
-            float: left;
-        }
+        /*.homeButton, .loginButton{
+            display:none;
+            position: absolute;
+            margin-top: 25%;
+            margin-left: 25%;
+        }*/
 
-        .space2 {
-            width: 80%;
-            float: left;
-        }
+        /*.home:hover .homeButton, .login:hover .loginButton{
+            display:inline-block;
+        }*/
 
-        .seller_nav {
-            width: 80%;
-            padding-left: 5%;
-            padding-right: 5%;
-            margin: 0 0 5% 20%;
-            border-collapse: collapse;
-            font-size: 18px;
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            
-        }
-
-        .seller_nav td {
-            padding: 5%;
-            border-top: 1px solid #333;
-            border-bottom: 1px solid #333;
-        }
-
-        .seller_nav td:hover {
-            transition-duration: 0.4s;
-            background-color: #333;
-            color: white;
-        }
-
-        .seller_nav_onclick {
-            background-color: #333;
-            color: white;
-        }
-
-        .seller_table  {
-            width: 80%;
-            float: right;
-            padding-top: 3%;
-            padding-left: 5%;
-            padding-right: 5%;
-            margin-left: 5%;
-            margin-right: 5%;
-            margin-bottom: 5%;
-            min-width: 950px;
-
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-        }
-        
-
-        .btn {
-            float:right;
-            padding: 12px 25px 12px 25px;
-            margin-right: 7%;
-            margin-bottom: 2%;
-        }
-
-        .left {
-            text-align:left;
-
-        }
-
-        .middle {
-            text-align:center;
-        }
-
-        .background_img {
-            opacity: 0.5;
-            height: 300px;
-        }
-
-        .image {
-            z-index:2;
-        }
-
-        .username {
-            font-size: 18px;
-            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-        }
-
-        .profile_pic {
-            border-radius: 50%;
-            border: 2px solid white;
-        }
-
-        .profile_nav {
-            padding: 2%;
-            padding-left: 4%;
-            padding-right: 4%;
-        }
-
-        .profile_nav_text {
-            padding:0 4% 2% 4%;
-        }
-
-        .table th {
-            
-            margin-left: 5%;
-        }
-
-        a:hover {
-            text-decoration:none;
-        }
-
-        a:active {
-            text-decoration:none;
-        }
+        /*.login{
+            position:initial;
+            float:left;
+            display:block;
+            width:10%;
+            margin-top:5%;
+            margin-left:50%;
+            margin-bottom:5%;
+        }*/
 
 
     </style>
-    <div style="margin: 2%; padding: 2%; width: 100%;">
-        <h2 style="margin:auto;">My Profile</h2>
-    </div>
-    <div style="min-width: 950px;">
-<%--        <div style="width:100%; padding-bottom: 5%;">
-            <button  type="button" id="btn_addProduct" runat="server" class="btn" data-toggle="modal" data-target="#modal_addProduct">Add Product</button>
-        </div>--%>
 
-    <div class="space1" style="position:sticky; top:0;">
-        <table class="seller_nav">
-            <tr>
-                <td class="seller_nav_onclick">My Profile</td>
-            </tr>
-
-            <tr>
-                <td onclick="changePage('myProd')" id="myProd" style="cursor:pointer;">My Product</td>
-            </tr>
-
-            <tr>
-                <td onclick="changePage('transHis')" id="transHis" style="cursor:pointer;">Transaction History</td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="space2">
-        <div class="seller_table" style="height: auto; padding-bottom:5%;">
-            
-<%--            <div class="background_image" style="text-align:center; height: 300px;" >
-                <asp:Image ID="Image2" ImageUrl="~/image/background.png" CssClass="background_img" runat="server"/>
-            </div>--%>
-       
-
-            <!-- Profile -->
-            <asp:DataList ID="DataList1" runat="server" DataKeyField="Seller_ID" DataSourceID="SqlDataSource1">
-                <ItemTemplate>
-
-                    <div class="image" style="text-align:center; ">
-                        <asp:Image ID="Image1" ImageUrl="~/image/sasuke2.png" CssClass="profile_pic" runat="server" />
-                    </div>
-
-                    <div style="text-align:center; margin-top: 2%;" >
-                        <asp:HiddenField ID="hdn_Seller_ID"  runat="server" Value='<%# Eval("Seller_ID") %>'/>
-                        <asp:Label ID="Seller_NameLabel" runat="server" CssClass="username" Text='<%# Eval("Seller_Name") %>' ></asp:Label>
-                    </div>
-
-                    <div style="width: 50%; margin-left: 25%; margin-top: 2%; margin-bottom:2%;">
-                        Phone : <%# Eval("Seller_Phone") %><br />
-                        Email : <%# Eval("Seller_Email") %><br />
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                    </div>
-
-                    <div style="text-align:center; margin: 2%; margin-bottom: 0;">
-                        <asp:ImageButton ID="editProfile" ToolTip="Edit Profile" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
-                        <asp:ImageButton ID="ImageButton2" ToolTip="Account Settings" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
-                        <asp:ImageButton ID="ImageButton3" ToolTip="Add new Post" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
-                    </div>
-                    <%# Eval("Seller_ID") %>
-                </ItemTemplate>
-            </asp:DataList>
-
-            <!-- Gallery Post -->
-            <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource2">
-                <ItemTemplate>
-
-            <%--<asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
-                <ItemTemplate>--%>
-            <div style="width: 100%; float:left; min-width: 850px; margin-top: 7%; height: auto; border:2px solid #eee; box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                
-
-                <asp:HiddenField ID="hidden_Gallery_ID" runat="server" Value='<%#Eval("Gallery_ID") %>'/>
-                <%--<asp:Label ID="lbl_Gallery_ID" runat="server" style="" Text='<%#Eval("Gallery_ID") %>'></asp:Label>--%>
-                
-                <div style="margin: 2%; padding-right:2%; padding-left:2%; float:left; width: 28%; min-width: 235px;">
-                    <asp:Image ID="Image2" Width="200px" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Gallery_Img").ToString() %>' runat="server" />
-                </div>
-
-                <div style="margin: 2%; float:left; width: 55%; min-width: 465px;">
-                    <span>
-                        <%#DataBinder.Eval(Container.DataItem,"Gallery_Desc")%>
-                    </span><hr style="border:0; border-top: 2px solid #333; margin: 3% 0;"/>
-                    <a href="#" style="text-decoration:none; color: navy; font-size: 12px;">View All 123 Comments</a><br />
-
-<%--                    <asp:ListView ID="ListView2" runat="server" DataSourceID="SqlDataSource3">
-                        <ItemTemplate>
-                            <span><b><%#DataBinder.Eval(Container.DataItem,"User_ID") %></b></span>
-                            <span><%#DataBinder.Eval(Container.DataItem,"Comment") %></span><br />
-                        </ItemTemplate>
-                    </asp:ListView>--%>
-                            
-                        
-
-
-
-<%--                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource3">
-                        <ItemTemplate>
-                            <span><b><%#DataBinder.Eval(Container.DataItem,"User_ID") %></b></span>
-                            <span><%#DataBinder.Eval(Container.DataItem,"Comment") %></span><br />
-                            
-                        </ItemTemplate>
-                    </asp:Repeater>--%>
-                    <asp:TextBox ID="tbx_comment" runat="server" style="width: 100%; visibility:hidden;"></asp:TextBox>
-                </div>
-
-                <div style="margin: 2%; float:left; width: 5%; min-width: 42px;">
-                    <i id="icon_heart" onclick="changeIcon()" class="far fa-heart" style="font-size: 30px; color: black; cursor: pointer; margin-bottom:2px; margin-top: 5px;"></i>
-                    <div style="margin-bottom:20px">233</div>
-                    <i id="icon_comment" onclick="addComment()" class="far fa-comment" style="font-size: 30px; color: black; cursor: pointer; margin-bottom:2px;"></i>
-                    <div style="margin-bottom:20px">125</div>
-                    <i id="icon_delete" class="fa fa-trash-alt" style="font-size: 30px; color: black; cursor: pointer; margin-bottom:20px;"></i>
-                </div>
-            </div>    
-                <%--</ItemTemplate>
-            </asp:Repeater>--%>
-
-                    </ItemTemplate>
-            </asp:ListView>
-        </div>
+    <div style="width:100%;">
+        <div class="home" style="float: left; width: 50%;">
+            <asp:Button ID="homeButton" runat="server" Text="Home" CssClass="homeButton" OnClick="homeButton_Click"/>
+            <%--<asp:Image ID="Image1" runat="server" ImageUrl="https://imgix.ranker.com/user_node_img/50064/1001279286/original/eevee-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces" Width="100%"/>--%>
+            <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/image/homescreen1.jpg" Width="100%" CssClass="imagebtn1"/>
         
-    </div>
-
-    </div>
-
-
-
-
-
-
-
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Seller_ID], [Seller_Name], [Seller_Phone], [Seller_Email], [Seller_UserName], [Seller_Image] FROM [Seller] WHERE ([Seller_ID] = @Seller_ID)">
-        <SelectParameters>
-            <asp:Parameter DefaultValue="SE1001" Name="Seller_ID" Type="String"></asp:Parameter>
-        </SelectParameters>
-    </asp:SqlDataSource>
-
-
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT Gallery.Gallery_ID, Gallery.Gallery_Img, Gallery.Gallery_Desc, Gallery.Gallery_Date, Gallery.Gallery_Tag, Gallery.User_ID, Gallery.Status, Seller.Seller_ID, Seller.Seller_Name, Seller.Seller_Phone, Seller.Seller_Email, Seller.Seller_IC, Seller.Seller_Rate, Seller.Seller_Gender, Seller.Seller_UserName, Seller.Seller_Pass, Seller.Seller_Image, Seller.Seller_Details FROM Gallery INNER JOIN Seller ON Seller.Seller_ID = Gallery.User_ID">
-    </asp:SqlDataSource>
-
-
-
-    <div class="container">
-      <!-- Modal -->
-      <div class="modal fade" id="modal_addProduct" role="dialog" >
-        <div class="modal-dialog" style="width:60%">
-    
-          <!-- Modal content-->
-          <div class="modal-content">
-
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add Product</h4>
-            </div>
-
-            <div class="modal-body">
-                <table class="table_addProd">
-                    <tr>
-                        <th>
-                            <asp:Label ID="lbl_addProd_id" runat="server" Text="Product ID"></asp:Label>
-                        </th>
-                        <td>
-                            <asp:Label ID="res_addProd_id" runat="server" Text="Auto-generate prod ID"></asp:Label>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <asp:Label ID="Label1" runat="server" Text="Product ID"></asp:Label>
-                        </th>
-                        <td>
-                            <asp:Label ID="Label2" runat="server" Text="Auto-generate prod ID"></asp:Label>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <asp:Label ID="lbl_addProd_name" runat="server" Text="Name"></asp:Label>
-                        </th>
-                        <td>
-                            <asp:TextBox ID="tbx_addProd_name" runat="server"></asp:TextBox>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <asp:Label ID="Label3" runat="server" Text="Product ID"></asp:Label>
-                        </th>
-                        <td>
-                            <asp:Label ID="Label4" runat="server" Text="Auto-generate prod ID"></asp:Label>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <th>
-                            <asp:Label ID="Label5" runat="server" Text="Product ID"></asp:Label>
-                        </th>
-                        <td>
-                            <asp:Label ID="Label6" runat="server" Text="Auto-generate prod ID"></asp:Label>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-      
         </div>
-      </div>
-  
+
+        <div class="login" style="width: 50%;">
+            <asp:Button ID="loginButton" runat="server" Text="Login" CssClass="loginButton" OnClick="loginButton_Click"/>
+            <%--<asp:Image ID="Image" runat="server" ImageUrl="https://www.lolwhy.com/javascript/uploads/2019/10/D99HYFPVUAACtMz-561x842.jpg" Width="100%" />--%>
+            <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/image/homescreen2.jpg" Width="100%"/>
+        </div>
     </div>
-
-    <script>
-
-        function changePage(id) {
-            if (id == document.getElementById("myProd").id)
-                window.location.href = "Seller_Product.aspx";
-
-            else if (id == document.getElementById("transHis").id)
-                window.location.href = "#";
-
-
-        }
-
-        //function openModal(id) {
-        //    if (id == document.getElementById("editProfile").id)
-        //        //window.location
-        //}
-
-        function changeIcon() {
-            if (document.getElementById("icon_heart").className == "far fa-heart") {
-                document.getElementById("icon_heart").className = "fas fa-heart";
-                document.getElementById("icon_heart").style.color = "red";
-            } else {
-                document.getElementById("icon_heart").className = "far fa-heart";
-                document.getElementById("icon_heart").style.color = "black";
-            }
-        }
-
-        function addComment() {
-            
-            if (document.getElementById("icon_comment").className == "far fa-comment") {
-                document.getElementById("icon_comment").className = "far fa-comment-dots";
-
-                document.getElementById("tbx_comment").style.visibility = "visible";
-                //if (document.getElementById("tbx_comment".style.visibility == "hidden"))
-                //    document.getElementById("tbx_comment").style.visibility = "visible";
-
-                //else
-                //    document.getElementById("tbx_comment").style.visibility = "hidden";
-            
-            } else {
-                document.getElementById("icon_comment").className = "far fa-comment";
-
-                
-
-            }
-        }
-
-    </script>
-
+   
 </asp:Content>
+
 

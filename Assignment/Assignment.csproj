@@ -106,6 +106,8 @@
     <Content Include="image\header_4.jpg" />
     <Content Include="image\home.jpg" />
     <Content Include="image\home.svg" />
+    <Content Include="image\homescreen1.jpg" />
+    <Content Include="image\homescreen2.jpg" />
     <Content Include="image\home_black.png" />
     <Content Include="image\home_white.png" />
     <Content Include="image\kakashiCostume.jpg" />
@@ -117,6 +119,8 @@
     <Content Include="image\mail.png" />
     <Content Include="image\mail.svg" />
     <Content Include="image\marvel.jpg" />
+    <Content Include="image\naruto.jpg" />
+    <Content Include="image\naruto2.png" />
     <Content Include="image\narutoCostume.jpg" />
     <Content Include="image\narutoFigure.jpg" />
     <Content Include="image\narutoShoes.jpg" />
@@ -129,6 +133,7 @@
     <Content Include="image\round.jpg" />
     <Content Include="image\RW_wig.jpg" />
     <Content Include="image\sasuke.jpg" />
+    <Content Include="image\sasuke2.png" />
     <Content Include="image\star.svg" />
     <Content Include="image\weapon.jpg" />
     <Content Include="image\wish.svg" />

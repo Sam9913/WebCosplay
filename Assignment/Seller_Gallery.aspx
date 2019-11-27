@@ -27,8 +27,8 @@
 
 
     </style>
-    <div style="margin: 2%; padding: 2%; width: 100%;">
-        <h2 style="margin:auto;">Gallery</h2>
+    <div style="margin: 2%; padding: 2%; width: 98%;">
+        <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">Gallery</h2>
     </div>
 
     <div style="min-width: 950px;">
@@ -37,7 +37,7 @@
 
             <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
                 <ItemTemplate>
-                    <asp:Image ID="Image1" CssClass="gallery" Height="300px" Width="260px" ImageUrl='<%#"~/image/" + Eval("Gallery_Img").ToString() %>' runat="server" />
+                    <asp:Image ID="Image1" CssClass="gallery" Height="300px" Width="260px" ImageUrl='<%#"~/image/" + Eval("Gallery_Image").ToString() %>' runat="server" />
                 </ItemTemplate>
             </asp:Repeater>
 

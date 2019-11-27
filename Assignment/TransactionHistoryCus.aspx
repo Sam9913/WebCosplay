@@ -83,8 +83,8 @@
     
         <div>
          <asp:Label ID="transID" runat="server" Text="T0001" style="display:none;"></asp:Label>
-          <div style="margin: 2%; padding: 2%; width: 100%;">
-        <h2 style="margin:auto;">Customer Transaction History</h2>
+          <div style="margin: 2%; padding: 2%; width: 98%;">
+        <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">Customer Transaction History</h2>
     </div>
 
          <div class="space1">
@@ -94,11 +94,11 @@
             </tr>
 
             <tr>
-                <td onclick="changePage('myCart')" id="myCart" style="cursor:pointer;">Cart</td>
+                <td onclick="changePage('myCart')" id="myCart" style="cursor:pointer;">My Cart</td>
             </tr>
 
            <tr>
-                <td onclick="changePage('myWishlist')" id="myWishlist" style="cursor:pointer;">Wishlist</td>
+                <td onclick="changePage('myWishlist')" id="myWishlist" style="cursor:pointer;">My Wishlist</td>
             </tr>
 
             <tr>

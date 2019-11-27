@@ -23,6 +23,14 @@
             padding-bottom: 1%;
         }
 
+        .footer {
+            width: 100%;
+            display: flex;
+            margin-top:5%;
+            /*position: fixed;
+            bottom: 0;*/
+        }
+
         .linkPage {
             width: 40%;
         }
@@ -50,9 +58,11 @@
           display: none;
           position: absolute;
           background-color: #333;
-          min-width: 160px;
+          min-width: 130px;
           box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
           z-index: 1;
+          margin-top:0;
+          
         }
 
         /* Links inside the dropdown */
@@ -71,37 +81,54 @@
         }
 
         /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
+        .ddl:hover .dropdown-content {
           display: block;
+          margin-top:0;
         }
+
+
     </style>
     </head>
     
-<body><div style="width:100%;">
+<body>
+    <div style="width:100%;">
+            <div class="nav" style="min-width: 630px; position:sticky; top:0; z-index: 5;">
+                <ul class="navDown" style="font-family:Bahnschrift; font-size:16px; height: 55.2px;">
+                <li id="logo">
+                    <asp:ImageMap ID="ImageMap1" runat="server" ImageUrl="~/image/logo.jpg" Height="50px" Width="140px">
+                        <asp:RectangleHotSpot NavigateUrl="~/Front.aspx" Top="0" Left="0" Bottom="70" Right="200" HotSpotMode="Navigate"/>
+
+                    </asp:ImageMap>
+                </li>
+                <li>
+                    <div class="ddl">
+                        <a href="Login.aspx" style="padding-bottom:13px;">Login/Logout</a>
+                        <div class="dropdown-content">
+                            <a href="Customer_Profile.aspx">Member</a>
+                            <a href="Seller_Profile.aspx">Seller</a>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="Wishlist.aspx">Wishlist</a></li>
+                <li><a href="cartlist.aspx">Cart</a></li>
+                <li><a href="Seller_Gallery.aspx">Gallery</a></li>
+                <li><div class="ddl"><a href="Product.aspx" style="padding-bottom:13px;">Product</a>
+                    <div class="dropdown-content">
+                        <a href="Category.aspx">Category</a>
+                    </div>
+                    </div>
+                    </li>
+                <li><a href="Home.aspx">Home</a></li>
+            </ul>
+            </div>
     <form id="form1" runat="server">
     <asp:SiteMapDataSource runat="server" ID="SiteMapDataSource1"></asp:SiteMapDataSource>
-    <div class="nav" style="min-width: 630px; position:sticky; top:0; z-index: 5;">
-            
-        <ul class="navDown">
-        <li id="logo"><asp:ImageMap ID="ImageMap1" runat="server" ImageUrl="~/image/logo.jpg" Height="50px" Width="140px"></asp:ImageMap></li>
-        <li><a href="Login.aspx">Login/Logout</a></li>
-        <li><a href="Wishlist.aspx">Wishlist</a></li>
-        <li><a href="cartlist.aspx">Cart</a></li>
-        <li><a href="Seller_Gallery.aspx">Gallery</a></li>
-        <li><div class="dropdown"><a href="Product.aspx">Product</a>
-            <div class="dropdown-content">
-                <a href="Category.aspx">Category</a>
-            </div>
-            </div>
-            </li>
-        <li><a href="Home.aspx">Home</a></li>
-    </ul>
-    </div>
+
         
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
 
-        <div class="footer" style="width:100%;">
+        <div class="footer">
             <div class="about">
                 About Us<br />
                 An online platform that allow cosplayer and anime fans to buy cosplay costume in more efficient way.<br />
@@ -113,7 +140,7 @@
                 <asp:Image ID="Image2" runat="server" ImageUrl="~/image/mail.png"/> kosupure@gmail.com
             </div>
 
-            <div class="linkPage" style="width: 40%;">
+            <div class="linkPage">
                 <div class="linkTitle">KOSUPERE</div>
                 <ul class="linkDown">
                     <li><a href="Home.aspx">Home</a></li>
@@ -127,4 +154,6 @@
         </div>
     </form></div>
 </body>
+
 </html>
+

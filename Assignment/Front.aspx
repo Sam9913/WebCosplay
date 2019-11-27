@@ -1,48 +1,90 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Front.aspx.cs" Inherits="Assignment.Front" %>
 
-<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
-    <style>
-        .home{
-            float:left;
-            margin-top:5%;
-            margin-left:10%;
-            margin-bottom:5%;
-            display:block;
-            width:10%;
-        }
+<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content2" runat="server">
 
-        .homeButton, .loginButton{
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <style>
+
+
+        /*.homeButton, .loginButton{
             display:none;
             position: absolute;
-            margin-top: 15%;
-            margin-left: 7%;
-        }
+            margin-top: 25%;
+            margin-left: 25%;
+        }*/
 
-        .home:hover .homeButton, .login:hover .loginButton{
+        /*.home:hover .homeButton, .login:hover .loginButton{
             display:inline-block;
+            
+            opacity:0.7;
+        }*/
+
+        /*.homeButton {
+            
         }
 
-        .login{
-            position:initial;
-            float:left;
-            display:block;
-            width:10%;
-            margin-top:5%;
-            margin-left:50%;
-            margin-bottom:5%;
+        .home1:hover .homeButton{
+            opacity:1;
+        }*/
+
+        .home1:hover .imagebtn1, .login1:hover .imagebtn2 {
+            opacity:0.7;
+            transition-duration:0.4s;
+            /*transform: scale(1.1, 1.1);*/
         }
+
+        .home1:hover .text1 , .login1:hover .text2{
+            opacity:1;
+            transform: scale(1.5, 1.5);
+            font-size: 500%;
+            transition-duration:0.4s;
+            z-index:3;
+            text-shadow:black;
+        }
+
+
+        .text1 {
+            opacity:0;
+            /*display:none;*/
+            position: absolute;
+            top: 25%;
+            left: 15%;
+          /*color: white;*/
+          padding: 16px 32px;
+          cursor:pointer;
+          font-family:Bahnschrift;
+          text-shadow: 2px 1px #333333;
+        }
+
+        .text2 {
+            opacity:0;
+            /*display:none;*/
+            position: absolute;
+            top: 25%;
+            left: 65%;
+          /*color: white;*/
+          padding: 16px 32px;
+          cursor:pointer;
+          font-family:Bahnschrift;
+          text-shadow: 2px 1px #333333;
+        }
+
     </style>
 
-    <div style="float:left;">
-        <div class="home">
-            <asp:Button ID="homeButton" runat="server" Text="Home" CssClass="homeButton" OnClick="homeButton_Click"/>
-            <asp:Image ID="Image1" runat="server" ImageUrl="https://imgix.ranker.com/user_node_img/50064/1001279286/original/eevee-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces" Width="180%"/>
+    <div style="width:100%;">
+        <div class="home1" style="float: left; width: 50%;">
+            <div class="text1" OnClick="homeButton_Click">HOME</div>
+<%--<asp:Button ID="homeButton" runat="server" Text="Home" CssClass="homeButton"/>--%>
+            <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/image/homescreen1.jpg" Width="100%" CssClass="imagebtn1" OnClick="homeButton_Click"/>
         </div>
 
-        <div class="login">
-            <asp:Button ID="loginButton" runat="server" Text="Login" CssClass="loginButton" OnClick="loginButton_Click"/>
-            <asp:Image ID="Image" runat="server" ImageUrl="https://www.lolwhy.com/javascript/uploads/2019/10/D99HYFPVUAACtMz-561x842.jpg" Width="180%" />
+        <div class="login1" style="float: left; width: 50%;">
+            <div class="text2" OnClick="loginButton_Click">LOGIN</div>
+            <%--<asp:Button ID="loginButton" runat="server" Text="Login" CssClass="loginButton"/>--%>
+            <asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/image/homescreen2.jpg" Width="100%" CssClass="imagebtn2" OnClick="loginButton_Click"/>
         </div>
     </div>
    
 </asp:Content>
+

@@ -73,8 +73,8 @@
          }
    
          </style>
-     <div style="margin: 2%; padding: 2%; width: 100%;">
-        <h2 style="margin:auto;">Transaction History</h2>
+     <div style="margin: 2%; padding: 2%; width: 98%;">
+        <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">Transaction History</h2>
     </div>
 
         <div>

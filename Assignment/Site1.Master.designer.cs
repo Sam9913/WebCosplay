@@ -13,6 +13,15 @@ namespace Assignment {
     public partial class Site1 {
         
         /// <summary>
+        /// ImageMap1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageMap ImageMap1;
+        
+        /// <summary>
         /// form1 control.
         /// </summary>
         /// <remarks>
@@ -29,15 +38,6 @@ namespace Assignment {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SiteMapDataSource SiteMapDataSource1;
-        
-        /// <summary>
-        /// ImageMap1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageMap ImageMap1;
         
         /// <summary>
         /// ContentPlaceHolder1 control.

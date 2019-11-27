@@ -1,0 +1,231 @@
+
+CREATE TABLE [dbo].[Seller] (
+    [Seller_ID]       NVARCHAR (6)   NOT NULL,
+    [Seller_Name]     NVARCHAR (MAX) NULL,
+    [Seller_Phone]    NVARCHAR (11)  NULL,
+    [Seller_Email]    NVARCHAR (50)  NULL,
+    [Seller_IC]       NVARCHAR (12)  NULL,
+    [Seller_Rate]     FLOAT (53)     NULL,
+    [Seller_Gender]   NVARCHAR (1)   NULL,
+    [Seller_UserName] NVARCHAR (MAX) NOT NULL,
+    [Seller_Pass]     NVARCHAR (MAX) NOT NULL,
+    [Seller_Image]    NVARCHAR (MAX) NULL,
+    [Seller_Details]  NVARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Seller_ID] ASC)
+);
+
+INSERT INTO [dbo].[Seller] ([Seller_ID], [Seller_Name], [Seller_Phone], [Seller_Email], [Seller_IC], [Seller_Rate], [Seller_Gender], [Seller_UserName], [Seller_Pass], [Seller_Image], [Seller_Details]) VALUES (N'SE1001', N'YUKI TAKO', N'0102569354', N'YUKI@GMAIL.COM', N'971226145468', 5, N'F', N'YukiChan', N'654321', N'sasuke2.png', NULL)
+INSERT INTO [dbo].[Seller] ([Seller_ID], [Seller_Name], [Seller_Phone], [Seller_Email], [Seller_IC], [Seller_Rate], [Seller_Gender], [Seller_UserName], [Seller_Pass], [Seller_Image], [Seller_Details]) VALUES (N'SE1002', N'STELLA', N'0122512475', N'STELLA01@GMAIL.COM', N'901230045872', 4.5, N'F', N'StellaYu', N'901222', NULL, NULL)
+
+CREATE TABLE [dbo].[Customer] (
+    [Cust_ID]       NVARCHAR (6)   NOT NULL,
+    [Cust_Name]     NVARCHAR (MAX) NULL,
+    [Cust_IC]       NVARCHAR (15)  NULL,
+    [Cust_Gender]   NVARCHAR (1)   NULL,
+    [Cust_Phone]    NVARCHAR (15)  NULL,
+    [Cust_Email]    NVARCHAR (50)  NULL,
+    [Cust_UserName] NVARCHAR (MAX) NOT NULL,
+    [Cust_Pass]     NVARCHAR (MAX) NOT NULL,
+    [Cust_Image]    NVARCHAR (MAX) NULL,
+    [Cust_Details]  NVARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Cust_ID] ASC)
+);
+
+INSERT INTO [dbo].[Customer] ([Cust_ID], [Cust_Name], [Cust_IC], [Cust_Gender], [Cust_Phone], [Cust_Email], [Cust_UserName], [Cust_Pass], [Cust_Image], [Cust_Details]) VALUES (N'CU1001', N'TAN AH BENG', N'991027145426', N'M', N'0123456789', N'TANAB@GMAIL.COM', N'TAB', N'123456', N'naruto2.png', NULL)
+INSERT INTO [dbo].[Customer] ([Cust_ID], [Cust_Name], [Cust_IC], [Cust_Gender], [Cust_Phone], [Cust_Email], [Cust_UserName], [Cust_Pass], [Cust_Image], [Cust_Details]) VALUES (N'CU1002', N'JUDY KHOO', N'950525146969', N'F', N'0124587623', N'JUDYKHOO@GMAIL.COM', N'JUDYK', N'234567', NULL, NULL)
+
+CREATE TABLE [dbo].[Category] (
+    [Cat_ID]   NVARCHAR (6) NOT NULL,
+    [Cat_Type] NCHAR (10)   NULL,
+    PRIMARY KEY CLUSTERED ([Cat_ID] ASC)
+);
+
+INSERT INTO [dbo].[Category] ([Cat_ID], [Cat_Type]) VALUES (N'C1000', N'Accesories')
+INSERT INTO [dbo].[Category] ([Cat_ID], [Cat_Type]) VALUES (N'C1001', N'Costume   ')
+INSERT INTO [dbo].[Category] ([Cat_ID], [Cat_Type]) VALUES (N'C1002', N'Props     ')
+INSERT INTO [dbo].[Category] ([Cat_ID], [Cat_Type]) VALUES (N'C1003', N'Shoes     ')
+INSERT INTO [dbo].[Category] ([Cat_ID], [Cat_Type]) VALUES (N'C1004', N'Set       ')
+INSERT INTO [dbo].[Category] ([Cat_ID], [Cat_Type]) VALUES (N'C1005', N'Wig       ')
+INSERT INTO [dbo].[Category] ([Cat_ID], [Cat_Type]) VALUES (N'C1006', N'Figure    ')
+
+CREATE TABLE [dbo].[Sort] (
+    [Sort_ID]   NVARCHAR (6)  NOT NULL,
+    [Sort_Type] NVARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([Sort_ID] ASC)
+);
+
+INSERT INTO [dbo].[Sort] ([Sort_ID], [Sort_Type]) VALUES (N'R1000', N'Game')
+INSERT INTO [dbo].[Sort] ([Sort_ID], [Sort_Type]) VALUES (N'R1001', N'Anime')
+INSERT INTO [dbo].[Sort] ([Sort_ID], [Sort_Type]) VALUES (N'R1002', N'Disney')
+INSERT INTO [dbo].[Sort] ([Sort_ID], [Sort_Type]) VALUES (N'R1003', N'Marvel')
+INSERT INTO [dbo].[Sort] ([Sort_ID], [Sort_Type]) VALUES (N'R1004', N'Movie')
+INSERT INTO [dbo].[Sort] ([Sort_ID], [Sort_Type]) VALUES (N'R1005', N'DC')
+INSERT INTO [dbo].[Sort] ([Sort_ID], [Sort_Type]) VALUES (N'R1006', N'Cartoon')
+
+CREATE TABLE [dbo].[Product] (
+    [Prod_ID]      NVARCHAR (6)   NOT NULL,
+    [Prod_Name]    NVARCHAR (50)  NULL,
+    [Prod_Price]   MONEY          NULL,
+    [Prod_Details] NVARCHAR (MAX) NULL,
+    [Prod_Count]   INT            NULL,
+    [Prod_Rate]    FLOAT (53)     NULL,
+    [Prod_Image]   NVARCHAR (MAX) NULL,
+    [Prod_Status]  NVARCHAR (MAX) NULL,
+    [Cat_ID]       NVARCHAR (6)   NOT NULL,
+    [Seller_ID]    NVARCHAR (6)   NOT NULL,
+    [Sort_ID]      NVARCHAR (6)   NOT NULL,
+    [Prod_Tag]     NVARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Prod_ID] ASC),
+    CONSTRAINT [FK_CatID] FOREIGN KEY ([Cat_ID]) REFERENCES [dbo].[Category] ([Cat_ID]),
+    CONSTRAINT [FK_Product_ToTable_1] FOREIGN KEY ([Sort_ID]) REFERENCES [dbo].[Sort] ([Sort_ID]),
+    CONSTRAINT [FK_Product_ToTable] FOREIGN KEY ([Seller_ID]) REFERENCES [dbo].[Seller] ([Seller_ID])
+);
+
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1000', N'Naruto Costume', CAST(200.0000 AS Money), N'Naruto Costume', 1, 4.5, N'narutoCostume.jpg', N'On Stock', N'C1001', N'SE1001', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1001', N'Kakashi Costume', CAST(250.0000 AS Money), N'Kakashi Costume', 1, 4, N'kakashiCostume.jpg', N'On Stock', N'C1001', N'SE1001', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1002', N'Naruto Shoes', CAST(120.0000 AS Money), N'Naruto Shoes', 1, 4.5, N'narutoShoes.jpg', N'On Stock', N'C1003', N'SE1001', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1003', N'Kakashi Shoes', CAST(145.0000 AS Money), N'Kakashi Shoes', 2, 3, N'kakashiShoes.jpg', N'On Stock', N'C1003', N'SE1001', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1004', N'Ear Ring', CAST(68.0000 AS Money), N'Sun Ear Ring', 2, 5, N'earring.jpg', N'On Stock', N'C1000', N'SE1001', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1005', N'Necklace', CAST(77.0000 AS Money), N'Black Panther', 1, 5, N'necklace.jpg', N'On Stock', N'C1000', N'SE1001', N'R1003', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1006', N'Naruto Sword', CAST(132.4500 AS Money), N'Naruto Sword', 1, 3.5, N'narutoSword.jpg', N'On Stock', N'C1002', N'SE1002', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1007', N'Ninja Shuriken', CAST(220.0000 AS Money), N'Ninja Shuriken', 0, 2.5, N'weapon.jpg', N'Out of Stock', N'C1002', N'SE1002', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1008', N'Captain Marvel Set', CAST(450.0000 AS Money), N'Captain Marvel Set', 0, 1.5, N'marvel.jpg', N'Out of Stock', N'C1004', N'SE1002', N'R1003', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1009', N'Fortnite Set', CAST(540.0000 AS Money), N'Fortnite Set', 1, 4.5, N'fortniteSet.jpg', N'On Stock', N'C1004', N'SE1002', N'R1000', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1010', N'Naruto Wig', CAST(100.0000 AS Money), N'Orange Wig', 1, 3, N'narutoWig.jpg', N'On Stock', N'C1005', N'SE1002', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1011', N'RW Wig', CAST(123.0000 AS Money), N'Red & White Wig', 0, 3, N'RW_wig.jpg', N'Out of Stock', N'C1005', N'SE1002', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1012', N'Naruto Figure', CAST(170.0000 AS Money), N'Naruto Chibi', 1, 5, N'narutoFigure.jpg', N'On Stock', N'C1006', N'SE1001', N'R1001', NULL)
+INSERT INTO [dbo].[Product] ([Prod_ID], [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Count], [Prod_Rate], [Prod_Image], [Prod_Status], [Cat_ID], [Seller_ID], [Sort_ID], [Prod_Tag]) VALUES (N'P1013', N'Sasuke Figure', CAST(185.0000 AS Money), N'Sasuke Chibi', 1, 5, N'sasuke.jpg', N'On Stock', N'C1006', N'SE1002', N'R1001', NULL)
+
+CREATE TABLE [dbo].[Gallery] (
+    [Gallery_ID]    NVARCHAR (6)   NOT NULL,
+    [Gallery_Image] NVARCHAR (MAX) NULL,
+    [Gallery_Desc]  NVARCHAR (MAX) NULL,
+    [Gallery_Date]  DATE           NULL,
+    [Gallery_Tag]   NVARCHAR (MAX) NULL,
+    [Status]        INT            DEFAULT ((1)) NOT NULL,
+    [User_ID]       NVARCHAR (6)   NOT NULL,
+    CONSTRAINT [PK_Gallery] PRIMARY KEY CLUSTERED ([Gallery_ID] ASC),
+    CONSTRAINT [CK_Gallery_Status] CHECK ([Status]=((1)|(0)))
+);
+
+INSERT INTO [dbo].[Gallery] ([Gallery_ID], [Gallery_Image], [Gallery_Desc], [Gallery_Date], [Gallery_Tag], [Status], [User_ID]) VALUES (N'G1000', N'1.jpg', N'This is the example of the description.', N'2019-10-10', N'Whatever', 1, N'CU1002')
+INSERT INTO [dbo].[Gallery] ([Gallery_ID], [Gallery_Image], [Gallery_Desc], [Gallery_Date], [Gallery_Tag], [Status], [User_ID]) VALUES (N'G1001', N'sasuke.jpg', N'This is bla bla bla bla blabalablabalala. WERTYUvnm igfdrtyu', N'2019-10-19', N'XXXXX', 1, N'SE1001')
+INSERT INTO [dbo].[Gallery] ([Gallery_ID], [Gallery_Image], [Gallery_Desc], [Gallery_Date], [Gallery_Tag], [Status], [User_ID]) VALUES (N'G1002', N'naruto.jpg', N'aldkjpasi pasiodvjw ckksocka. osidjcpas  poiejfmcsvo.', N'2019-10-20', N'QWERT', 1, N'SE1001')
+
+CREATE TABLE [dbo].[Comment] (
+    [Comment]    NVARCHAR (MAX) NULL,
+    [Likes]      INT            DEFAULT ((0)) NOT NULL,
+    [Date]       DATE           NULL,
+    [Time]       TIME (7)       NULL,
+    [Gallery_ID] NVARCHAR (6)   NULL,
+    [User_ID]    NVARCHAR (6)   NULL, 
+    CONSTRAINT [FK_Comment_Gallery] FOREIGN KEY ([Gallery_ID]) REFERENCES [dbo].[Gallery] ([Gallery_ID])
+);
+
+INSERT INTO [dbo].[Comment] ([Comment], [Likes], [Date], [Time], [Gallery_ID], [User_ID]) VALUES (N'Wow, nice post, thanks for sharing! :))', 1, N'2019-09-20', N'14:30:00', N'G1001', N'SE1001')
+INSERT INTO [dbo].[Comment] ([Comment], [Likes], [Date], [Time], [Gallery_ID], [User_ID]) VALUES (N'Oh, i hate this! :((', 0, N'2019-09-20', N'14:31:00', N'G1001', N'SE1000')
+INSERT INTO [dbo].[Comment] ([Comment], [Likes], [Date], [Time], [Gallery_ID], [User_ID]) VALUES (N'woooooooooooooooooaaaaaaaaaahhh', 1, N'2019-09-30', N'00:02:30', N'G1002', N'CU1002')
+
+CREATE TABLE [dbo].[Cart] (
+    [Cart_ID]    NVARCHAR (6) NOT NULL,
+    [Cart_Total] INT          NULL,
+    [Cust_ID]    NVARCHAR (6) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Cart_ID] ASC),
+    CONSTRAINT [FK_Cart_ToTable] FOREIGN KEY ([Cust_ID]) REFERENCES [dbo].[Customer] ([Cust_ID])
+);
+
+INSERT INTO [dbo].[Cart] ([Cart_ID], [Cart_Total], [Cust_ID]) VALUES (N'CA1001', 800, N'CU1001')
+INSERT INTO [dbo].[Cart] ([Cart_ID], [Cart_Total], [Cust_ID]) VALUES (N'CA1002', 700, N'CU1002')
+
+CREATE TABLE [dbo].[Cartlist] (
+    [Cart_ID] NVARCHAR (6) NOT NULL,
+    [Prod_ID] NVARCHAR (6) NOT NULL,
+    [Qty]     INT          NULL,
+    CONSTRAINT [PK_Cartlist] PRIMARY KEY CLUSTERED ([Cart_ID] ASC, [Prod_ID] ASC),
+    CONSTRAINT [FK_Cartlist_ToTable] FOREIGN KEY ([Cart_ID]) REFERENCES [dbo].[Cart] ([Cart_ID]),
+    CONSTRAINT [FK_Cartlist_ToTable_1] FOREIGN KEY ([Prod_ID]) REFERENCES [dbo].[Product] ([Prod_ID])
+);
+
+INSERT INTO [dbo].[Cartlist] ([Cart_ID], [Prod_ID], [Qty]) VALUES (N'CA1001', N'P1000', 2)
+INSERT INTO [dbo].[Cartlist] ([Cart_ID], [Prod_ID], [Qty]) VALUES (N'CA1001', N'P1001', 1)
+INSERT INTO [dbo].[Cartlist] ([Cart_ID], [Prod_ID], [Qty]) VALUES (N'CA1001', N'P1002', 1)
+INSERT INTO [dbo].[Cartlist] ([Cart_ID], [Prod_ID], [Qty]) VALUES (N'CA1001', N'P1003', 1)
+INSERT INTO [dbo].[Cartlist] ([Cart_ID], [Prod_ID], [Qty]) VALUES (N'CA1002', N'P1005', 1)
+INSERT INTO [dbo].[Cartlist] ([Cart_ID], [Prod_ID], [Qty]) VALUES (N'CA1002', N'P1006', 1)
+INSERT INTO [dbo].[Cartlist] ([Cart_ID], [Prod_ID], [Qty]) VALUES (N'CA1002', N'P1007', 1)
+INSERT INTO [dbo].[Cartlist] ([Cart_ID], [Prod_ID], [Qty]) VALUES (N'CA1002', N'P1010', 1)
+
+CREATE TABLE [dbo].[Wishlist] (
+    [Wish_ID] NVARCHAR (6) NOT NULL,
+    [Cust_ID] NVARCHAR (6) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Wish_ID] ASC),
+    CONSTRAINT [FK_Wishlist_ToTable] FOREIGN KEY ([Cust_ID]) REFERENCES [dbo].[Customer] ([Cust_ID])
+);
+
+INSERT INTO [dbo].[Wishlist] ([Wish_ID], [Cust_ID]) VALUES (N'W1001', N'CU1001')
+INSERT INTO [dbo].[Wishlist] ([Wish_ID], [Cust_ID]) VALUES (N'W1002', N'CU1002')
+
+CREATE TABLE [dbo].[Wishlist_list] (
+    [Wish_ID] NVARCHAR (6) NOT NULL,
+    [Prod_ID] NVARCHAR (6) NOT NULL,
+    CONSTRAINT [PK_Wishlist_list] PRIMARY KEY CLUSTERED ([Prod_ID] ASC, [Wish_ID] ASC),
+    CONSTRAINT [FK_Wishlist_list_ToTable] FOREIGN KEY ([Wish_ID]) REFERENCES [dbo].[Wishlist] ([Wish_ID]),
+    CONSTRAINT [FK_Wishlist_list_ToTable_1] FOREIGN KEY ([Prod_ID]) REFERENCES [dbo].[Product] ([Prod_ID])
+);
+
+INSERT INTO [dbo].[Wishlist_list] ([Wish_ID], [Prod_ID]) VALUES (N'W1001', N'P1000')
+INSERT INTO [dbo].[Wishlist_list] ([Wish_ID], [Prod_ID]) VALUES (N'W1001', N'P1002')
+INSERT INTO [dbo].[Wishlist_list] ([Wish_ID], [Prod_ID]) VALUES (N'W1002', N'P1003')
+INSERT INTO [dbo].[Wishlist_list] ([Wish_ID], [Prod_ID]) VALUES (N'W1002', N'P1004')
+INSERT INTO [dbo].[Wishlist_list] ([Wish_ID], [Prod_ID]) VALUES (N'W1002', N'P1008')
+INSERT INTO [dbo].[Wishlist_list] ([Wish_ID], [Prod_ID]) VALUES (N'W1002', N'P1009')
+INSERT INTO [dbo].[Wishlist_list] ([Wish_ID], [Prod_ID]) VALUES (N'W1001', N'P1010')
+INSERT INTO [dbo].[Wishlist_list] ([Wish_ID], [Prod_ID]) VALUES (N'W1001', N'P1011')
+
+CREATE TABLE [dbo].[Rating] (
+    [Rate_ID]      NVARCHAR (6)   NOT NULL,
+    [Prod_ID]      NVARCHAR (6)   NOT NULL,
+    [Rate_Comment] NVARCHAR (MAX) NULL,
+    [Rate_Star]    INT            NULL,
+    [Rate_Type]    NVARCHAR (MAX) NULL,
+    PRIMARY KEY CLUSTERED ([Rate_ID] ASC),
+    CONSTRAINT [FK_Rating_ToTable] FOREIGN KEY ([Prod_ID]) REFERENCES [dbo].[Product] ([Prod_ID])
+);
+
+CREATE TABLE [dbo].[Payment] (
+    [Pay_ID]     NVARCHAR (6)  NOT NULL,
+    [Pay_Type]   NVARCHAR (50) NULL,
+    [Pay_Date]   DATE          NULL,
+    [Pay_Amount] MONEY         NULL,
+    [Cart_ID]    NVARCHAR (6)  NOT NULL,
+    [Trans_ID]   NVARCHAR (6)  NOT NULL,
+    [Cust_ID]    NVARCHAR (6)  NULL,
+    PRIMARY KEY CLUSTERED ([Pay_ID] ASC),
+    CONSTRAINT [FK_Payment_ToTable] FOREIGN KEY ([Cart_ID]) REFERENCES [dbo].[Cart] ([Cart_ID]),
+    CONSTRAINT [FK_Payment_ToTable_1] FOREIGN KEY ([Cust_ID]) REFERENCES [dbo].[Customer] ([Cust_ID])
+);
+
+INSERT INTO [dbo].[Payment] ([Pay_ID], [Pay_Type], [Pay_Date], [Pay_Amount], [Cart_ID], [Trans_ID], [Cust_ID]) VALUES (N'PA1001', N'Debit', N'2019-11-11', CAST(800.0000 AS Money), N'CA1001', N'T0001', NULL)
+
+CREATE TABLE [dbo].[PAYMENT_DETAIL] (
+    [Pay_ID]  NVARCHAR (6) NOT NULL,
+    [Prod_ID] NVARCHAR (6) NOT NULL,
+    [Qty]     INT          NULL,
+    CONSTRAINT [PK_PAYMENT_DETAIL] PRIMARY KEY CLUSTERED ([Pay_ID] ASC, [Prod_ID] ASC),
+    CONSTRAINT [FK_PAYMENT_DETAIL_ToTable] FOREIGN KEY ([Pay_ID]) REFERENCES [dbo].[Payment] ([Pay_ID]),
+    CONSTRAINT [FK_PAYMENT_DETAIL_ToTable_1] FOREIGN KEY ([Prod_ID]) REFERENCES [dbo].[Product] ([Prod_ID])
+);
+
+INSERT INTO [dbo].[PAYMENT_DETAIL] ([Pay_ID], [Prod_ID], [Qty]) VALUES (N'PA1001', N'P1001', 2)
+INSERT INTO [dbo].[PAYMENT_DETAIL] ([Pay_ID], [Prod_ID], [Qty]) VALUES (N'PA1001', N'P1002', 1)
+INSERT INTO [dbo].[PAYMENT_DETAIL] ([Pay_ID], [Prod_ID], [Qty]) VALUES (N'PA1001', N'P1003', 1)
+
+CREATE TABLE [dbo].[TRANSACTION] (
+    [Trans_ID] NVARCHAR (6) NOT NULL,
+    [pay_ID]   NVARCHAR (6) NULL,
+    PRIMARY KEY CLUSTERED ([Trans_ID] ASC),
+    CONSTRAINT [FK_TRANSACTION_ToTable] FOREIGN KEY ([pay_ID]) REFERENCES [dbo].[Payment] ([Pay_ID])
+);
+
+INSERT INTO [dbo].[TRANSACTION] ([Trans_ID], [pay_ID]) VALUES (N'T0001', N'PA1001')
+

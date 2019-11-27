@@ -23,8 +23,9 @@
         display: block;
         color: white;
         text-align: center;
-        padding: 14px 16px;
+        padding: 18px 16px;
         text-decoration: none;
+        padding-bottom: 14px;
     }
 
         /* Change the link color to #111 (black) on hover */
@@ -59,20 +60,11 @@
     width: 100%;
 }
 
-
-
 .login {
     float: right;
 }
-
-    .login:hover, .home:hover, .hotSales:hover, .newArrival:hover {
-        opacity: 0.4;
-    }
 
 .imageButton {
     margin: 4.5%;
 }
 
-.footer {
-    width: 100%;
-}

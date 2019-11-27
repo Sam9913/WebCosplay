@@ -13,5 +13,15 @@ namespace Assignment
         {
 
         }
+        
+        protected void ImageButton1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void ImageMap1_Click(object sender, ImageMapEventArgs e)
+        {
+            Response.Redirect("/Front.aspx");
+        }
     }
 }

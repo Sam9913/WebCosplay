@@ -116,8 +116,8 @@
 
 
  </style>
-    <div style="margin: 2%; padding: 2%; width: 100%;">
-        <h2 style="margin:auto;">Cart</h2>
+    <div style="margin: 2%; padding: 2%; width: 98%;">
+        <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">Cart</h2>
     </div>
          <div class="space1">
         <table class="seller_nav">
@@ -126,11 +126,11 @@
             </tr>
 
             <tr>
-                <td class="seller_nav_onclick">Cart</td>
+                <td class="seller_nav_onclick">My Cart</td>
             </tr>
 
            <tr>
-                <td onclick="changePage('myWishlist')" id="myWishlist" style="cursor:pointer;">Wishlist</td>
+                <td onclick="changePage('myWishlist')" id="myWishlist" style="cursor:pointer;">My Wishlist</td>
             </tr>
 
             <tr>

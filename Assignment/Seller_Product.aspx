@@ -116,8 +116,8 @@
 
 
     </style>
-    <div style="margin: 2%; padding: 2%; width: 100%;">
-        <h2 style="margin:auto;">My Product</h2>
+    <div style="margin: 2%; padding: 2%; width: 98%;">
+        <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">My Product</h2>
     </div>
     <div style="min-width: 950px;">
 <%--        <div style="width:100%; padding-bottom: 5%;">
@@ -292,7 +292,7 @@
                 window.location.href = "Seller_Profile.aspx";
 
             else if (id == document.getElementById("transHis").id)
-                window.location.href = "#";
+                window.location.href = "TransactionHistorySell.aspx";
 
 
         }

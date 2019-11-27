@@ -1,6 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Home.aspx.cs" Inherits="Assignment.Home" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -19,7 +22,7 @@
     
     <table style="width: 100%; padding-top:2.5%; padding-left:10%; padding-right:10%; padding-bottom:2.5%;">
         <tr>
-            <td style="width: 200px; padding-bottom:2.5%; padding-top:2.5%"><u><b>Hot Sales</b></u></td>
+            <td style="width: 200px; padding-left: 7.5%; padding-bottom:2.5%; padding-top:2.5%; font-size: 30px;"><u><b>Hot Sales</b></u></td>
         </tr>
         <tr>
             <td style="text-align:center; width: 200px;">
@@ -47,7 +50,7 @@
 
     <table style="width: 100%; padding-top:2.5%; padding-left:10%; padding-right:10%; padding-bottom:2.5%;">
         <tr>
-            <td style="width: 200px; padding-bottom:2.5%;"><u><b>New Arrival</b></u></td>
+            <td style="width: 200px; padding-left: 7.5%; padding-bottom:2.5%; font-size: 30px; padding-top:2.5%;"><u><b>New Arrival</b></u></td>
         </tr>
         <tr>
             <td style="text-align:center; width: 200px;">
