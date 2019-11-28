@@ -158,7 +158,7 @@
                                    <%--retrieve from product--%>
                                  
                                 <div style="margin-left: 10px">
-                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Details], [Prod_Price], [Prod_Image] FROM [Product] WHERE ([Prod_ID] = @Prod_ID)">
+                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Details], [Prod_Price], [Prod_Image1] FROM [Product] WHERE ([Prod_ID] = @Prod_ID)">
                                         <SelectParameters>
                                             <asp:ControlParameter ControlID="prodID" PropertyName="Text" Name="Prod_ID" Type="String"></asp:ControlParameter>
                                         </SelectParameters>
@@ -166,7 +166,7 @@
                                     <td class="auto-style1">
                                      <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource2">
                                         <ItemTemplate>
-                                           <td class="auto-style4"><asp:Image ImageUrl='<%#"~/image/" + Eval("Prod_Image").ToString() %>' runat="server" ID="Prod_InamgeLabel" Height="150px" Width="150px" style="margin-left:20px"/></td>
+                                           <td class="auto-style4"><asp:Image ImageUrl='<%#"~/image/" + Eval("Prod_Image1").ToString() %>' runat="server" ID="Prod_InamgeLabel" Height="150px" Width="150px" style="margin-left:20px"/></td>
                                     <br />
                                         </ItemTemplate>
                                     </asp:DataList>
@@ -177,7 +177,7 @@
                                      <asp:DataList ID="DataList3" runat="server" DataSourceID="SqlDataSource2">
                                         <ItemTemplate> <td style="font-size:large;"><h3>Name: <asp:Label Text='<%# Eval("Prod_Name") %>' runat="server" ID="Prod_NameLabel" /></h3>
                                     Details: <asp:Label Text='<%# Eval("Prod_Details") %>' runat="server" ID="Prod_DetailsLabel" /><br />
-                                    Price: <asp:Label Text='<%# Eval("Prod_Price","{0:00}") %>' runat="server" ID="Prod_PriceLabel" /><br /></td>
+                                    Price: <asp:Label Text='<%# Eval("Prod_Price","{0:0.00}") %>' runat="server" ID="Prod_PriceLabel" /><br /></td>
                                      </ItemTemplate>
                                     </asp:DataList>
                                 

@@ -16,7 +16,11 @@ namespace Assignment
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Costume1.aspx");
+            LinkButton button = (LinkButton)sender;
+            DataListItem item = (DataListItem)button.NamingContainer;
+            HiddenField idLabel = (HiddenField)item.FindControl("hidden");
+            
+            Response.Redirect("~/Costume1.aspx?productID=" + idLabel.Value.ToString());
         }
 
         protected void sortButton_Click(object sender, EventArgs e)

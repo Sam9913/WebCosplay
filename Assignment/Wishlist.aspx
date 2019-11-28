@@ -118,7 +118,7 @@
     <div style=" width: 80%;float: left;">
     <div class="table-space">
         <%--<div style="float:left; width:70%;margin-left:5%;">--%>
-            <asp:Label ID="wishID" runat="server" Text="W1001" style="display:none;"></asp:Label>
+           
         <table style="border-bottom:2px solid black; border-top:2px solid black;width:100%" class="auto-style5">
             <tr>
                 <td style="text-align:center" class="tableheader">Product</td>
@@ -136,7 +136,7 @@
                                <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource2">
                                    
                                     <ItemTemplate>
-                                              <td class="auto-style4"><asp:Image ImageUrl='<%#"~/image/" + Eval("Prod_Image").ToString() %>' runat="server" ID="Prod_InamgeLabel" Height="150px" Width="150px" style="margin-left:20px"/></td>
+                                              <td class="auto-style4"><asp:Image ImageUrl='<%#"~/image/" + Eval("Prod_Image1").ToString() %>' runat="server" ID="Prod_InamgeLabel" Height="150px" Width="150px" style="margin-left:20px"/></td>
                                     <br />
                                     </ItemTemplate>
                                 </asp:DataList>
@@ -152,7 +152,7 @@
                                          </ItemTemplate>
                                 </asp:DataList>
                                   </td>
-                                <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Image] FROM [Product] WHERE ([Prod_ID] = @Prod_ID)">
+                              <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Details], [Prod_Image1] FROM [Product] WHERE ([Prod_ID] = @Prod_ID)">
                                     <SelectParameters>
                                         <asp:ControlParameter ControlID="prodID" PropertyName="Text" Name="Prod_ID" Type="String"></asp:ControlParameter>
                                     </SelectParameters>
@@ -169,7 +169,8 @@
             </asp:Repeater>
             <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Wish_ID], [Prod_ID] FROM [Wishlist_list] WHERE ([Wish_ID] = @Wish_ID)">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="wishID" PropertyName="Text" Name="Wish_ID" Type="String"></asp:ControlParameter>
+                    <asp:CookieParameter CookieName="customerName" Name="Wish_ID" Type="String"></asp:CookieParameter>
+
                 </SelectParameters>
             </asp:SqlDataSource>
         </table>

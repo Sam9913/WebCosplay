@@ -28,7 +28,8 @@
         <ItemStyle BackColor="#F7F6F3" ForeColor="#333333"></ItemStyle>
         <ItemTemplate>
             <div style="text-align:center; margin:5%;">
-                <asp:Image ID="Image1" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image").ToString()%>' Width="50%"/><br />
+                <asp:HiddenField ID="hidden" runat="server" Value='<%# Eval("Prod_ID") %>' />
+                <asp:Image ID="Image1" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image1").ToString()%>' Width="50%"/><br />
                 <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_Name") %>'>
                 </asp:LinkButton><br /> 
                 RM 
@@ -38,7 +39,7 @@
         </ItemTemplate>
         <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedItemStyle>
     </asp:DataList>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Image], [Prod_ID] FROM [Product]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Image1], [Prod_ID] FROM [Product]"></asp:SqlDataSource>
     
         
 </asp:Content>
