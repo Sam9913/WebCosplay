@@ -31,7 +31,6 @@
 
     <asp:DataList ID="DataList1" runat="server" DataKeyField="Prod_ID" DataSourceID="SqlDataSource1" style="width: 100%; margin-top: -12%; margin-left:10%;">
         <ItemTemplate> 
-            <asp:Label ID="hiddenID" runat="server" Text='<%# Eval("Cat_ID") %>' Visible="false" />
             <td style="width: 160px; float: right; margin-top: 45%;">
                 <asp:ImageButton ID="Image2" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image1").ToString()%>' Width="150px" />
                 <br /><br />
@@ -52,6 +51,10 @@
                 <b><asp:Label Text='<%# Eval("Prod_Status") %>' runat="server" ID="Prod_StatusLabel" /></b><br />
                 <asp:Label ID="Label4" runat="server" Text='<%# Eval("Prod_Count") %>' /> item left<br />
                 <br />
+                <%if (Session["Cat_ID"].Equals("C1001") || Session["Cat_ID"].Equals("C1003") || Session["Cat_ID"].Equals("C1004"))
+                    { %>
+                <asp:Label ID="sizeLabel" Text="Size :" runat="server"></asp:Label><br />
+                <%} %>
                 <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
                     <ItemTemplate>
                         <asp:Button ID="Button1" runat="server" Text='<%# Eval("Size_Details") %>' CssClass="changeButton" OnClick="Button1_Click"/>

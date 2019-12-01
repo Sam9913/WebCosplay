@@ -11,7 +11,8 @@
     <div style="text-align:center; margin:2.5% 5% 2.5% 5%;">
         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
             <ItemTemplate>
-                <asp:LinkButton ID="sortButton" runat="server" OnClick="sortButton_Click"><%#DataBinder.Eval(Container.DataItem,"Sort_Type") %></asp:LinkButton>&ensp;|&ensp;
+                <asp:HiddenField ID="sortIDHidden" runat="server" Value='<%# Eval("Sort_ID") %>'/>
+                <asp:LinkButton ID="sortButton" runat="server" OnClick="sortButton_Click" Text='<%#DataBinder.Eval(Container.DataItem,"Sort_Type") %>' ></asp:LinkButton>&ensp;|&ensp;
             </ItemTemplate>
         </asp:Repeater>
     </div>
@@ -27,6 +28,7 @@
 
         <ItemStyle BackColor="#F7F6F3" ForeColor="#333333"></ItemStyle>
         <ItemTemplate>
+            <asp:Label ID="hiddenID" runat="server" Text='<%# Eval("Cat_ID") %>' Visible="false" />
             <div style="text-align:center; margin:5%;">
                 <asp:HiddenField ID="hidden" runat="server" Value='<%# Eval("Prod_ID") %>' />
                 <asp:Image ID="Image1" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image1").ToString()%>' Width="50%"/><br />
@@ -39,7 +41,7 @@
         </ItemTemplate>
         <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedItemStyle>
     </asp:DataList>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Image1], [Prod_ID] FROM [Product]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Image1], [Prod_ID], [Cat_ID] FROM [Product]"></asp:SqlDataSource>
     
         
 </asp:Content>

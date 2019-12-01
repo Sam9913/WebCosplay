@@ -27,7 +27,7 @@
     <div class="loginTable">
         <div style="margin-left:10%;">
             <asp:RadioButtonList ID="rblRole" runat="server" RepeatDirection="Horizontal">
-                <asp:ListItem>Customer</asp:ListItem>
+                <asp:ListItem Selected="True">Customer</asp:ListItem>
                 <asp:ListItem>Cosplayer</asp:ListItem>
             </asp:RadioButtonList>
             <asp:Login ID="Login1" runat="server"  Font-Names="Verdana" Font-Size="10pt" OnLoggedIn="Login1_LoggedIn" OnAuthenticate="Login1_Authenticate">

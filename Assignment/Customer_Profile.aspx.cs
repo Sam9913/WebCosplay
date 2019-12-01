@@ -11,7 +11,7 @@ namespace CosplayWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            String customerName = Request.Cookies["customerName"].Value;
+            
         }
     }
 }

@@ -13,8 +13,8 @@
         <ContentTemplate>
             <asp:Timer ID="Timer1" runat="server" Interval="5000" OnTick="Timer1_Tick"></asp:Timer>
     
-            <asp:ImageButton ID="buttonRight" CssClass="buttonR" runat="server" ImageUrl="~/image/arrowR.svg" OnClick="buttonRight_Click" />
-            <asp:ImageButton ID="buttonLeft" CssClass="buttonL" runat="server" ImageUrl="~/image/arrowL.svg" OnClick="buttonLeft_Click" />
+            <asp:ImageButton ID="buttonRight"  runat="server" CssClass="buttonR" ImageUrl="image/arrowR.png" OnClick="buttonRight_Click" />
+            <asp:ImageButton ID="buttonLeft" CssClass="buttonL" runat="server" ImageUrl="image/arrowL.png" OnClick="buttonLeft_Click" />
             <asp:Image ID="Image1" runat="server" CssClass="slideshow" ImageUrl="~/image/header_1.jpg" />
             <asp:HiddenField ID="hiddenField" runat="server" Value="1"/>
         </ContentTemplate>

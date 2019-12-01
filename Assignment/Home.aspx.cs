@@ -12,7 +12,7 @@ namespace Assignment
         int i;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void buttonRight_Click(object sender, ImageClickEventArgs e)

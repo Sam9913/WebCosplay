@@ -6,29 +6,10 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="StyleSheet1.css"/>
     <style>
-        .linkDown {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-
-        .linkDown li a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .linkTitle {
-            color: lightgrey;
-            padding-bottom: 1%;
-        }
-
         .footer {
             width: 100%;
             display: flex;
-            margin-top:5%;
-            /*position: fixed;
-            bottom: 0;*/
+            margin-top: 5%;
         }
 
         .linkPage {
@@ -53,75 +34,99 @@
             padding-left: 1%;
         }
 
-        /* Dropdown content (hidden by default) */
-        .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #333;
-          min-width: 130px;
-          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-          z-index: 1;
-          margin-top:0;
-          
+        .linkDown {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
         }
 
-        /* Links inside the dropdown */
-        .dropdown-content a {
-          float: none;
-          color: black;
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-          text-align: left;
+            .linkDown li a {
+                color: white;
+                text-decoration: none;
+            }
+
+        .linkTitle {
+            color: lightgrey;
+            padding-bottom: 1%;
         }
 
-        /* Add a grey background color to dropdown links on hover */
-        .dropdown-content a:hover {
-          background-color: #111;
+        .ddl .loginLink:hover {
+            background-image: url('image/login_white.png');
         }
 
-        /* Show the dropdown menu on hover */
-        .ddl:hover .dropdown-content {
-          display: block;
-          margin-top:0;
+        .buttonR, .buttonL {
+            padding-top: 10%;
+            padding-right: 1%;
+            padding-left: 1%;
+            position: absolute;
+            padding-bottom: 14.85%;
+            background-color: lightslategrey;
+            opacity: 0.0;
         }
 
+        .buttonR {
+            margin-left: 97%;
+        }
 
+        .buttonR:hover, .buttonL:hover {
+            opacity: 1.0;
+        }
     </style>
     </head>
-    
+
 <body>
     <div style="width:100%;">
+        <form id="form1" runat="server">
             <div class="nav" style="min-width: 630px; position:sticky; top:0; z-index: 5;">
                 <ul class="navDown" style="font-family:Bahnschrift; font-size:16px; height: 55.2px;">
                 <li id="logo">
                     <asp:ImageMap ID="ImageMap1" runat="server" ImageUrl="~/image/logo.jpg" Height="50px" Width="140px">
                         <asp:RectangleHotSpot NavigateUrl="~/Front.aspx" Top="0" Left="0" Bottom="70" Right="200" HotSpotMode="Navigate"/>
-
                     </asp:ImageMap>
                 </li>
                 <li>
-                    <div class="ddl">
-                        <a href="Login.aspx" style="padding-bottom:13px;">Login/Logout</a>
-                        <div class="dropdown-content">
-                            <a href="Customer_Profile.aspx">Member</a>
-                            <a href="Seller_Profile.aspx">Seller</a>
+                    <div class="ddl"> 
+                        <%if (Request.Cookies["customerName"] == null && Request.Cookies["sellerName"] == null)
+                            {%>
+                            <a href="Login.aspx" style="padding-bottom:13px;" id="loginLink">
+                                <asp:Label ID="loginLabel" runat="server" Text="Login"></asp:Label></a>
+                            <%}
+                        else if (Request.Cookies["customerName"] != null)
+                        {%>
+                            <a href="Customer_Profile.aspx" style="padding-bottom:13px;" id="customerLink">
+                                <asp:Label ID="Label1" runat="server" Text="Member"></asp:Label></a>
+                            <%}
+                        else if (Request.Cookies["sellerName"] != null)
+                        { %>
+                                <a href="Seller_Profile.aspx" style="padding-bottom:13px;" id="sellerLink">
+                                    <asp:Label ID="Label2" runat="server" Text="Seller"></asp:Label></a>
+                            <%} %>
+                            
+                        <% if (Request.Cookies["customerName"] != null || Request.Cookies["sellerName"] != null)
+                        { %>
+                        <div class="dropdown-content" style="float:right;" id="logoutLink">
+                            <asp:LinkButton ID="logoutButton" runat="server" OnClick="logoutLabel_Click">Logout</asp:LinkButton>
                         </div>
+                        <%} %>
                     </div>
                 </li>
-                <li><a href="Wishlist.aspx">Wishlist</a></li>
-                <li><a href="cartlist.aspx">Cart</a></li>
-                <li><a href="Seller_Gallery.aspx">Gallery</a></li>
-                <li><div class="ddl"><a href="Product.aspx" style="padding-bottom:13px;">Product</a>
+                    <%if (Request.Cookies["customerName"] != null)
+                        { %>
+                <li><a href="Wishlist.aspx" id="wishlistLink">Wishlist</a></li>
+                <li><a href="cartlist.aspx" id="cartlistLink">Cart</a></li>
+                    <%} %>
+                <li><a href="Seller_Gallery.aspx" id="galleryLink">Gallery</a></li>
+                <li><div class="ddl"><a href="Product.aspx" style="padding-bottom:13px;" id="productLink">Product</a>
                     <div class="dropdown-content">
-                        <a href="Category.aspx">Category</a>
+                        <a href="Category.aspx" id="categoryLink">Category</a>
                     </div>
                     </div>
                     </li>
-                <li><a href="Home.aspx">Home</a></li>
+                <li><a href="Home.aspx" id="homeLink">Home</a></li>
             </ul>
             </div>
-    <form id="form1" runat="server">
+    
     <asp:SiteMapDataSource runat="server" ID="SiteMapDataSource1"></asp:SiteMapDataSource>
 
         
@@ -153,6 +158,7 @@
             </div>
         </div>
     </form></div>
+
 </body>
 
 </html>

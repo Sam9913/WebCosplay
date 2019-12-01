@@ -16,12 +16,12 @@ namespace Assignment
         
         protected void homeButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Home.aspx");
+            Response.Redirect("~/Home.aspx");
         }
 
         protected void loginButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Login.aspx");
+            Response.Redirect("~/Login.aspx");
         }
     }
 }

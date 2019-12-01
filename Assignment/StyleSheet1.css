@@ -33,24 +33,6 @@
             background-color: #111;
         }
 
-.buttonR, .buttonL {
-    padding-top: 10%;
-    width: 3%;
-    height: 5%;
-    position: absolute;
-    padding-bottom: 14%;
-    background-color: lightslategrey;
-    opacity: 0.0;
-}
-
-.buttonR {
-    margin-left: 97%;
-}
-
-    .buttonR:hover, .buttonL:hover {
-        opacity: 1.0;
-    }
-
 .descriptionEffect {
     margin-top: 10%;
     margin-bottom: 10%;
@@ -68,3 +50,34 @@
     margin: 4.5%;
 }
 
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 130px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top: 0;
+}
+
+    /* Links inside the dropdown */
+    .dropdown-content a {
+        float: none;
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        text-align: left;
+    }
+
+        /* Add a grey background color to dropdown links on hover */
+        .dropdown-content a:hover {
+            background-color: #111;
+        }
+
+/* Show the dropdown menu on hover */
+.ddl:hover .dropdown-content {
+    display: block;
+    margin-top: 0;
+}

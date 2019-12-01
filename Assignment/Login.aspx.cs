@@ -52,7 +52,7 @@ namespace Assignment
                 {
                     HttpCookie httpCookie = new HttpCookie("sellerName");
                     httpCookie.Value = userName;
-                    httpCookie.Expires = DateTime.Now.AddHours(5);
+                    httpCookie.Expires = DateTime.Now.AddMinutes(20);
                     Response.Cookies.Add(httpCookie);
 
                     return true;
@@ -83,7 +83,7 @@ namespace Assignment
                 {
                     HttpCookie httpCookie = new HttpCookie("customerName");
                     httpCookie.Value = userName;
-                    httpCookie.Expires = DateTime.Now.AddHours(5);
+                    httpCookie.Expires = DateTime.Now.AddMinutes(20);
                     Response.Cookies.Add(httpCookie);
 
                     return true;
@@ -93,10 +93,17 @@ namespace Assignment
 
         protected void Login1_Authenticate(object sender, AuthenticateEventArgs e)
         {
+            bool result = false;
             string userName = Login1.UserName;
             string password = Login1.Password;
-            
-            bool result = CustLogin(userName, password);
+
+            if (rblRole.SelectedIndex == 0) {
+                result = CustLogin(userName, password);
+            }
+            else if(rblRole.SelectedIndex == 1) {
+                result = SellerLogin(userName, password);
+            }
+
             if ((result))
             {
                 e.Authenticated = true;

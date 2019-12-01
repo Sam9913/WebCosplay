@@ -90,34 +90,31 @@
     <Content Include="image\3.jpg" />
     <Content Include="image\4.jpg" />
     <Content Include="image\5.jpg" />
-    <Content Include="image\arrowL.svg" />
-    <Content Include="image\arrowR.svg" />
+    <Content Include="image\arrowL.png" />
+    <Content Include="image\arrowR.png" />
     <Content Include="image\arrows_minus.svg" />
     <Content Include="image\arrows_plus.svg" />
-    <Content Include="image\cart.svg" />
     <Content Include="image\commentBox.svg" />
+    <Content Include="image\cosplayHome.jpg" />
     <Content Include="image\delete .svg" />
     <Content Include="image\earring.jpg" />
     <Content Include="image\fortniteSet.jpg" />
-    <Content Include="image\gallery.svg" />
     <Content Include="image\header_1.jpg" />
     <Content Include="image\header_2.jpg" />
     <Content Include="image\header_3.jpg" />
     <Content Include="image\header_4.jpg" />
     <Content Include="image\home.jpg" />
-    <Content Include="image\home.svg" />
     <Content Include="image\homescreen1.jpg" />
     <Content Include="image\homescreen2.jpg" />
     <Content Include="image\home_black.png" />
     <Content Include="image\home_white.png" />
     <Content Include="image\kakashiCostume.jpg" />
     <Content Include="image\kakashiShoes.jpg" />
-    <Content Include="image\login.svg" />
+    <Content Include="image\loginFront.jpg" />
     <Content Include="image\login_black.png" />
     <Content Include="image\login_white.png" />
     <Content Include="image\logo.jpg" />
     <Content Include="image\mail.png" />
-    <Content Include="image\mail.svg" />
     <Content Include="image\marvel.jpg" />
     <Content Include="image\naruto.jpg" />
     <Content Include="image\naruto2.png" />
@@ -128,7 +125,6 @@
     <Content Include="image\narutoWig.jpg" />
     <Content Include="image\necklace.jpg" />
     <Content Include="image\phone.png" />
-    <Content Include="image\phone.svg" />
     <Content Include="image\review.svg" />
     <Content Include="image\round.jpg" />
     <Content Include="image\RW_wig.jpg" />
@@ -158,7 +154,6 @@
     <Content Include="TransactionHistoryCus.aspx" />
     <Content Include="TransactionHistorySell.aspx" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
     <Content Include="Wishlist.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -309,13 +304,6 @@
     </Compile>
     <Compile Include="TransactionHistorySell.aspx.designer.cs">
       <DependentUpon>TransactionHistorySell.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
     </Compile>
     <Compile Include="Wishlist.aspx.cs">
       <DependentUpon>Wishlist.aspx</DependentUpon>
