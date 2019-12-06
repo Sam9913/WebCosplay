@@ -67,5 +67,16 @@ namespace Assignment
         {
             Response.Redirect("/n");
         }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            LinkButton button = (LinkButton)sender;
+            RepeaterItem item = (RepeaterItem)button.NamingContainer;
+            HiddenField idLabel = (HiddenField)item.FindControl("hidden");
+            Label catLabel = (Label)item.FindControl("hiddenID");
+
+            Session["Cat_ID"] = catLabel.Text;
+            Response.Redirect("~/Costume1.aspx?productID=" + idLabel.Value.ToString());
+        }
     }
 }

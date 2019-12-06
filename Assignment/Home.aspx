@@ -25,54 +25,40 @@
             <td style="width: 200px; padding-left: 7.5%; padding-bottom:2.5%; padding-top:2.5%; font-size: 30px;"><u><b>Hot Sales</b></u></td>
         </tr>
         <tr>
-            <td style="text-align:center; width: 200px;">
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Costume1.aspx" ><img src="image/4.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/Costume1.aspx">Costume 4</asp:HyperLink>
-            </td>
-            <td style="text-align:center; width: 200px;">
-                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/5.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/Costume1.aspx">Costume 5</asp:HyperLink>
-            </td>
-            <td style="text-align:center; width: 200px;">
-                <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Costume1.aspx" ><img src="image/3.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Costume1.aspx">Costume 3</asp:HyperLink>
-            </td>
-            <td style="text-align:center; width: 200px;">
-                <asp:HyperLink ID="HyperLink7" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/narutoFigure.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Costume1.aspx">Naruto Figure</asp:HyperLink>
-            </td>
+            <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
+                <ItemTemplate>
+                    <td style="text-align: center; width: 200px;">
+                        <asp:HiddenField ID="hidden" runat="server" Value='<%# Eval("Prod_ID") %>' />
+                        <asp:Label ID="hiddenID" runat="server" Text='<%# Eval("Cat_ID") %>' Visible="false" />
+                        <asp:Image ID="Image2" runat="server" style="width:150px; height:150px;" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image1").ToString()%>'/>
+                        <br />
+                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_Name") %>'></asp:LinkButton><br /> 
+                    </td>
+                </ItemTemplate>
+            </asp:Repeater>
         </tr>
     </table>
+
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT TOP 4 * FROM PRODUCT ORDER BY Sales_Count DESC"></asp:SqlDataSource>
 
     <table style="width: 100%; padding-top:2.5%; padding-left:10%; padding-right:10%; padding-bottom:2.5%;">
         <tr>
             <td style="width: 200px; padding-left: 7.5%; padding-bottom:2.5%; font-size: 30px; padding-top:2.5%;"><u><b>New Arrival</b></u></td>
         </tr>
         <tr>
-            <td style="text-align:center; width: 200px;">
-                <asp:HyperLink ID="HyperLink9" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/4.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Costume1.aspx">Costume 4</asp:HyperLink>
-            </td>
-            <td style="text-align:center; width: 200px;">
-                <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/1.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="HyperLink12" runat="server" NavigateUrl="~/Costume1.aspx">Costume 1</asp:HyperLink>
-            </td>
-            <td style="text-align:center; width: 200px;">
-                <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/2.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/Costume1.aspx">Costume 2</asp:HyperLink>
-            </td>
-            <td style="text-align:center; width: 200px;">
-                <asp:HyperLink ID="HyperLink15" runat="server" NavigateUrl="~/Costume1.aspx"><img src="image/sasuke.jpg" alt="" style="width:150px; height:150px;"/></asp:HyperLink>
-                <br />
-                <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/Costume1.aspx">Sasuke Figure</asp:HyperLink>
-            </td>
+            <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
+                <ItemTemplate>
+                    <td style="text-align: center; width: 200px;">
+                        <asp:HiddenField ID="hidden" runat="server" Value='<%# Eval("Prod_ID") %>' />
+                        <asp:Label ID="hiddenID" runat="server" Text='<%# Eval("Cat_ID") %>' Visible="false" />
+                        <asp:Image ID="Image2" runat="server" style="width:150px; height:150px;" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image1").ToString()%>'/>
+                        <br />
+                        <asp:LinkButton ID="LinkButton1" runat="server" OnClick="LinkButton1_Click" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_Name") %>'></asp:LinkButton><br />                     
+                    </td>
+                </ItemTemplate>
+            </asp:Repeater>
         </tr>
     </table>
+
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT TOP 4 * FROM PRODUCT ORDER BY Add_Date DESC"></asp:SqlDataSource>
 </asp:Content>

@@ -31,7 +31,7 @@ namespace Assignment
             RepeaterItem repeater = (RepeaterItem)button.NamingContainer;
             HiddenField sortID = (HiddenField)repeater.FindControl("sortIDHidden");
             
-            Response.Redirect("~/Category.aspx?sortID=" + sortID.Value.ToString());
+            Response.Redirect("~/Sort.aspx?sortID=" + sortID.Value.ToString());
         }
     }
 }

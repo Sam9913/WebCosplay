@@ -66,7 +66,7 @@
         }
 
         .buttonR {
-            margin-left: 97%;
+            margin-left: 96.7%;
         }
 
         .buttonR:hover, .buttonL:hover {
@@ -119,14 +119,19 @@
                 <li><a href="Seller_Gallery.aspx" id="galleryLink">Gallery</a></li>
                 <li><div class="ddl"><a href="Product.aspx" style="padding-bottom:13px;" id="productLink">Product</a>
                     <div class="dropdown-content">
-                        <a href="Category.aspx" id="categoryLink">Category</a>
+                        <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
+                            <ItemTemplate>
+                                <a href='Category.aspx?catID=<%# Eval("Cat_ID").ToString() %>' id="categoryLink"><%# Eval("Cat_Type") %></a>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                     </div>
                     </li>
                 <li><a href="Home.aspx" id="homeLink">Home</a></li>
             </ul>
             </div>
-    
+
+            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Category]"></asp:SqlDataSource>
     <asp:SiteMapDataSource runat="server" ID="SiteMapDataSource1"></asp:SiteMapDataSource>
 
         

@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -62,7 +63,6 @@ namespace Assignment
 
         private bool CustLogin(string userName, string password)
         {
-
             string conString = ConfigurationManager.ConnectionStrings["KosupureEntities"].ConnectionString;
 
             using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(conString))
@@ -113,5 +113,6 @@ namespace Assignment
                 e.Authenticated = false;
             }
         }
+        
     }
 }

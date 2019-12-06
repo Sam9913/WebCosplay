@@ -81,6 +81,7 @@
     </Content>
     <Content Include="cartlist.aspx" />
     <Content Include="Category.aspx" />
+    <Content Include="changePassword.aspx" />
     <Content Include="Costume1.aspx" />
     <Content Include="Customer_Profile.aspx" />
     <Content Include="Front.aspx" />
@@ -150,10 +151,13 @@
     <Content Include="Seller_Gallery.aspx" />
     <Content Include="Seller_Product.aspx" />
     <Content Include="Seller_Profile.aspx" />
+    <Content Include="Sort.aspx" />
     <Content Include="StyleSheet1.css" />
     <Content Include="TransactionHistoryCus.aspx" />
     <Content Include="TransactionHistorySell.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Wishlist.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -170,6 +174,13 @@
     </Compile>
     <Compile Include="Category.aspx.designer.cs">
       <DependentUpon>Category.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="changePassword.aspx.cs">
+      <DependentUpon>changePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="changePassword.aspx.designer.cs">
+      <DependentUpon>changePassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Costume1.aspx.cs">
       <DependentUpon>Costume1.aspx</DependentUpon>
@@ -290,6 +301,13 @@
     </Compile>
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Sort.aspx.cs">
+      <DependentUpon>Sort.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sort.aspx.designer.cs">
+      <DependentUpon>Sort.aspx</DependentUpon>
     </Compile>
     <Compile Include="TransactionHistoryCus.aspx.cs">
       <DependentUpon>TransactionHistoryCus.aspx</DependentUpon>

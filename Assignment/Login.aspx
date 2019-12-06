@@ -18,7 +18,7 @@
         }
     </style>
 
-    <div style="text-align:center; margin-top:2%;">
+    <div style="text-align:center; margin-top:2%; margin-bottom:2.3%;">
     <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Login.aspx">Login</asp:HyperLink>/<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Register.aspx">Register</asp:HyperLink>
     </div>
 
@@ -34,9 +34,5 @@
                 <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />
             </asp:Login>
         </div>
-                <br /><br />
-                        <asp:PasswordRecovery ID="PasswordRecovery1" runat="server" Font-Names="Verdana" Font-Size="10pt">
-                            <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />                        
-                        </asp:PasswordRecovery>
     </div>
 </asp:Content>

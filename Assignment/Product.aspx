@@ -7,9 +7,8 @@
             <h2 style="margin:auto; font-size:30px; font-family: Bahnschrift; font-weight: 700""><asp:SiteMapPath ID="SiteMapPath1" runat="server" ></asp:SiteMapPath></h2>
         </div>
 
-
     <div style="text-align:center; margin:2.5% 5% 2.5% 5%;">
-        <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
+        | <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
             <ItemTemplate>
                 <asp:HiddenField ID="sortIDHidden" runat="server" Value='<%# Eval("Sort_ID") %>'/>
                 <asp:LinkButton ID="sortButton" runat="server" OnClick="sortButton_Click" Text='<%#DataBinder.Eval(Container.DataItem,"Sort_Type") %>' ></asp:LinkButton>&ensp;|&ensp;

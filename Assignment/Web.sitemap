@@ -1,7 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
   <siteMapNode url="~/Product.aspx" title="Product"  description="Product">
-    <siteMapNode url="~/Category.aspx" title="Category"  description="Category" />
-    <siteMapNode url="" title=""  description="" />
+    <siteMapNode url="~/Category.aspx?catID=C1000" title="Accesories"  description="Accesories" />
+    <siteMapNode url="~/Category.aspx?catID=C1001" title="Costume"  description="Costume" />
+    <siteMapNode url="~/Category.aspx?catID=C1002" title="Props"  description="Props" />
+    <siteMapNode url="~/Category.aspx?catID=C1003" title="Shoes"  description="Shoes" />
+    <siteMapNode url="~/Category.aspx?catID=C1004" title="Set"  description="Set" />
+    <siteMapNode url="~/Category.aspx?catID=C1005" title="Wig"  description="Wig" />
+    <siteMapNode url="~/Category.aspx?catID=C1006" title="Figure"  description="Figure" />
+    
+    <siteMapNode url="~/Sort.aspx?sortID=R1000" title="Game"  description="Game" />
+    <siteMapNode url="~/Sort.aspx?sortID=R1001" title="Anime"  description="Anime" />
+    <siteMapNode url="~/Sort.aspx?sortID=R1002" title="Disney"  description="Disney" />
+    <siteMapNode url="~/Sort.aspx?sortID=R1003" title="Marvel"  description="Marvel" />
+    <siteMapNode url="~/Sort.aspx?sortID=R1004" title="Movie"  description="Movie" />
+    <siteMapNode url="~/Sort.aspx?sortID=R1005" title="DC"  description="DC" />
+    <siteMapNode url="~/Sort.aspx?sortID=R1006" title="Cartoon"  description="Cartoon" />
   </siteMapNode>
 </siteMap>

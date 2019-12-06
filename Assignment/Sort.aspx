@@ -1,12 +1,11 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Category.aspx.cs" Inherits="Assignment.Category" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Sort.aspx.cs" Inherits="Assignment.Sort" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-
-
-        <div style="margin: 2%; padding: 2%; width: 98%;">
-            <h2 style="margin:auto; font-size:30px; font-family: Bahnschrift; font-weight: 700""><asp:SiteMapPath ID="SiteMapPath1" runat="server" RootNodeStyle-Font-Underline="false" RootNodeStyle-ForeColor="Black"></asp:SiteMapPath></h2>
+    <div style="margin: 2%; padding: 2%; width: 98%;">
+            <h2 style="margin:auto; font-size:30px; font-family: Bahnschrift; font-weight: 700"">
+                <asp:SiteMapPath ID="SiteMapPath1" runat="server" RootNodeStyle-Font-Underline="false" RootNodeStyle-ForeColor="Black"></asp:SiteMapPath></h2>
         </div>
     <div style="text-align:center; margin:2.5% 5% 2.5% 5%;">
         | <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
@@ -40,11 +39,12 @@
         </ItemTemplate>
         <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333"></SelectedItemStyle>
     </asp:DataList>
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Image1], [Prod_ID] FROM [Product] WHERE ([Cat_ID] = @Cat_ID) ">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price], [Prod_Image1], [Prod_ID] FROM [Product] WHERE ([Sort_ID] = @Sort_ID) ">
         <SelectParameters>
-            <asp:QueryStringParameter QueryStringField="catID" Name="Cat_ID"></asp:QueryStringParameter>
+            <asp:QueryStringParameter QueryStringField="sortID" Name="Sort_ID"></asp:QueryStringParameter>
         </SelectParameters>
     </asp:SqlDataSource>
     
         
 </asp:Content>
+
