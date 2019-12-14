@@ -1,7 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Sort.aspx.cs" Inherits="Assignment.Sort" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="SortControl.ascx.cs" Inherits="Assignment.SortControl" %>
 
-<asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
     <div style="margin: 2%; padding: 2%; width: 98%;">
             <h2 style="margin:auto; font-size:30px; font-family: Bahnschrift; font-weight: 700"">
@@ -44,7 +43,3 @@
             <asp:QueryStringParameter QueryStringField="sortID" Name="Sort_ID"></asp:QueryStringParameter>
         </SelectParameters>
     </asp:SqlDataSource>
-    
-        
-</asp:Content>
-

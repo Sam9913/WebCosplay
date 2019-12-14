@@ -7,20 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Assignment
 {
-    public partial class Sort : System.Web.UI.Page
+    public partial class ProductControl : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        protected void sortButton_Click(object sender, EventArgs e)
-        {
-            LinkButton button = (LinkButton)sender;
-            RepeaterItem repeater = (RepeaterItem)button.NamingContainer;
-            HiddenField sortID = (HiddenField)repeater.FindControl("sortIDHidden");
-
-            Response.Redirect("~/Sort.aspx?sortID=" + sortID.Value.ToString());
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
@@ -32,6 +23,15 @@ namespace Assignment
 
             Session["Cat_ID"] = catLabel.Text;
             Response.Redirect("~/Costume1.aspx?productID=" + idLabel.Value.ToString());
+        }
+
+        protected void sortButton_Click(object sender, EventArgs e)
+        {
+            LinkButton button = (LinkButton)sender;
+            RepeaterItem repeater = (RepeaterItem)button.NamingContainer;
+            HiddenField sortID = (HiddenField)repeater.FindControl("sortIDHidden");
+
+            Response.Redirect("~/Classify.aspx?sortID=" + sortID.Value.ToString());
         }
     }
 }

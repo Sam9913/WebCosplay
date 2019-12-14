@@ -10,7 +10,7 @@
 namespace Assignment {
     
     
-    public partial class Category {
+    public partial class SortControl {
         
         /// <summary>
         /// SiteMapPath1 control.

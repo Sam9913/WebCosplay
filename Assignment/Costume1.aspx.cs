@@ -49,19 +49,5 @@ namespace Assignment
                 Response.Write("<script language=javascript>alert('The item had been added to cartlist.')</script>");
         }
 
-        //protected void Image2_Click(object sender, ImageClickEventArgs e)
-        //{
-        //    Image1.ImageUrl = Image2.ImageUrl;
-        //}
-
-        //protected void Image3_Click(object sender, ImageClickEventArgs e)
-        //{
-        //    Image1.ImageUrl = Image3.ImageUrl;
-        //}
-
-        //protected void Image4_Click(object sender, ImageClickEventArgs e)
-        //{
-        //    Image1.ImageUrl = Image4.ImageUrl;
-        //}
     }
 }

@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Assignment
 {
-    public partial class Product : System.Web.UI.Page
+    public partial class CategoryControl : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,8 +30,8 @@ namespace Assignment
             LinkButton button = (LinkButton)sender;
             RepeaterItem repeater = (RepeaterItem)button.NamingContainer;
             HiddenField sortID = (HiddenField)repeater.FindControl("sortIDHidden");
-            
-            Response.Redirect("~/Sort.aspx?sortID=" + sortID.Value.ToString());
+
+            Response.Redirect("~/Classify.aspx?sortID=" + sortID.Value.ToString());
         }
     }
 }

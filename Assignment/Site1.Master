@@ -121,7 +121,7 @@
                     <div class="dropdown-content">
                         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
                             <ItemTemplate>
-                                <a href='Category.aspx?catID=<%# Eval("Cat_ID").ToString() %>' id="categoryLink"><%# Eval("Cat_Type") %></a>
+                                <a href='Classify.aspx?catID=<%# Eval("Cat_ID").ToString() %>' id="categoryLink"><%# Eval("Cat_Type") %></a>
                             </ItemTemplate>
                         </asp:Repeater>
                     </div>

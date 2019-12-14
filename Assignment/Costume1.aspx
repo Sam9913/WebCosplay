@@ -16,15 +16,23 @@
         }
     </style>
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Product] WHERE ([Prod_ID] = @Prod_ID)">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT  SUM([SizeDetails].[Prod_Count]) AS Total_Prod, [Prod_Image1], [Prod_Image2], [Prod_Image3], [Prod_Name], [Prod_Price], [Prod_Details], [Product].[Prod_ID], [Prod_Status]
+FROM [Product] 
+JOIN [SizeDetails] 
+ON [Product].[Prod_ID] = [SizeDetails].[Prod_ID] 
+JOIN [Size]
+ON [Size].[Size_ID] = [SizeDetails].[Size_ID] 
+WHERE ([Product].[Prod_ID] = @Prod_ID)
+GROUP BY [Prod_Image1], [Prod_Image2], [Prod_Image3], [Prod_Name], [Prod_Price], [Prod_Details] , [Product].[Prod_ID], [Prod_Status]">
         <SelectParameters>
             <asp:QueryStringParameter QueryStringField="productID" Name="Prod_ID" Type="String"></asp:QueryStringParameter>
 
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Size_Details] FROM [Size] WHERE ([Prod_ID] = @Prod_ID)">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT S.Size_Details from Size S join SizeDetails SD on SD.Size_ID=S.Size_ID where SD.Prod_ID=@productID
+">
         <SelectParameters>
-            <asp:QueryStringParameter QueryStringField="productID" Name="Prod_ID" Type="String"></asp:QueryStringParameter>
+            <asp:QueryStringParameter QueryStringField="productID" Name="productID"></asp:QueryStringParameter>
 
         </SelectParameters>
     </asp:SqlDataSource>
@@ -49,17 +57,18 @@
                 <u><strong>Details</strong></u><br />
                 <asp:Label ID="Label3" runat="server" Text='<%# Eval("Prod_Details") %>' /><br />
                 <b><asp:Label Text='<%# Eval("Prod_Status") %>' runat="server" ID="Prod_StatusLabel" /></b><br />
-                <asp:Label ID="Label4" runat="server" Text='<%# Eval("Prod_Count") %>' /> item left<br />
+                <asp:Label ID="Label4" runat="server" Text='<%# Eval("Total_Prod") %>' /> item left<br />
                 <br />
                 <%if (Session["Cat_ID"].Equals("C1001") || Session["Cat_ID"].Equals("C1003") || Session["Cat_ID"].Equals("C1004"))
                     { %>
                 <asp:Label ID="sizeLabel" Text="Size :" runat="server"></asp:Label><br />
-                <%} %>
+                
                 <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
                     <ItemTemplate>
                         <asp:Button ID="Button1" runat="server" Text='<%# Eval("Size_Details") %>' CssClass="changeButton" OnClick="Button1_Click"/>
                     </ItemTemplate>
                 </asp:Repeater>
+                <%} %>
                 <br /><br />
                 Quantity : <asp:TextBox ID="txtQty" runat="server" Width="3%"></asp:TextBox><br />
                 <asp:Button ID="cartButton" runat="server" Text="Add to Cart" OnClick="cartButton_Click"/>

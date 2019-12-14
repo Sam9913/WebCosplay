@@ -80,7 +80,7 @@
       <DependentUpon>Kosupure.mdf</DependentUpon>
     </Content>
     <Content Include="cartlist.aspx" />
-    <Content Include="Category.aspx" />
+    <Content Include="CategoryControl.ascx" />
     <Content Include="changePassword.aspx" />
     <Content Include="Costume1.aspx" />
     <Content Include="Customer_Profile.aspx" />
@@ -146,12 +146,13 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
-    <Content Include="Product.aspx" />
+    <Content Include="ProductControl.ascx" />
     <Content Include="Register.aspx" />
     <Content Include="Seller_Gallery.aspx" />
     <Content Include="Seller_Product.aspx" />
     <Content Include="Seller_Profile.aspx" />
-    <Content Include="Sort.aspx" />
+    <Content Include="Classify.aspx" />
+    <Content Include="SortControl.ascx" />
     <Content Include="StyleSheet1.css" />
     <Content Include="TransactionHistoryCus.aspx" />
     <Content Include="TransactionHistorySell.aspx" />
@@ -168,12 +169,12 @@
     <Compile Include="cartlist.aspx.designer.cs">
       <DependentUpon>cartlist.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Category.aspx.cs">
-      <DependentUpon>Category.aspx</DependentUpon>
+    <Compile Include="CategoryControl.ascx.cs">
+      <DependentUpon>CategoryControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Category.aspx.designer.cs">
-      <DependentUpon>Category.aspx</DependentUpon>
+    <Compile Include="CategoryControl.ascx.designer.cs">
+      <DependentUpon>CategoryControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="changePassword.aspx.cs">
       <DependentUpon>changePassword.aspx</DependentUpon>
@@ -259,12 +260,12 @@
     <Compile Include="Models\Wishlist.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Product.aspx.cs">
-      <DependentUpon>Product.aspx</DependentUpon>
+    <Compile Include="ProductControl.ascx.cs">
+      <DependentUpon>ProductControl.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Product.aspx.designer.cs">
-      <DependentUpon>Product.aspx</DependentUpon>
+    <Compile Include="ProductControl.ascx.designer.cs">
+      <DependentUpon>ProductControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">
@@ -302,12 +303,19 @@
     <Compile Include="Site1.Master.designer.cs">
       <DependentUpon>Site1.Master</DependentUpon>
     </Compile>
-    <Compile Include="Sort.aspx.cs">
-      <DependentUpon>Sort.aspx</DependentUpon>
+    <Compile Include="Classify.aspx.cs">
+      <DependentUpon>Classify.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sort.aspx.designer.cs">
-      <DependentUpon>Sort.aspx</DependentUpon>
+    <Compile Include="Classify.aspx.designer.cs">
+      <DependentUpon>Classify.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SortControl.ascx.cs">
+      <DependentUpon>SortControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SortControl.ascx.designer.cs">
+      <DependentUpon>SortControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="TransactionHistoryCus.aspx.cs">
       <DependentUpon>TransactionHistoryCus.aspx</DependentUpon>
