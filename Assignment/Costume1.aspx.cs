@@ -49,5 +49,17 @@ namespace Assignment
                 Response.Write("<script language=javascript>alert('The item had been added to cartlist.')</script>");
         }
 
+        protected void Image_Click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton imageButton = sender as ImageButton;
+            if (!imageButton.ImageUrl.Equals("~/image/white.jpg"))
+            {
+                foreach(DataListItem item in DataList1.Items)
+                {
+                    Image image = (Image)item.FindControl("Image1");
+                    image.ImageUrl = imageButton.ImageUrl;
+                }
+            }
+        }
     }
 }

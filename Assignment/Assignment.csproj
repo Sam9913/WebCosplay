@@ -84,6 +84,7 @@
     <Content Include="changePassword.aspx" />
     <Content Include="Costume1.aspx" />
     <Content Include="Customer_Profile.aspx" />
+    <Content Include="ForgetPassControl.ascx" />
     <Content Include="Front.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="image\1.jpg" />
@@ -136,6 +137,7 @@
     <Content Include="image\wish.svg" />
     <Content Include="image\wish_blank.svg" />
     <Content Include="Login.aspx" />
+    <Content Include="LoginControl.ascx" />
     <Content Include="Models\Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -197,6 +199,13 @@
     <Compile Include="Customer_Profile.aspx.designer.cs">
       <DependentUpon>Customer_Profile.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ForgetPassControl.ascx.cs">
+      <DependentUpon>ForgetPassControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgetPassControl.ascx.designer.cs">
+      <DependentUpon>ForgetPassControl.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Front.aspx.cs">
       <DependentUpon>Front.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -217,6 +226,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginControl.ascx.cs">
+      <DependentUpon>LoginControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginControl.ascx.designer.cs">
+      <DependentUpon>LoginControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Models\Cart.cs">
       <DependentUpon>Model.tt</DependentUpon>

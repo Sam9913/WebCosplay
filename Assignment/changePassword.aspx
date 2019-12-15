@@ -18,7 +18,7 @@
     </style>
 
         <div class="changeTable">
-            <asp:ChangePassword ID="ChangePassword1" runat="server" Font-Names="Verdana" Font-Size="10pt" o>
+            <asp:ChangePassword ID="ChangePassword1" runat="server" Font-Names="Verdana" Font-Size="10pt" OnChangedPassword="ChangePassword1_ChangedPassword">
                 <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />
                 </asp:ChangePassword>  
         </div>

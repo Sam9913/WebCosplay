@@ -40,11 +40,11 @@ GROUP BY [Prod_Image1], [Prod_Image2], [Prod_Image3], [Prod_Name], [Prod_Price],
     <asp:DataList ID="DataList1" runat="server" DataKeyField="Prod_ID" DataSourceID="SqlDataSource1" style="width: 100%; margin-top: -12%; margin-left:10%;">
         <ItemTemplate> 
             <td style="width: 160px; float: right; margin-top: 45%;">
-                <asp:ImageButton ID="Image2" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image1").ToString()%>' Width="150px" />
+                <asp:ImageButton ID="Image2" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image1").ToString()%>' Width="150px" OnClick="Image_Click"/>
                 <br /><br />
-                <asp:ImageButton ID="Image3" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image2").ToString()%>' Width="150px" />
+                <asp:ImageButton ID="Image3" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image2").ToString()%>' Width="150px" OnClick="Image_Click"/>
                 <br /><br />
-                <asp:ImageButton ID="Image4" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image3").ToString()%>' Width="150px" />
+                <asp:ImageButton ID="Image4" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image3").ToString()%>' Width="150px" OnClick="Image_Click"/>
             </td>
             <td style="width: 320px; margin-top: 0;">
                 <asp:Image ID="Image1" runat="server" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Prod_Image1").ToString()%>' Width="80%"/><br />
@@ -119,4 +119,20 @@ GROUP BY [Prod_Image1], [Prod_Image2], [Prod_Image3], [Prod_Name], [Prod_Price],
         <textarea id="TextArea1" cols="150" rows="5" ></textarea>
         <asp:Button ID="commentButton" runat="server" Text="Comment" style="float:right;"/>
     </div>
+
+    <div style="margin-left:10%; margin-right:10%; padding-bottom:10%;">
+        <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource3">
+            <ItemTemplate>
+                Rated Star:<asp:Label ID="starLabel" runat="server" Text='<%# Eval("Rate_Star") %>'></asp:Label><br />
+                <asp:Label ID="commentLabel" runat="server" Text='<%# Eval("Rate_Comment") %>'></asp:Label>
+            </ItemTemplate>
+        </asp:Repeater>
+    </div>
+
+    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Rating] WHERE ([Prod_ID] = @Prod_ID)">
+        <SelectParameters>
+            <asp:QueryStringParameter QueryStringField="productID" Name="Prod_ID" Type="String"></asp:QueryStringParameter>
+        </SelectParameters>
+    </asp:SqlDataSource>
+
 </asp:Content>
