@@ -92,6 +92,8 @@
     <Content Include="image\3.jpg" />
     <Content Include="image\4.jpg" />
     <Content Include="image\5.jpg" />
+    <Content Include="image\add_black.png" />
+    <Content Include="image\add_white.png" />
     <Content Include="image\arrowL.png" />
     <Content Include="image\arrowR.png" />
     <Content Include="image\arrows_minus.svg" />
@@ -118,6 +120,8 @@
     <Content Include="image\logo.jpg" />
     <Content Include="image\mail.png" />
     <Content Include="image\marvel.jpg" />
+    <Content Include="image\minus_black.png" />
+    <Content Include="image\minus_white.png" />
     <Content Include="image\naruto.jpg" />
     <Content Include="image\naruto2.png" />
     <Content Include="image\narutoCostume.jpg" />

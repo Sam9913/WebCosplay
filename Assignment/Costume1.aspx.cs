@@ -11,7 +11,7 @@ namespace Assignment
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void wishButton_Click(object sender, ImageClickEventArgs e)
@@ -60,6 +60,39 @@ namespace Assignment
                     image.ImageUrl = imageButton.ImageUrl;
                 }
             }
+        }
+
+        protected void minus_Click(object sender, ImageClickEventArgs e)
+        {
+            foreach (DataListItem item in DataList1.Items)
+            {
+                TextBox textBox = (TextBox)item.FindControl("txtQty");
+                int quantity = Int32.Parse(textBox.Text);
+                if(quantity > 0)
+                    textBox.Text = (quantity - 1).ToString();
+            }
+        }
+
+        protected void add_Click(object sender, ImageClickEventArgs e)
+        {
+            foreach (DataListItem item in DataList1.Items)
+            {
+                TextBox textBox = (TextBox)item.FindControl("txtQty");
+                int quantity = Int32.Parse(textBox.Text);
+                textBox.Text = (quantity + 1).ToString();
+            }
+        }
+
+        protected void Repeater2_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Label label = (Label)e.Item.FindControl("starLabel");
+            for (int counter = 1; Int32.Parse(label.Text) >= counter; counter++)
+            {
+                string starLabel = "star" + counter.ToString();
+                Label star = (Label)e.Item.FindControl(starLabel);
+                star.CssClass = "fa fa-star checked";
+            }
+            
         }
     }
 }

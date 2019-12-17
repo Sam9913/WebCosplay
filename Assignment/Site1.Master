@@ -117,7 +117,7 @@
                 <li><a href="cartlist.aspx" id="cartlistLink">Cart</a></li>
                     <%} %>
                 <li><a href="Seller_Gallery.aspx" id="galleryLink">Gallery</a></li>
-                <li><div class="ddl"><a href="Product.aspx" style="padding-bottom:13px;" id="productLink">Product</a>
+                <li><div class="ddl"><a href="Classify.aspx" style="padding-bottom:13px;" id="productLink">Product</a>
                     <div class="dropdown-content">
                         <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
                             <ItemTemplate>
