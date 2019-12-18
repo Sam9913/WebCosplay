@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
         <Triggers>
             <asp:AsyncPostBackTrigger controlid="Timer1" eventname="Tick" />

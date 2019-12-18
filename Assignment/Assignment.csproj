@@ -136,6 +136,8 @@
     <Content Include="image\RW_wig.jpg" />
     <Content Include="image\sasuke.jpg" />
     <Content Include="image\sasuke2.png" />
+    <Content Include="image\star-blank.PNG" />
+    <Content Include="image\star-full.PNG" />
     <Content Include="image\star.svg" />
     <Content Include="image\weapon.jpg" />
     <Content Include="image\wish.svg" />

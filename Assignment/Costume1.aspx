@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Costume1.aspx.cs" Inherits="Assignment.Costume1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" ClassName="AutoID" MasterPageFile="~/Site1.Master" CodeBehind="Costume1.aspx.cs" Inherits="Assignment.Costume1" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -24,49 +24,29 @@
             border: 2px solid white;
         }
 
-        .star-rating {
-          font-family: 'FontAwesome';
+        .star1:hover ~ .star2, .star1:hover ~ .star3,.star1:hover ~ .star4,
+        .star1:hover ~.star5, .star2:hover ~ .star3, .star2:hover ~ .star4,
+        .star2:hover ~ .star5, .star3:hover ~ .star4, .star3:hover ~ .star5,
+        .star3:hover ~ .star4, .star3:hover ~ .star5, .star4:hover ~ .star5{
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #FAE842;
+            -webkit-text-fill-color: white;
         }
-        .star-rating > fieldset {
-          border: none;
-          display: inline-block;
+
+        .fa-star, .checked{
+            -webkit-text-stroke-color: #F7DC10;
+            -webkit-text-fill-color: #F7DC10;
         }
-        .star-rating > fieldset:not(:checked) > input {
-          position: absolute;
-          top: -9999px;
-          clip: rect(0, 0, 0, 0);
+
+        .not-checked{
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: #FAE842;
+            -webkit-text-fill-color: white;
         }
-        .star-rating > fieldset:not(:checked) > label {
-          float: right;
-          width: 1em;
-          padding: 0 0.05em;
-          overflow: hidden;
-          white-space: nowrap;
-          cursor: pointer;
-          font-size: 200%;
-          color: #FAE842;
-        }
-        .star-rating > fieldset:not(:checked) > label:before {
-          content: '\f006  ';
-        }
-        .star-rating > fieldset:not(:checked) > label:hover,
-        .star-rating > fieldset:not(:checked) > label:hover ~ label, .checked {
-          color: #F7DC10;
-          text-shadow: 0 0 3px #F7DC10;
-        }
-        .star-rating > fieldset:not(:checked) > label:hover:before,
-        .star-rating > fieldset:not(:checked) > label:hover ~ label:before {
-          content: '\f005  ';
-        }
-        .star-rating > fieldset > input:checked ~ label:before {
-          content: '\f005  ';
-        }
-        .star-rating > fieldset > label:active {
-          position: relative;
-          top: 2px;
-        }
+
     </style>
 
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT  SUM([SizeDetails].[Prod_Count]) AS Total_Prod, [Prod_Image1], [Prod_Image2], [Prod_Image3], [Prod_Name], [Prod_Price], [Prod_Details], [Product].[Prod_ID], [Prod_Status]
 FROM [Product] 
 JOIN [SizeDetails] 
@@ -135,21 +115,23 @@ GROUP BY [Prod_Image1], [Prod_Image2], [Prod_Image3], [Prod_Name], [Prod_Price],
         </ItemTemplate>
     </asp:DataList>
 
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
     <div style="margin-left:10%; margin-right:10%; padding-bottom:2.5%;">
         <h3>Rating</h3>
         <hr />
         <div class="star-rating">
-          <fieldset>
-            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="Outstanding">5 stars</label>
-            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="Very Good">4 stars</label>
-            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="Good">3 stars</label>
-            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="Poor">2 stars</label>
-            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="Very Poor">1 star</label>
-          </fieldset>
+            <asp:HiddenField ID="hiddenStar" runat="server" Value="5" />
+              <asp:LinkButton ID="starButton1" CssClass="star1 fa fa-star checked" runat="server" style="text-decoration:none;" OnClick="LinkButton1_Click"></asp:LinkButton>
+              <asp:LinkButton ID="starButton2" CssClass="star2 fa fa-star checked" runat="server" style="text-decoration:none;" OnClick="LinkButton2_Click"></asp:LinkButton>
+              <asp:LinkButton ID="starButton3" CssClass="star3 fa fa-star checked" runat="server" style="text-decoration:none;" OnClick="LinkButton3_Click"></asp:LinkButton>
+              <asp:LinkButton ID="starButton4" CssClass="star4 fa fa-star checked" runat="server" style="text-decoration:none;" OnClick="LinkButton4_Click"></asp:LinkButton>
+              <asp:LinkButton ID="starButton5" CssClass="star5 fa fa-star checked" runat="server" style="text-decoration:none;" ></asp:LinkButton>
         </div>
-        <textarea id="TextArea1" cols="150" rows="5" ></textarea>
-        <asp:Button ID="commentButton" runat="server" Text="Comment" style="float:right;"/>
+        <textarea id="TextArea1" name="TextArea1" cols="150" rows="5" ></textarea>
+        <asp:Button ID="commentButton" runat="server" Text="Comment" style="float:right;" OnClick="commentButton_Click"/>
     </div>
+
 
     <div style="margin-left:10%; margin-right:10%;">
         <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource3" OnItemDataBound="Repeater2_ItemDataBound">
@@ -169,7 +151,8 @@ GROUP BY [Prod_Image1], [Prod_Image2], [Prod_Image3], [Prod_Name], [Prod_Price],
             </ItemTemplate>
         </asp:Repeater>
     </div>
-
+</ContentTemplate>
+        </asp:UpdatePanel>
     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Rating] JOIN [Customer] ON [Customer].[Cust_ID] = [Rating].[Cust_ID] WHERE ([Prod_ID] = @Prod_ID)">
         <SelectParameters>
             <asp:QueryStringParameter QueryStringField="productID" Name="Prod_ID" Type="String"></asp:QueryStringParameter>

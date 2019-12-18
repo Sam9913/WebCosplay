@@ -136,7 +136,8 @@
 
         
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+            
+        </asp:ContentPlaceHolder>
 
         <div class="footer">
             <div class="about">
