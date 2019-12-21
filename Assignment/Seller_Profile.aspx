@@ -1,12 +1,13 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Seller_Profile.aspx.cs" Inherits="CosplayWeb.Seller_Profile" %>
+﻿<%@ Page Language="C#" ClassName="AutoID" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="Seller_Profile.aspx.cs" Inherits="CosplayWeb.Seller_Profile" %>
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
     
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 
 
@@ -112,12 +113,63 @@
         }
 
         .table th {
-            
             margin-left: 5%;
         }
 
+        .usernameBold {
+            font-weight:bold;
+        }
+
+        .commentBox {
+            border-radius:10px 10px 10px 10px;
+            border-color:grey;
+        }
+
+        .icon_heart1 {
+            font-size: 30px;
+            color: black; 
+            cursor: pointer; 
+            margin-bottom:15px; 
+            margin-top: 5px;
+        }
+
+        .icon_heart2 {
+            font-size: 30px;
+            color: red; 
+            cursor: pointer; 
+            margin-bottom:15px; 
+            margin-top: 5px;
+        }
+
+        .icon_heart1:hover, .icon_heart1:focus {
+            color:black;
+            text-decoration:none;
+        }
+
+        .icon_heart2:hover, .icon_heart2:focus {
+            color:red;
+            text-decoration:none;
+        }
+
+        .icon_comment {
+            font-size: 30px; 
+            color: black; 
+            cursor: pointer; 
+            margin-bottom:15px;
+        }
+
+        .icon_comment:hover, .icon_comment:focus {
+            color: black;
+            text-decoration:none;
+        }
 
 
+        .icon_delete {
+            font-size: 30px; 
+            color: black; 
+            cursor: pointer; 
+            margin-bottom:15px;
+        }
 
     </style>
     <div style="margin: 2%; padding: 2%; width: 98%;">
@@ -138,6 +190,9 @@
             <tr>
                 <td onclick="changePage('transHis')" id="transHis" style="cursor:pointer;">Transaction History</td>
             </tr>
+            <tr>
+                <td onclick="changePage('changePass')" id="changePass" style="cursor:pointer;">Change Password</td>
+            </tr>
         </table>
     </div>
 
@@ -150,10 +205,9 @@
        
 
             <!-- Profile -->
-            <asp:DataList ID="DataList1" runat="server" DataKeyField="Seller_ID" DataSourceID="SqlDataSource1">
+            <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
                 <ItemTemplate>
-
-                    <div class="image" style="text-align:center; ">
+                        <div class="image" style="text-align:center; ">
                         <asp:Image ID="Image1" ImageUrl='<%# "~/image/" + DataBinder.Eval(Container.DataItem,"Seller_Image").ToString() %>' CssClass="profile_pic" runat="server" />
                     </div>
 
@@ -165,8 +219,7 @@
                     <div style="width: 50%; margin-left: 25%; margin-top: 2%; margin-bottom:2%;">
                         Phone : <%# Eval("Seller_Phone") %><br />
                         Email : <%# Eval("Seller_Email") %><br />
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                        <%# Eval("Seller_Details") %>
                     </div>
 
                     <div style="text-align:center; margin: 2%; margin-bottom: 0;">
@@ -175,61 +228,69 @@
                         <asp:ImageButton ID="ImageButton3" ToolTip="Add new Post" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
                     </div>
                 </ItemTemplate>
-            </asp:DataList>
+            </asp:Repeater>
 
+            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
             <!-- Gallery Post -->
-            <asp:ListView ID="ListView1" runat="server" DataSourceID="SqlDataSource2">
-                <ItemTemplate>
-
-            <%--<asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
-                <ItemTemplate>--%>
-            <div style="width: 100%; float:left; min-width: 850px; margin-top: 7%; height: auto; border:2px solid #eee; box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                
-
-                <asp:HiddenField ID="hidden_Gallery_ID" runat="server" Value='<%#Eval("Gallery_ID") %>'/>
-                <%--<asp:Label ID="lbl_Gallery_ID" runat="server" style="" Text='<%#Eval("Gallery_ID") %>'></asp:Label>--%>
-                
-                <div style="margin: 2%; padding-right:2%; padding-left:2%; float:left; width: 28%; min-width: 235px;">
-                    <asp:Image ID="Image2" Width="200px" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Gallery_Image").ToString() %>' runat="server" />
-                </div>
-
-                <div style="margin: 2%; float:left; width: 55%; min-width: 465px;">
-                    <span>
-                        <%#DataBinder.Eval(Container.DataItem,"Gallery_Desc")%>
-                    </span><hr style="border:0; border-top: 2px solid #333; margin: 3% 0;"/>
-                    <a href="#" style="text-decoration:none; color: navy; font-size: 12px;">View All 123 Comments</a><br />
-
-<%--                    <asp:ListView ID="ListView2" runat="server" DataSourceID="SqlDataSource3">
+            <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+        
+                    <asp:Repeater ID="Repeater3" runat="server" DataSourceID="SqlDataSource2" OnItemDataBound="Repeater3_ItemDataBound">
                         <ItemTemplate>
-                            <span><b><%#DataBinder.Eval(Container.DataItem,"User_ID") %></b></span>
-                            <span><%#DataBinder.Eval(Container.DataItem,"Comment") %></span><br />
-                        </ItemTemplate>
-                    </asp:ListView>--%>
-                            
-                    <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource3">
-                        <ItemTemplate>
-                            <span><b><%#DataBinder.Eval(Container.DataItem,"User_ID") %></b></span>
-                            <span><%#DataBinder.Eval(Container.DataItem,"Comment") %></span><br />
-                            
+                    
+                            <div style="width: 100%; float:left; min-width: 850px; margin-top: 7%; height: auto; border:2px solid #eee; box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            
+                                <asp:HiddenField ID="hidden_Gallery_ID" runat="server" Value='<%#Eval("Gallery_ID") %>'/>
+                        
+                                <div style="margin: 2%; padding-right:2%; padding-left:2%; float:left; width: 28%; min-width: 235px;">
+                                    <asp:Image ID="Image2" Width="200px" ImageUrl='<%#"~/image/" + DataBinder.Eval(Container.DataItem,"Gallery_Image").ToString() %>' runat="server" />
+                                </div>
+
+                                <div style="margin: 2%; float:left; width: 55%; min-width: 465px;">
+                                    <span>
+                                        <%#DataBinder.Eval(Container.DataItem,"Gallery_Desc")%>
+                                    </span><hr style="border:0; border-top: 2px solid #333; margin: 3% 0;"/>
+                                    <a href="#" style="text-decoration:none; color: navy; font-size: 12px;">View All 123 Comments</a><br />
+
+                                    <asp:Repeater ID="Repeater4" runat="server" DataSourceID="SqlDataSource3" OnItemDataBound="Repeater4_ItemDataBound">
+                                        <ItemTemplate>
+                                            <asp:HiddenField ID="hdn_userID" runat="server" Value='<%#Eval("User_ID") %>'/>
+                                            <asp:Label ID="lbl_uname" runat="server" CssClass="usernameBold"></asp:Label>
+                                            <asp:Label ID="lbl_comment" runat="server" Text='<%#Eval("Comment") %>'></asp:Label><br />
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+
+                                    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT CO.Comment, CO.User_ID FROM Comment CO where CO.Gallery_ID = @Gallery_ID">
+                                        <SelectParameters>
+                                            <asp:ControlParameter ControlID="hidden_Gallery_ID" PropertyName="Value" Name="Gallery_ID"></asp:ControlParameter>
+                                        </SelectParameters>
+                                    </asp:SqlDataSource>
+                                    
+                                    <asp:Label ID="username_comment" runat="server" CssClass="usernameBold" Visible="false" Text='<%#Eval("Seller_Username") %>' ></asp:Label>
+                                    <asp:TextBox ID="tbx_comment"  CssClass="commentBox" Placeholder=" Comment..." runat="server" Visible="false"></asp:TextBox>
+                                    <asp:LinkButton ID="linkbtn_send" CssClass="material-icons" Text="send" runat="server"></asp:LinkButton>
+                                </div>
+
+                                <div style="margin: 2%; float:left; width: 5%; min-width: 42px; text-align:center;">
+                                   
+                                    <asp:Label ID="numLikes" runat="server" Text='<%# Eval("TotalLikes") %>'></asp:Label>
+                                    <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Like" CommandArgument='<%# Container.ItemIndex%>' OnCommand="LinkButton1_Command">
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton2" CssClass="far fa-comment icon_comment" runat="server" ToolTip="Comment" CommandArgument='<%# Container.ItemIndex%>' OnCommand="LinkButton2_Command">
+                                    </asp:LinkButton>
+                                    <asp:LinkButton ID="LinkButton3" CssClass="fa fa-trash-alt icon_delete" runat="server" ToolTip="Delete" CommandArgument='<%# Container.ItemIndex%>' OnCommand="LinkButton3_Command">
+                                    </asp:LinkButton>
+
+                                </div>
+                            </div>
+
                         </ItemTemplate>
                     </asp:Repeater>
-                    <asp:TextBox ID="tbx_comment" runat="server" style="width: 100%; visibility:hidden;"></asp:TextBox>
-                </div>
-
-                <div style="margin: 2%; float:left; width: 5%; min-width: 42px;">
-                    <i id="icon_heart" onclick="changeIcon()" class="far fa-heart" style="font-size: 30px; color: black; cursor: pointer; margin-bottom:2px; margin-top: 5px;"></i>
-                    <div style="margin-bottom:20px">233</div>
-                    <i id="icon_comment" onclick="addComment()" class="far fa-comment" style="font-size: 30px; color: black; cursor: pointer; margin-bottom:2px;"></i>
-                    <div style="margin-bottom:20px">125</div>
-                    <i id="icon_delete" class="fa fa-trash-alt" style="font-size: 30px; color: black; cursor: pointer; margin-bottom:20px;"></i>
-                </div>
-            </div>    
-                <%--</ItemTemplate>
-            </asp:Repeater>--%>
-
-                    </ItemTemplate>
-            </asp:ListView>
+            
+                </ContentTemplate>
+            </asp:UpdatePanel>   --%>                     
+                                    
 
         </div>
         
@@ -243,17 +304,22 @@
 
 
 
-    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Seller_ID], [Seller_Name], [Seller_Phone], [Seller_Email], [Seller_IC], [Seller_Details], [Seller_Gender], [Seller_UserName], [Seller_Pass], [Seller_Image] FROM [Seller] WHERE ([Seller_ID] = @Seller_ID)">
+    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Seller_ID], [Seller_Name], [Seller_Phone], [Seller_Email], [Seller_IC], [Seller_Details], [Seller_Gender], [Seller_UserName], [Seller_Pass], [Seller_Image] FROM [Seller] WHERE ([Seller_UserName] = @SellerName)">
         <SelectParameters>
-            <asp:Parameter DefaultValue="SE1001" Name="Seller_ID" Type="String"></asp:Parameter>
+            <asp:CookieParameter CookieName="sellerName" Name="SellerName"></asp:CookieParameter>
+
         </SelectParameters>
     </asp:SqlDataSource>
 
 
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT Gallery.Gallery_ID, Gallery.Gallery_Image, Gallery.Gallery_Desc, Gallery.Gallery_Date, Gallery.Gallery_Tag, Gallery.Status, Gallery.User_ID, Seller.Seller_UserName AS Expr8, Seller.Seller_ID FROM Gallery INNER JOIN Seller ON Gallery.User_ID = Seller.Seller_ID">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT G.Gallery_ID, G.Gallery_Image, G.Gallery_Desc, G.Gallery_Date, G.Gallery_Tag, G.Gallery_Status, G.User_ID, G.TotalLikes, S.Seller_UserName FROM Gallery G join Seller S on G.User_ID = S.Seller_ID WHERE S.Seller_UserName = @SellerName">
+        <SelectParameters>
+            <asp:CookieParameter CookieName="sellerName" Name="SellerName"></asp:CookieParameter>
+
+        </SelectParameters>
     </asp:SqlDataSource>
 
-    <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Comment]"></asp:SqlDataSource>
+
 
 
     <div class="container">
@@ -329,14 +395,15 @@
     </div>
 
     <script>
-
+        
         function changePage(id) {
             if (id == document.getElementById("myProd").id)
                 window.location.href = "Seller_Product.aspx";
 
             else if (id == document.getElementById("transHis").id)
                 window.location.href = "TransactionHistorySell.aspx";
-
+            else if (id == document.getElementById("changePass").id)
+                window.location.href = "changePassword.aspx";
 
         }
 
@@ -346,9 +413,9 @@
         //}
 
         function changeIcon() {
-            if (document.getElementById("icon_heart").className == "far fa-heart") {
-                document.getElementById("icon_heart").className = "fas fa-heart";
-                document.getElementById("icon_heart").style.color = "red";
+            if (document.getElementById("icon_heart").className == "far fa-heart icon_heart") {
+                document.getElementById("icon_heart").className = "fas fa-heart icon_heart";
+                document.getElementById("icon_heart").style.color = "red icon_heart";
             } else {
                 document.getElementById("icon_heart").className = "far fa-heart";
                 document.getElementById("icon_heart").style.color = "black";
@@ -360,13 +427,15 @@
             if (document.getElementById("icon_comment").className == "far fa-comment") {
                 document.getElementById("icon_comment").className = "far fa-comment-dots";
 
-                document.getElementById("tbx_comment").style.visibility = "visible";
-                //if (document.getElementById("tbx_comment".style.visibility == "hidden"))
-                //    document.getElementById("tbx_comment").style.visibility = "visible";
 
-                //else
-                //    document.getElementById("tbx_comment").style.visibility = "hidden";
-            
+
+                document.getElementById("tbx_comment").style.visibility = "visible";
+<%--                if (document.getElementById('<%=tbx_comment.ClientID%>').)
+                    document.getElementById("#tbx_comment").style.visibility = "visible";
+
+                else
+                    document.getElementById("#tbx_comment").style.visibility = "hidden";
+            --%>
             } else {
                 document.getElementById("icon_comment").className = "far fa-comment";
 

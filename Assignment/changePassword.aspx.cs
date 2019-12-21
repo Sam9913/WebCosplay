@@ -69,10 +69,10 @@ namespace Assignment
         {
             if (Request.Cookies["customerName"] != null)
             {
-                if (validateCustPassword(ChangePassword1.PasswordLabelText) != false)
+                if (validateCustPassword(Request.Cookies["customerName"].Value) != false)
                 {
-                    string password = ChangePassword1.PasswordLabelText;
-                    string newPass = ChangePassword1.NewPasswordLabelText;
+                    string password = txtCurrent.Text;
+                    string newPass = txtNew.Text;
                     string conString = ConfigurationManager.ConnectionStrings["KosupureEntities"].ConnectionString;
 
                     using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(conString))
@@ -89,12 +89,12 @@ namespace Assignment
                     }
                 }
             }
-            else if (Request.Cookies["sellerrName"] != null)
+            else if (Request.Cookies["sellerName"] != null)
             {
-                if (validateCustPassword(ChangePassword1.PasswordLabelText) != false)
+                if (validateSellerPassword(Request.Cookies["sellerName"].Value) != false && txtNew.Text.Equals(txtConfirm.Text))
                 {
-                    string password = ChangePassword1.PasswordLabelText;
-                    string newPass = ChangePassword1.NewPasswordLabelText;
+                    string password = txtCurrent.Text;
+                    string newPass = txtNew.Text;
                     string conString = ConfigurationManager.ConnectionStrings["KosupureEntities"].ConnectionString;
 
                     using (System.Data.SqlClient.SqlConnection con = new System.Data.SqlClient.SqlConnection(conString))
@@ -109,6 +109,12 @@ namespace Assignment
                         adapter.UpdateCommand = com;
                         adapter.UpdateCommand.ExecuteNonQuery();
                     }
+                    Response.Write("<script>alert('Change password successful. you will be logged out.')</script>");
+                    HttpCookie aCookie = Request.Cookies["sellerName"];
+                    aCookie.Expires = DateTime.Now.AddDays(-10);
+                    aCookie.Value = "";
+                    Response.Cookies.Add(aCookie);
+                    Response.Redirect("~/Home.aspx");
                 }
             }
         }

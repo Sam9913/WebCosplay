@@ -18,8 +18,10 @@
     </style>
 
         <div class="changeTable">
-            <asp:ChangePassword ID="ChangePassword1" runat="server" Font-Names="Verdana" Font-Size="10pt" OnChangedPassword="ChangePassword1_ChangedPassword">
-                <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />
-                </asp:ChangePassword>  
+            Change Password<br />
+            Password : <asp:TextBox ID="txtCurrent" runat="server" TextMode="Password"></asp:TextBox><br />
+            New Password : <asp:TextBox ID="txtNew" runat="server" TextMode="Password"></asp:TextBox><br />
+            Confirm New Password : <asp:TextBox ID="txtConfirm" runat="server" TextMode="Password"></asp:TextBox><br />
+            <asp:Button ID="changeButton" runat="server" Text="Change Password" OnClick="ChangePassword1_ChangedPassword" />&ensp;<asp:Button ID="cancelButton" runat="server" Text="Cancel" />
         </div>
 </asp:Content>
