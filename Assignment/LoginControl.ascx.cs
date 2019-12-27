@@ -70,8 +70,37 @@ namespace Assignment
                 com.Parameters.Add("@UserName", SqlDbType.NVarChar).Value = userName;
                 com.Parameters.Add("@Password", SqlDbType.NVarChar).Value = password;
 
+                SqlCommand getWish = new SqlCommand("SELECT W.Wish_ID FROM Wishlist W inner join Customer CU on W.Cust_ID=CU.Cust_ID where CU.Cust_UserName=@username", con);
+                getWish.Parameters.Add("@username", SqlDbType.NVarChar).Value = userName;
+
+
+                SqlCommand getCart = new SqlCommand("SELECT C.Cart_ID FROM Cart C inner join Customer CU on C.Cust_ID=CU.Cust_ID where CU.Cust_UserName=@username", con);
+                getCart.Parameters.Add("@username", SqlDbType.NVarChar).Value = userName;
+
                 con.Open();
                 string result = Convert.ToString(com.ExecuteScalar());
+                SqlDataReader drwish =getWish.ExecuteReader();
+
+                SqlDataReader drcart = getCart.ExecuteReader();
+
+                while (drwish.Read())
+                {
+                    string wishID = drwish["Wish_ID"].ToString();
+                    HttpCookie httpCookie = new HttpCookie("wish_ID");
+                    httpCookie.Value = wishID;
+                    httpCookie.Expires = DateTime.Now.AddMinutes(20);
+                    Response.Cookies.Add(httpCookie);
+
+                }
+
+                while (drcart.Read())
+                {
+                    string cartID = drcart["Cart_ID"].ToString();
+                    HttpCookie httpCookie = new HttpCookie("Cart_ID");
+                    httpCookie.Value = cartID;
+                    httpCookie.Expires = DateTime.Now.AddMinutes(20);
+                    Response.Cookies.Add(httpCookie);
+                }
 
                 if (string.IsNullOrEmpty(result))
                 {

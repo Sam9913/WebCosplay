@@ -154,6 +154,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Content Include="placeOrder.aspx" />
     <Content Include="ProductControl.ascx" />
     <Content Include="Register.aspx" />
     <Content Include="Seller_Gallery.aspx" />
@@ -281,6 +282,13 @@
     </Compile>
     <Compile Include="Models\Wishlist.cs">
       <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="placeOrder.aspx.cs">
+      <DependentUpon>placeOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="placeOrder.aspx.designer.cs">
+      <DependentUpon>placeOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductControl.ascx.cs">
       <DependentUpon>ProductControl.ascx</DependentUpon>

@@ -64,7 +64,7 @@
              height: 35px;
               font-size: 18px;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-           
+           border-bottom:2px solid black;
             
          }
          .auto-style2 {
@@ -76,9 +76,14 @@
         height: 35px;
          font-size: 18px;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            
+            border-bottom:2px solid black;
     }
-   
+   .btn-view{
+       background: url(image/view1.svg);
+          height:25px;
+          width:25px;
+          border:none;
+   }
          </style>
     
         <div>
@@ -117,26 +122,34 @@
                   <td style="padding:10px" class="auto-style1">Payment ID</td>
                 <td style="padding:10px" class="auto-style1">Transaction Type</td>
                 <td style="padding:10px;" class="auto-style3">Amount (RM)</td>
+                <td style="padding:10px" class="auto-style1"></td>
              </tr>
 
-            <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Pay_ID], [Pay_Type], [Pay_Date], [Pay_Amount], [Trans_ID] FROM [Payment] WHERE ([Trans_ID] = @Trans_ID)">
-                    <SelectParameters>
-                        <asp:ControlParameter ControlID="transID" PropertyName="Text" Name="Trans_ID" Type="String"></asp:ControlParameter>
-                    </SelectParameters>
+            <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT T.Trans_ID,P.Pay_Date,P.Pay_ID,P.Pay_Type,P.Pay_Amount from [TRANSACTION] T join Payment P on T.pay_ID=P.Pay_ID join Customer CU on CU.Cust_ID=P.Cust_ID where CU.Cust_UserName=@username ">
+                <SelectParameters>
+                    <asp:CookieParameter CookieName="customerName" Name="username"></asp:CookieParameter>
+
+                </SelectParameters>
                 </asp:SqlDataSource>
-                <asp:DataList ID="DataList1" runat="server" DataKeyField="Pay_ID" DataSourceID="SqlDataSource1">
+            <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource1" OnItemDataBound="Repeater2_ItemDataBound">
                     <ItemTemplate>
                          <tr>
-                        <td style="padding:10px;width:40px;" class="auto-style2">1.</td>
-                        <td style="padding:10px;width:120px;" class="auto-style2">11/11/2019</td>
-                        <td style="padding:10px;width:180px;" class="auto-style2"><%# Eval("Trans_ID") %></td>
-                        <td style="padding:10px; width:170px" class="auto-style2"><%# Eval("Pay_ID") %></td>
+                        <td style="padding:10px;width:40px;" class="auto-style2" >
+                            <asp:Label ID="count" runat="server" ></asp:Label></td>
+                        <td style="padding:10px;width:120px;" class="auto-style2">
+                            <asp:Label ID="payDate" runat="server" Text='<%# Eval("Pay_Date","{0:dd/MM/yyyy}") %>'></asp:Label></td>
+                             <td style="padding:10px;width:180px;" class="auto-style2">
+                                 <asp:Label ID="trans_ID" runat="server" Text='<%# Eval("Trans_ID") %>'></asp:Label></td>
+                        <td style="padding:10px; width:170px" class="auto-style2">
+                            <asp:Label ID="payID" runat="server" Text='<%# Eval("Pay_ID") %>'></asp:Label></td>
                        <td style="padding:10px;width:250px" class="auto-style2"><%# Eval("Pay_Type") %></td>
-                        <td style="padding:10px;width:180px" class="auto-style2"><%# Eval("Pay_Amount","{0:00}") %></td>
+                        <td style="padding:10px;width:180px" class="auto-style2">
+                            <asp:Label ID="amount" runat="server" Text='<%# Eval("Pay_Amount","{0:0.00}") %>'></asp:Label></td>
+                           <td class="auto-style2"><asp:Button ID="ViewButton" runat="server" CssClass="btn-view" style="margin-right:5%;" ToolTip="View" CausesValidation="false" OnCommand="ViewButton_Command" CommandArgument='<%#Container.ItemIndex%>' />
+                       </td>
                         </tr>
                     </ItemTemplate>
-                </asp:DataList>
-       
+       </asp:Repeater>
 
         </table>
         <br />
@@ -146,7 +159,107 @@
          </div>
         </div>
 
+     <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="modal_showDetail" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" style="width:60%">
+    
+          <!-- Modal content-->
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Details</h4>
+            </div>
+
+            <div class="modal-body" style="padding: 25px; margin-left: 10%;">
+                Transaction ID:<asp:Label ID="trans" runat="server"></asp:Label><br />
+                    Date: <asp:Label ID="date" runat="server"></asp:Label><br /><br />
+
+                <asp:Label ID="payID" runat="server" style="display:none"></asp:Label>
+                <table class="table_showDetail" style="border-bottom:1px solid">
+                    <tr style="border-bottom:1px solid">
+                        <td>
+                            <asp:Label ID="Label1" runat="server" style="padding-left:10px;">Product</asp:Label></td>
+                        <td>
+                            <asp:Label ID="Label2" runat="server" >Size</asp:Label></td>
+                        <td>
+                            <asp:Label ID="Label3" runat="server">Qty</asp:Label></td>
+                        <td>
+                            <asp:Label ID="Label5" runat="server">U\Price(RM)</asp:Label></td>
+                        <td>
+                            <asp:Label ID="Label4" runat="server">Amount(RM)</asp:Label></td>
+                    </tr>
+                    <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
+                        <ItemTemplate>
+                        <tr>
+                         <td style="padding:10px;width:180px;"><%# Eval("Prod_Name") %></td>
+                        <td style="padding:10px; width:100px"><%# Eval("Size_Details") %></td>
+                       <td style="padding:10px;width:100px"><%# Eval("Qty") %></td>
+                            <td style="padding:10px;width:150px"><%# Eval("Prod_Price","{0:0.00}") %></td>
+                            <td style="padding:10px;width:100px"><%# Eval("num","{0:0.00}") %></td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                    <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT PM.Pay_Date,P.Prod_Name,P.Prod_Price,PMD.Qty,S.Size_Details,(PMD.Qty * P.Prod_Price) AS num from Payment PM join Payment_Detail PMD on PMD.Pay_ID=PM.Pay_ID join Product P on P.Prod_ID=PMD.Prod_ID join Size S on S.Size_ID=PMD.Size_ID where PM.Pay_ID=@payID">
+                        <SelectParameters>
+                            <asp:ControlParameter ControlID="payID" PropertyName="Text" Name="payID"></asp:ControlParameter>
+
+                        </SelectParameters>
+                    </asp:SqlDataSource>
+                </table>
+                <br />
+                <table style="margin-left:54%;">
+                    <tr style="height:35px;">
+                        <td>
+                            <asp:Label ID="Label6" runat="server" Text="Sub Total " style="width:120px;padding-top:10px;"></asp:Label>
+                        </td>
+                        <td>
+                        <asp:Label ID="subtotal" runat="server" Text=""  style="padding:20px;text-align:left;padding-top:10px;"></asp:Label><br />
+                        </td>
+                    </tr>
+                
+                    <tr style="height:35px;">
+                        <td>
+                            <asp:Label ID="Label7" runat="server" Text="Shipping Fee " style="width:120px;padding-top:10px;"></asp:Label>
+
+                        </td>
+                        <td>
+                                <asp:Label ID="shipping" runat="server" Text="RM 3.80"  style="padding:20px;text-align:left;padding-top:10px;"></asp:Label><br />
+                        </td>
+                    </tr>
+               <tr style="height:35px;">
+
+                   <td>
+                       <asp:Label ID="Label8" runat="server" Text="Total Amount " style="width:120px;padding-top:10px;"></asp:Label>
+                   </td>
+                <td>
+                <asp:Label ID="amountT" runat="server" style="padding:20px;text-align:left;padding-top:10px;"></asp:Label>
+                </td>
+               </tr>
+                
+           </table> 
+
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+  
+    </div>
+
+
+
      <script>
+         function openModal() {
+            $('#modal_showDetail').modal('show');
+        }
+
 
         function changePage(id) {
             if (id == document.getElementById("myProf").id)

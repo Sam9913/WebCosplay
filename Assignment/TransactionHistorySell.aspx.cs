@@ -9,9 +9,20 @@ namespace Assignment
 {
     public partial class TransactionHistorySell : System.Web.UI.Page
     {
+        int countno = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            countno = 1;
         }
+
+        protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            Label no = e.Item.FindControl("count") as Label;
+            no.Text = Convert.ToString(countno)+".";
+
+            countno++;
+        }
+
+       
     }
 }

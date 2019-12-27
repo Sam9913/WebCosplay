@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Site1.Master" CodeBehind="cartlist.aspx.cs" Inherits="Assignment.cartlist" %>
+﻿<%@ Page Language="C#" AutoEventWireup="True" MasterPageFile="~/Site1.Master" CodeBehind="cartlist.aspx.cs" Inherits="Assignment.cartlist" %>
 
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
@@ -9,7 +9,7 @@
     <style type="text/css">
 
         .table-space {
-            width: 65%;
+            width: 71%;
             padding-top: 3%;
             padding-right: 5%;
             margin-left: 5%;
@@ -23,7 +23,7 @@
 
         }
         
- .tableheader {
+        .tableheader {
              height: 35px;
               font-size: 18px;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -32,8 +32,9 @@
             
          }
 
-        .auto-style1 {
-            width: 592px;
+        .productDetail {
+            /*width: 50px;*/
+            padding-left:15px;
             height: 160px;
             border-bottom:1px solid;
         }
@@ -42,17 +43,18 @@
             height: 160px;
             border-bottom:1px solid;
         }
-        .auto-style4 {
-            width: 200px;
+        .productImg {
+            /*width: 150px;*/
             height: 160px;
+            border-bottom:1px solid;
         }
 
         .auto-style5 {
             margin-left:5%;
-            width: 80%;
+            width: 90%;
         }
 
-    .space1 {
+        .space1 {
             width: 20%;
             float: left;
         }
@@ -100,15 +102,42 @@
             padding: 12px 25px 12px 25px;
             margin-right: 7%;
             margin-bottom: 2%;
+             background-color:white;
+        }
+
+         .addBtn:hover {
+            transition-duration: 0.4s;
+            background-color: #333;
+            color: white;
         }
 
         .auto-style6 {
-            width: 175px;
+            /*width: 175px;*/
         }
 
         .auto-style7 {
-            width: 187px;
+            width: 3px;
             border-bottom:1px solid;
+        }
+
+        .auto-style8 {
+            height: 35px;
+            font-size: 18px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            border-bottom: 2px solid black;
+            padding: 10px;
+            width: 223px;
+        }
+        .auto-style9 {
+            /*width: 150px;*/
+            height: 160px;
+            width: 223px;
+            border-bottom-style: solid;
+            border-bottom-color: inherit;
+            border-bottom-width: 1px;
+        }
+        .auto-style10 {
+            width: 223px;
         }
 
 
@@ -116,6 +145,8 @@
 
 
  </style>
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    
     <div style="margin: 2%; padding: 2%; width: 98%;">
         <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">Cart</h2>
     </div>
@@ -138,122 +169,109 @@
             </tr>
         </table>
     </div>
-
-    <asp:Label ID="Label3" runat="server" Text="CA1001" style="display:none;"></asp:Label>
     
     <div class="table-space">
-        <div style="float:left; width:75%">
+        <div><asp:Button ID="updateCart" runat="server" class="btn addBtn" style="margin-right:-3%;margin-top:-2%; border: 1.5px solid #333; font-weight:500; font-size:15px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" Text="Update Cart" OnClick="updateCart_Click"/>
+       </div>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
+          <div style="float:left; width:78%;margin-top:5.7%">
             <table style="border-bottom:2px solid black; border-top:2px solid black" class="auto-style5">
                 <tr>
-                <td style="text-align:center;width:100px;" class="tableheader">Product</td>
-                <td style="padding-left:20px;width:350px" class="tableheader">Detail</td>
-                <td style="padding-left:30px;width:50px" class="tableheader">Quantity</td>
-                <td style="padding-left:20px" class="tableheader">Delete</td>
+                <td style="text-align:center;" class="tableheader">Product</td>
+                <td style="padding-right:150px;" class="tableheader">Detail</td>
+                <td style="padding-left:10px;width:40px;text-align:center;" class="tableheader">Quantity</td>
+                <td style="padding-right:22px;" class="tableheader">Price(RM)</td>
+                <td style="padding-left:5px;text-align:center;" class="tableheader">Delete</td>
              </tr>
-                <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
+               
+                    <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1" OnItemDataBound="Repeater1_ItemDataBound">
                     <ItemTemplate>
+                        <asp:Label ID="prodID" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_ID")%>' style="display:none;"></asp:Label>
+                        <asp:Label ID="catID" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Cat_ID")%>' style="display:none;"></asp:Label>
                         <tr>
-                            <asp:Label ID="prodID" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_ID")%>' style="display:none;"></asp:Label>
-
-                                   <%--retrieve from product--%>
-                                 
-                                <div style="margin-left: 10px">
-                                    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Details], [Prod_Price], [Prod_Image1] FROM [Product] WHERE ([Prod_ID] = @Prod_ID)">
-                                        <SelectParameters>
-                                            <asp:ControlParameter ControlID="prodID" PropertyName="Text" Name="Prod_ID" Type="String"></asp:ControlParameter>
-                                        </SelectParameters>
-                                    </asp:SqlDataSource>
-                                    <td class="auto-style1">
-                                     <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource2">
-                                        <ItemTemplate>
-                                           <td class="auto-style4"><asp:Image ImageUrl='<%#"~/image/" + Eval("Prod_Image1").ToString() %>' runat="server" ID="Prod_InamgeLabel" Height="150px" Width="150px" style="margin-left:20px"/></td>
+                            <div style="margin-left: 10px">
+                                    <td class="productDetail" style="width:15%;">
+                                     <asp:Image ImageUrl='<%#"~/image/" + Eval("Prod_Image1").ToString() %>' runat="server" ID="Prod_InamgeLabel" Height="150px" Width="150px" style="margin-left:20px" /><%--</td>--%>
                                     <br />
-                                        </ItemTemplate>
-                                    </asp:DataList>
-                                
-                            </td>
+                                </td>
 
-                            <td class="auto-style1">
-                                     <asp:DataList ID="DataList3" runat="server" DataSourceID="SqlDataSource2">
-                                        <ItemTemplate> <td style="font-size:large;"><h3>Name: <asp:Label Text='<%# Eval("Prod_Name") %>' runat="server" ID="Prod_NameLabel" /></h3>
+                            <td class="productDetail">
+                                <asp:Label Text='<%# Eval("Prod_Price","{0:0.00}") %>' runat="server" ID="Prod_PriceLabel" style="display:none"/><br />
+                                <h5>Name: <asp:LinkButton ID="Prod_NameLabel" runat="server" Text='<%# Eval("Prod_Name") %>' OnClick="Prod_NameLabel_Click" style="text-decoration:none; color:black" /></h5>
                                     Details: <asp:Label Text='<%# Eval("Prod_Details") %>' runat="server" ID="Prod_DetailsLabel" /><br />
-                                    Price: <asp:Label Text='<%# Eval("Prod_Price","{0:0.00}") %>' runat="server" ID="Prod_PriceLabel" /><br /></td>
-                                     </ItemTemplate>
-                                    </asp:DataList>
-                                
-                            </td>
+                                    Size: <asp:Label Text='<%# Eval("Size_Details") %>' runat="server" ID="SizeDetails"/><br />
+                                   </td>
 
-                            <td class="auto-style7">
+                            <td class="auto-style7" style="width:20%;">
                                 <table>
-                                    <tr>
+                                     <tr>
                                         <td>
-                                            <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/image/arrows_minus.svg" Height="28px" Width="25px" Style="margin-top: 10px; margin-left: 40px;" /></td>
+                                          <asp:ImageButton ID="ImageButtonMinus" runat="server" ImageUrl="~/image/arrows_minus.svg" Height="28px" Width="25px" Style="margin-top: 10px; margin-left: 20px;" CommandArgument='<%#Container.ItemIndex%>' OnCommand="ImageButtonMinus_Command" /></td>
                                         <td>
-                                            <asp:Label ID="Label1" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Qty")%>' Style="margin-left: 10px; margin-top: 10px;"></asp:Label></td>
+                                            <td><asp:Label ID="LabelQty" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Qty")%>' style="margin-left: 5px; margin-top: 10px;"></asp:Label></td>
                                         <td>
-                                            <asp:ImageButton ID="ImageButton3" runat="server" ImageUrl="~/image/arrows_plus.svg" Height="28px" Width="25px" Style="margin-top: 10px; margin-left: 10px;" /></td>
+                                            <asp:ImageButton ID="ImageButtonPlus" runat="server" ImageUrl="~/image/arrows_plus.svg" Height="28px" Width="25px" Style="margin-top: 10px; margin-left: 5px;" CommandArgument='<%#Container.ItemIndex%>' OnCommand="ImageButtonPlus_Command" /></td>
+                                    
                                     </tr>
                                 </table>
+                                
                             </td>
-
-                            <td class="auto-style2" style="border-left: 0.5px dashed">
-                                <asp:ImageButton ID="ImageButton1" runat="server" Style="margin-left: 30px" ImageUrl="~/image/delete .svg" Height="35px" Width="35px" ToolTip="Delete" />
+                            <td style="border-bottom:1px solid;text-align:center">
+                               <asp:Label ID="totalPerItem" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_Price","{0:0.00}") %>' ></asp:Label></td>
+                            <td class="auto-style2" style="border-left: 0.5px solid;width:20%;">
+                                <asp:ImageButton ID="deleteProduct" runat="server" Style="margin-left: 30px" ImageUrl="~/image/delete .svg" Height="35px" Width="35px" ToolTip="Delete" OnCommand="deleteProduct_Command" CommandArgument='<%#Container.ItemIndex%>' />
                                 <br />
                             </td>
                         </tr>
                     </ItemTemplate>
                 </asp:Repeater>
-                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Cart_ID], [Prod_ID], [Qty] FROM [Cartlist] WHERE ([Cart_ID] = @Cart_ID)">
+                  
+                <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT CL.Cart_ID,CL.Prod_ID,CL.Qty,P.Prod_Price,P.Prod_Name,P.Prod_Details,P.Prod_Image1,P.Cat_ID,S.Size_Details from Cartlist CL join Cart C on CL.Cart_ID=C.Cart_ID 
+                    join Customer CU on C.Cust_ID=CU.Cust_ID join Product P on CL.Prod_ID=P.Prod_ID join Size S on CL.Size_ID=S.Size_ID where CU.Cust_userName=@customerName">
                     <SelectParameters>
-                        <asp:ControlParameter ControlID="Label3" PropertyName="Text" Name="Cart_ID" Type="String"></asp:ControlParameter>
+                        <asp:CookieParameter CookieName="customerName" Name="customerName"></asp:CookieParameter>
+
                     </SelectParameters>
                 </asp:SqlDataSource>
+                   
+                
             </table>
             <br />
             <br />
+              </ContentTemplate>
+        </asp:UpdatePanel>
             </div>
-       
 
-    <div style="float:left;border:1px solid;margin-left:-5%;">
+    <div style="float:right;border:1px solid;margin-right:-6%;margin-top:1%;">
        <table>
-           <asp:SqlDataSource runat="server" ID="SqlDataSource3" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Cart_Total] FROM [Cart] WHERE ([Cart_ID] = @Cart_ID)">
-               <SelectParameters>
-                   <asp:ControlParameter ControlID="Label3" PropertyName="Text" Name="Cart_ID" Type="String"></asp:ControlParameter>
-               </SelectParameters>
-           </asp:SqlDataSource>
+          
            <tr><td style="padding:10px;" class="auto-style6"><h3 style="font-size:20px;">Order Summary</h3></td></tr>
-           <asp:DataList ID="DataList2" runat="server" DataSourceID="SqlDataSource3">
-               <ItemTemplate>
-                    
-           <tr>
+          <tr>
                <td style="padding:10px;" class="auto-style6">Subtotal </td>
-               <td style="padding:10px; text-align:left">RM <asp:Label Text='<%# Eval("Cart_Total") %>' runat="server" ID="Cart_TotalLabel" /></td>
+               <td style="padding:10px; text-align:left">RM <asp:Label  runat="server" ID="subTotalPrice" Text=""/></td>
            </tr>
 
            <tr>
                <td style="padding:10px;" class="auto-style6">Shipping Fee</td>
-            <td style="padding:10px;text-align:left">RM 3.80</td> 
+            <td style="padding:10px;text-align:left">RM<asp:Label ID="shippingfee" runat="server" Text="3.80"></asp:Label></td> 
            </tr>
 
            <tr>
                <td style="padding:10px;" class="auto-style6">Total</td>
-               <td style="padding:10px;text-align:left">RM 803.80</td>
+               <td style="padding:10px;text-align:left">RM<asp:Label ID="totalAmount" runat="server" Text=""></asp:Label></td>
            </tr>
 
-               </ItemTemplate>
-           </asp:DataList>
+         
    </table> 
-        <%--<asp:ImageButton ID="ImageButton4" runat="server" ImageUrl="~/image/checkout.jfif" style="height:50px;width:100px;float:right;"/>--%>
-           <button type="button" id="btn_addProduct" runat="server" class="btn" data-toggle="checkout" data-target="#modal_checkout">Checkout</button>
-        </div>
-        </div>
+        <asp:Button ID="ButtonCheckout" runat="server" Text="Checkout" style="border: 1.5px solid #333;font-size:15px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" class="btn addBtn" OnClick="ButtonCheckout_Click"/>
+          </div>
         </div>
         <br />
       
           <br />
    
     <br /> 
-
      <script>
 
         function changePage(id) {

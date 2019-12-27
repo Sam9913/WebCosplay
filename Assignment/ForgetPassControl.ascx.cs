@@ -121,16 +121,17 @@ namespace Assignment
             {
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.From = new MailAddress("tansh9913@gmail.com");
-                mailMessage.To.Add(new MailAddress(getCustEmail(txtName.Text)));
+                mailMessage.To.Add(new MailAddress(getCustEmail(txtName.Text).Trim()));
                 mailMessage.Subject = "Your subject";
                 mailMessage.IsBodyHtml = true;
-                mailMessage.Body = "Your password is " + getCustPassword(txtName.Text);
+                mailMessage.Body = "Dear " + txtName.Text.ToString() + ", your password is " + getCustPassword(txtName.Text);
 
                 SmtpClient client = new SmtpClient();
                 client.EnableSsl = true;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("tansh9913@gmail.com", "TAN 990213");
+                client.Port = 587;
                 client.Host = "smtp.gmail.com";
                 client.Send(mailMessage);
             }
@@ -138,16 +139,17 @@ namespace Assignment
             {
                 MailMessage mailMessage = new MailMessage();
                 mailMessage.From = new MailAddress("tansh9913@gmail.com");
-                mailMessage.To.Add(new MailAddress(getSellerEmail(txtName.Text)));
+                mailMessage.To.Add(new MailAddress(getSellerEmail(txtName.Text).Trim()));
                 mailMessage.Subject = "Your subject";
                 mailMessage.IsBodyHtml = true;
-                mailMessage.Body = "Your password is " + getSellerPassword(txtName.Text);
+                mailMessage.Body = "Dear " + txtName.Text.ToString() + ", your password is " + getSellerPassword(txtName.Text);
 
                 SmtpClient client = new SmtpClient();
                 client.EnableSsl = true;
                 client.DeliveryMethod = SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
                 client.Credentials = new System.Net.NetworkCredential("tansh9913@gmail.com", "TAN 990213");
+                client.Port = 587;
                 client.Host = "smtp.gmail.com";
                 client.Send(mailMessage);
             }

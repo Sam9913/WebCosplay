@@ -250,7 +250,7 @@
     </asp:SqlDataSource>
 
 
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT Gallery.Gallery_ID, Gallery.Gallery_Image, Gallery.Gallery_Desc, Gallery.Gallery_Date, Gallery.Gallery_Tag, Gallery.Status, Gallery.User_ID, Customer.Cust_UserName AS Expr8, Customer.Cust_ID FROM Gallery INNER JOIN Customer ON Gallery.User_ID = Customer.Cust_ID">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT Gallery.Gallery_ID, Gallery.Gallery_Image, Gallery.Gallery_Desc, Gallery.Gallery_Date, Gallery.Gallery_Tag, Gallery.User_ID, Customer.Cust_UserName AS Expr8, Customer.Cust_ID FROM Gallery INNER JOIN Customer ON Gallery.User_ID = Customer.Cust_ID">
     </asp:SqlDataSource>
 
     <asp:SqlDataSource ID="SqlDataSource3" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Comment]"></asp:SqlDataSource>

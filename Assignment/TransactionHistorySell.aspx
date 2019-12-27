@@ -7,7 +7,7 @@
 <style type="text/css">
     
         .table-space {
-            width: 70%;
+            width: 80%;
             padding-top: 3%;
             padding-left: 5%;
             padding-right: 5%;
@@ -17,12 +17,12 @@
             min-width: 950px;
             height: auto; 
             padding-bottom:5%;
-
+            float:right;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
         }
 
- .space1 {
+            .space1 {
             width: 20%;
             float: left;
         }
@@ -59,17 +59,38 @@
         background-color: #333;
         color: white;
     }
+    .seller_table_header td{
+            /*height: 100px;*/
+            font-size: 18px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            
+        }
 
  .auto-style1 {
+             font-weight: bold;
              height: 35px;
               font-size: 18px;
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-           border-bottom:2px solid black;
+             border-bottom:2px solid black;
+                 padding: 2% 2% 2% 2%;
             
          }
          .auto-style2 {
              height:10px;
              border-bottom:1px solid black;
+         }
+
+         .ddlMonth{
+             margin-right: 5%;
+             margin-bottom: 4%;
+             padding: 12px 25px 12px 25px;
+             border-radius:4px;
+             background-color:white;
+             border: 1.5px solid #333; 
+             font-weight:500; 
+             font-size:15px; 
+             float:right;
+             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
          }
    
          </style>
@@ -94,89 +115,69 @@
         </table>
     </div>
     
-            <div style=" width: 80%;float: left;">
+     <div style=" width: 80%;float: left;">
     <div class="table-space">
+        
+        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT Month(Pay_Date) AS Month ,datename(month, Pay_Date) AS monthN from Payment Order by Month
+"></asp:SqlDataSource>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+        <div>
+            <asp:DropDownList ID="DropDownList1" runat="server" CssClass="ddlMonth" DataSourceID="SqlDataSource2" DataValueField="month" DataTextField="monthN" AutoPostBack="true"></asp:DropDownList></div>
+        
+
         <table style="width:100%; border-collapse:collapse;border-top:2px solid black;">
-            
-            <tr>
-                <td style="padding:10px" class="auto-style1">No</td>
-                <td style="padding:10px" class="auto-style1">Date</td>
-                <td style="padding:10px" class="auto-style1">Transaction ID</td>
+            <tr class="seller_table_header">
+                <td class="auto-style1">No</td>
+                <td style="padding:10px;padding-left:50px;" class="auto-style1">Date</td>
                   <td style="padding:10px;width:150px;" class="auto-style1">Product Name</td>
-                <td style="padding:10px" class="auto-style1">Quantity (Sell) </td>
+                 <td style="padding:10px" class="auto-style1">Size </td>
+                <td style="padding:10px" class="auto-style1">Quantity<br /> &nbsp;(Sell) </td>
                 <td style="padding:10px;" class="auto-style1">Amount (RM)</td>
              </tr>
 
             
-            <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1">
+            <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource1" OnItemDataBound="Repeater1_ItemDataBound">
                 <ItemTemplate>
-                    <%int i=0;%>
-                    <asp:Label ID="payID" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Pay_ID")%>' style="display:none;"></asp:Label>
-                    <asp:Label ID="ProdID" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Prod_ID")%>' style="display:none;"></asp:Label>
-                          
-                    <tr>
-                     <td style="padding: 10px" class="auto-style2"><%=i%></td>
-                        <td style="padding: 10px" class="auto-style2">11/11/19</td>
-                        <asp:SqlDataSource runat="server" ID="SqlDataSource3" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Pay_ID], [Trans_ID] FROM [Payment] WHERE ([Pay_ID] = @Pay_ID)">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="payID" PropertyName="Text" Name="Pay_ID" Type="String"></asp:ControlParameter>
-                            </SelectParameters>
-                        </asp:SqlDataSource>
+                    <tr style="height:55px;">
+                        <td style="padding: 10px;padding-left:20px;" class="auto-style2">
+                            <asp:Label ID="count" runat="server"></asp:Label></td>
 
-                        <td style="padding: 10px;width:200px;" class="auto-style2">
-                        <asp:DataList ID="DataList2" runat="server" DataSourceID="SqlDataSource3" DataKeyField="Pay_ID">
-                           <ItemTemplate>
-                             <td><asp:Label Text='<%# Eval("Trans_ID") %>' runat="server" ID="Trans_IDLabel"/></td>
-                             </ItemTemplate>
-                        </asp:DataList>
+                        <td style="padding: 13px; width: 200px; text-align: center;" class="auto-style2">
+                            <asp:Label Text='<%# Eval("Pay_Date","{0:dd/MM/yyyy}") %>' runat="server" ID="QtyLabel" />
                         </td>
 
-                        <td style="padding: 10px;width:200px;" class="auto-style2">
-                            <asp:DataList ID="DataList1" runat="server" DataSourceID="SqlDataSource2">
-                            <ItemTemplate>
-                               <td><asp:Label Text='<%# Eval("Prod_Name") %>' runat="server" ID="Prod_NameLabel" /></td>
-                               </ItemTemplate>
-                        </asp:DataList>
-                        </td>
+                        <td style="padding: 13px; width: 200px;" class="auto-style2">
+                            <asp:Label Text='<%# Eval("Prod_Name") %>' runat="server" ID="Prod_NameLabel" /></td>
 
-                        <td style="padding:10px;width:200px;text-align:center;" class="auto-style2">
-                            <asp:DataList ID="DataList3" runat="server" DataSourceID="SqlDataSource4">
-                                <ItemTemplate>
-                                    <asp:Label Text='<%# Eval("Qty") %>' runat="server" ID="QtyLabel"/>
-                                </ItemTemplate>
-                            </asp:DataList>
-                            <asp:SqlDataSource runat="server" ID="SqlDataSource4" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Qty] FROM [Payment_detail] WHERE ([Prod_ID] = @Prod_ID)">
-                                <SelectParameters>
-                                    <asp:ControlParameter ControlID="ProdID" PropertyName="Text" Name="Prod_ID" Type="String"></asp:ControlParameter>
-                                </SelectParameters>
-                            </asp:SqlDataSource>
-                        </td>
+                        <td style="padding: 13px; width: 200px;padding-left:20px;" class="auto-style2">
+                            <asp:Label Text='<%# Eval("Size_Details") %>' runat="server" ID="Label2" /></td>
 
-                        <td style="padding: 10px;width:200px;" class="auto-style2"><asp:DataList ID="DataList4" runat="server" DataSourceID="SqlDataSource2">
-                            <ItemTemplate>
-                        <td><asp:Label Text='<%# Eval("Prod_Price","{0:00}") %>' runat="server" ID="Prod_PriceLabel" /></td>
-                             </ItemTemplate>
-                        </asp:DataList>
-                        </td>    
+                        <td style="padding: 13px; width: 200px; padding-left:40px;" class="auto-style2">
+                            <asp:Label Text='<%# Eval("totalcount") %>' runat="server" ID="Label1" /></td>
 
-                        <asp:SqlDataSource runat="server" ID="SqlDataSource2" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Prod_Name], [Prod_Price] FROM [Product] WHERE ([Prod_ID] = @Prod_ID)">
-                            <SelectParameters>
-                                <asp:ControlParameter ControlID="prodID" PropertyName="Text" Name="Prod_ID" Type="String"></asp:ControlParameter>
-                            </SelectParameters>
-                        </asp:SqlDataSource>
+                        <td style="padding: 13px; width: 200px;" class="auto-style2">
+                            <asp:Label Text='<%# Eval("totalSell","{0:0.00}") %>' runat="server" ID="Prod_PriceLabel" /></td>
                     </tr>
-                   
+
                 </ItemTemplate>
             </asp:Repeater>
 
-
-
-            <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT * FROM [Payment_detail]">
+            <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT PA.Pay_Date,P.Prod_Name,SI.Size_Details,SUM(PD.Qty) AS totalcount,(P.Prod_Price * SUM(PD.Qty)) AS totalSell from Payment_Detail PD,Product P,Size SI,Seller S,Payment PA where P.Seller_ID=S.Seller_ID  and P.Prod_ID=PD.Prod_ID and SI.Size_ID=PD.Size_ID and PA.Pay_ID=PD.Pay_ID and S.Seller_UserName=@sellername and MONTH(PA.Pay_Date)=@month
+group by P.Prod_Name,SI.Size_Details,PA.Pay_Date,P.Prod_Price
+">
+                <SelectParameters>
+                    <asp:CookieParameter CookieName="sellerName" Name="sellername"></asp:CookieParameter>
+                    <asp:ControlParameter ControlID="DropDownList1" PropertyName="SelectedValue" Name="month"></asp:ControlParameter>
+                </SelectParameters>
             </asp:SqlDataSource>
         </table>
         <br />
         <br />
          <div style="margin-top:25%"></div>
+          </ContentTemplate>  
+        </asp:UpdatePanel>
         </div>
                 </div>
         </div>

@@ -96,11 +96,12 @@ GROUP BY [Prod_Image1], [Prod_Image2], [Prod_Image3], [Prod_Name], [Prod_Price],
                 
                 <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
                     <ItemTemplate>
-                        <asp:Button ID="Button1" runat="server" Text='<%# Eval("Size_Details") %>' CssClass="changeButton" OnClick="Button1_Click"/>
+                        <asp:Button ID="ButtonSize" runat="server" Text='<%# Eval("Size_Details") %>' CssClass="changeButton" OnCommand="ButtonSize_Command" CommandArgument='<%#Container.ItemIndex%>'/>
                     </ItemTemplate>
                 </asp:Repeater>
                 <%} %>
                 <br /><br />
+                <asp:Label ID="prodCount" runat="server"></asp:Label><br />
                 Quantity : 
                 <div style="display:inline;">
                     <asp:ImageButton CssClass="btnMinus" ID="minus" runat="server" ImageUrl="~/image/minus_black.png" OnClick="minus_Click" onmouseover="this.src='/image/minus_white.png'" onmouseout="this.src='/image/minus_black.png'"/>
