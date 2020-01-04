@@ -26,22 +26,19 @@ namespace Assignment
 
         protected void logoutLabel_Click(object sender, EventArgs e)
         {
+            HttpCookie aCookie = null;
             if (Request.Cookies["customerName"] != null)
             {
-                HttpCookie aCookie = Request.Cookies["customerName"];
-                aCookie.Expires = DateTime.Now.AddDays(-10);
-                aCookie.Value = "";
-                Response.Cookies.Add(aCookie);
-                Response.Redirect("~/Home.aspx");
+                aCookie = Request.Cookies["customerName"];
             }
             else if (Request.Cookies["sellerName"] != null)
             {
-                HttpCookie aCookie = Request.Cookies["sellerName"];
-                aCookie.Expires = DateTime.Now.AddDays(-10);
-                aCookie.Value = "";
-                Response.Cookies.Add(aCookie);
-                Response.Redirect("~/Home.aspx");
+                aCookie = Request.Cookies["sellerName"];
             }
+            aCookie.Expires = DateTime.Now.AddDays(-10);
+            aCookie.Value = "";
+            Response.Cookies.Add(aCookie);
+            Response.Redirect("~/Home.aspx");
         }
     }
 }

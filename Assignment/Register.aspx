@@ -4,12 +4,12 @@
     <style>
         .registerTable{
             /*text-align:center;*/
-            width: 10%;
+            width: 30%;
             padding-top: 2%;
             padding-bottom: 2%;
             padding-left: 4%;
-            padding-right: 2%;
-            margin-left: 36%;
+            padding-right: -2%;
+            margin-left: 35%;
             margin-bottom: 5%;
             min-width: 350px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -47,6 +47,7 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Username is required." Text="*" ControlToValidate="txtUName" ForeColor="Red"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Username should start with letters and contain 6 to 12 characters."
                                 Text="*" ControlToValidate="txtUName" ValidationExpression="^[a-zA-Z][a-zA-Z0-9]{5,11}$" ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:CustomValidator ID="checkExistUser" ControlToValidate="txtUName" runat="server" Text="*" ClientValidationFunction="checkExistUser_ServerValidate" ErrorMessage="Username already exist." Display="Dynamic" SetFocusOnError="True" ForeColor="Red" OnServerValidate="checkExistUser_ServerValidate"></asp:CustomValidator>
                     </td>
                 </tr>
 
@@ -131,13 +132,8 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="Email is required" Text="*" ControlToValidate="txtEmail" ForeColor="Red"></asp:RequiredFieldValidator>
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="Email format is incorrect." Text="*"
                                 ControlToValidate="txtEmail" ValidationExpression="^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$" ForeColor="Red"></asp:RegularExpressionValidator>
+                        <asp:CustomValidator ID="checkExistEmail" ControlToValidate="txtEmail" runat="server" ErrorMessage="Email already registered as an user." ForeColor="Red" ClientValidationFunction="checkExistEmail_ServerValidate" Text="*" Display="Dynamic" SetFocusOnError="True" OnServerValidate="checkExistEmail_ServerValidate"></asp:CustomValidator>
                     </td>
-                </tr>
-
-                <tr>
-                    <td><asp:Label ID="Label10" runat="server" Text="Details"></asp:Label></td>
-                    <td> : </td>
-                    <td><asp:TextBox ID="txtDetail" runat="server"></asp:TextBox></td>
                 </tr>
 
                 <!--Address for customer only-->

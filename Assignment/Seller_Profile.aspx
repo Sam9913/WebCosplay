@@ -3,7 +3,7 @@
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" ID="Content1" runat="server">
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <%--<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> --%><!--comment this to let the screen unscrollable-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -100,6 +100,8 @@
         .profile_pic {
             border-radius: 50%;
             border: 2px solid white;
+            height:200px;
+            width:200px;
         }
 
         .profile_nav {
@@ -116,13 +118,64 @@
             margin-left: 5%;
         }
 
+        .icon_editProfile {
+            font-size: 34px;
+            color: black; 
+            cursor: pointer;
+        }
+
+        .icon_addPost, .icon_editAccount {
+            font-size: 36px;
+            color: black; 
+            cursor: pointer;
+            margin-left: 7%;
+        }
+
+        .icon_editProfile:hover, .icon_editProfile:focus, .icon_addPost:hover, .icon_addPost:focus, .icon_editAccount:hover, .icon_editAccount:focus {
+            color:black;
+            text-decoration:none;
+        }
+
         .usernameBold {
             font-weight:bold;
         }
 
-        .commentBox {
+        .updatedcomment {
+            word-break:break-all;
+        }
+
+        .wrapper {
+            margin-left:2%;
+            border:1.5px solid black;
             border-radius:10px 10px 10px 10px;
-            border-color:grey;
+            display:inline-block;
+        }
+        .commentName {
+            padding-top:2%;
+            float:left;
+        }
+
+        .commentSubmit {
+            border:0;
+            display:inline-block;
+            float:right;
+            margin:3%;
+            color:black;
+        }
+
+        .commentBox {
+            border: 0;
+            margin: 3%;
+            width: 80%;
+            height:24px;
+            float:left;
+            /*border-radius:10px 10px 10px 10px;
+            border-color:grey;*/
+        }
+
+        .commentSubmit:hover, .commentSubmit:focus {
+            color:black;
+            text-decoration:none;
         }
 
         .icon_heart1 {
@@ -151,28 +204,29 @@
             text-decoration:none;
         }
 
-        .icon_comment {
+        .icon_comment, .icon_delete {
             font-size: 30px; 
             color: black; 
             cursor: pointer; 
             margin-bottom:15px;
         }
 
-        .icon_comment:hover, .icon_comment:focus {
+        .icon_comment:hover, .icon_comment:focus, .icon_delete:hover, .icon_delete:focus {
             color: black;
             text-decoration:none;
         }
 
+        .html{
+            box-sizing:border-box;
 
-        .icon_delete {
-            font-size: 30px; 
-            color: black; 
-            cursor: pointer; 
-            margin-bottom:15px;
-        }
+        }*,*:before,*:after{
+             box-sizing:border-box;
+
+         }
+
 
     </style>
-    <div style="margin: 2%; padding: 2%; width: 98%;">
+    <div style="margin: 2%; padding: 2%; width: 96%;">
         <h2 style="margin:auto; font-family: Bahnschrift; font-weight: 700">My Profile</h2>
     </div>
 
@@ -190,11 +244,13 @@
             <tr>
                 <td onclick="changePage('transHis')" id="transHis" style="cursor:pointer;">Transaction History</td>
             </tr>
-            <tr>
-                <td onclick="changePage('changePass')" id="changePass" style="cursor:pointer;">Change Password</td>
-            </tr>
         </table>
     </div>
+        <asp:HiddenField ID="hdn_login_userID" runat="server" />
+        <asp:HiddenField ID="hdn_confirmDelete" runat="server" Value="false" ClientIDMode="Static"/>
+
+
+
 
     <div class="space2">
         <div class="seller_table" style="height: auto; padding-bottom:5%;">
@@ -213,7 +269,7 @@
 
                     <div style="text-align:center; margin-top: 2%;" >
                         <asp:HiddenField ID="hdn_Seller_ID"  runat="server" Value='<%# Eval("Seller_ID") %>'/>
-                        <asp:Label ID="Seller_NameLabel" runat="server" CssClass="username" Text='<%# Eval("Seller_Name") %>' ></asp:Label>
+                        <asp:Label ID="Seller_NameLabel" runat="server" CssClass="username usernameBold" Text='<%# Eval("Seller_Name") %>' ></asp:Label>
                     </div>
 
                     <div style="width: 50%; margin-left: 25%; margin-top: 2%; margin-bottom:2%;">
@@ -223,17 +279,16 @@
                     </div>
 
                     <div style="text-align:center; margin: 2%; margin-bottom: 0;">
-                        <asp:ImageButton ID="editProfile" ToolTip="Edit Profile" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
-                        <asp:ImageButton ID="ImageButton2" ToolTip="Account Settings" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
-                        <asp:ImageButton ID="ImageButton3" ToolTip="Add new Post" ImageUrl="~/image/login_black.png" runat="server" CssClass="profile_nav"/>
+                        <asp:LinkButton ID="editProfile" CssClass="fas fa-user-edit icon_editProfile" runat="server" ToolTip="Edit Profile" OnClick="editProfile_Click"></asp:LinkButton>
+                        <asp:LinkButton ID="addPost" CssClass="fas fa-plus-square icon_addPost" runat="server" ToolTip="Add New Post" OnClick="addPost_Click"></asp:LinkButton>
+                        <asp:LinkButton ID="editAccount" CssClass="fa fa-cog icon_editAccount" runat="server" ToolTip="Account Settings" OnClick="editAccount_Click"></asp:LinkButton>
                     </div>
                 </ItemTemplate>
             </asp:Repeater>
 
-            <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
             <!-- Gallery Post -->
-            <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                 <ContentTemplate>
         
                     <asp:Repeater ID="Repeater3" runat="server" DataSourceID="SqlDataSource2" OnItemDataBound="Repeater3_ItemDataBound">
@@ -248,16 +303,16 @@
                                 </div>
 
                                 <div style="margin: 2%; float:left; width: 55%; min-width: 465px;">
+                                    <asp:Label ID="gallery_username" CssClass="usernameBold" runat="server"></asp:Label><br />
                                     <span>
                                         <%#DataBinder.Eval(Container.DataItem,"Gallery_Desc")%>
                                     </span><hr style="border:0; border-top: 2px solid #333; margin: 3% 0;"/>
-                                    <a href="#" style="text-decoration:none; color: navy; font-size: 12px;">View All 123 Comments</a><br />
 
                                     <asp:Repeater ID="Repeater4" runat="server" DataSourceID="SqlDataSource3" OnItemDataBound="Repeater4_ItemDataBound">
                                         <ItemTemplate>
                                             <asp:HiddenField ID="hdn_userID" runat="server" Value='<%#Eval("User_ID") %>'/>
                                             <asp:Label ID="lbl_uname" runat="server" CssClass="usernameBold"></asp:Label>
-                                            <asp:Label ID="lbl_comment" runat="server" Text='<%#Eval("Comment") %>'></asp:Label><br />
+                                            <asp:Label ID="lbl_comment" CssClass="updatedcomment" runat="server" Text='<%#Eval("Comment") %>'></asp:Label><br />
                                         </ItemTemplate>
                                     </asp:Repeater>
 
@@ -266,22 +321,27 @@
                                             <asp:ControlParameter ControlID="hidden_Gallery_ID" PropertyName="Value" Name="Gallery_ID"></asp:ControlParameter>
                                         </SelectParameters>
                                     </asp:SqlDataSource>
-                                    
-                                    <asp:Label ID="username_comment" runat="server" CssClass="usernameBold" Visible="false" Text='<%#Eval("Seller_Username") %>' ></asp:Label>
-                                    <asp:TextBox ID="tbx_comment"  CssClass="commentBox" Placeholder=" Comment..." runat="server" Visible="false"></asp:TextBox>
-                                    <asp:LinkButton ID="linkbtn_send" CssClass="material-icons" Text="send" runat="server"></asp:LinkButton>
+
+                                    <hr style="border:0; border-top: 2px solid #333; margin: 3% 0;"/>
+
+                                    <asp:Label ID="username_comment" runat="server" CssClass="usernameBold commentName" Visible="false" Text='<%#Eval("Seller_Username") %>' ></asp:Label>
+
+                                    <div class="wrapper" id="wrapper" style="width: 70%;" runat="server" visible="false">
+                                        <asp:TextBox ID="tbx_comment"  CssClass="commentBox wrapper" Placeholder="Comment..." runat="server"  TextMode="MultiLine" Visible="false" Rows="5"></asp:TextBox>
+                                        <asp:LinkButton ID="linkbtn_send" CssClass="material-icons commentSubmit" Text="send" runat="server" Visible="false" OnCommand="linkbtn_send_Command" CommandArgument="<%# Container.ItemIndex %>"></asp:LinkButton>
+                                    </div>
                                 </div>
 
                                 <div style="margin: 2%; float:left; width: 5%; min-width: 42px; text-align:center;">
-                                   
-                                    <asp:Label ID="numLikes" runat="server" Text='<%# Eval("TotalLikes") %>'></asp:Label>
+                                    <%--<asp:HiddenField ID="hdn_likestatus" runat="server" Value='<%# Eval("LikeStatus") %>'/>--%>
+                                    <%--<div style="">233</div>--%>
+                                    <asp:Label ID="numLikes" runat="server" Text='<%# Eval("TotalLikes") %>'></asp:Label><br />
                                     <asp:LinkButton ID="LinkButton1" runat="server" ToolTip="Like" CommandArgument='<%# Container.ItemIndex%>' OnCommand="LinkButton1_Command">
                                     </asp:LinkButton>
-                                    <asp:LinkButton ID="LinkButton2" CssClass="far fa-comment icon_comment" runat="server" ToolTip="Comment" CommandArgument='<%# Container.ItemIndex%>' OnCommand="LinkButton2_Command">
+                                    <asp:LinkButton ID="LinkButton2" CssClass="far fa-comment icon_comment" runat="server" ToolTip="Comment" CommandArgument='<%# Container.ItemIndex%>' OnCommand="LinkButton2_Command" OnClientClick="visible();">
                                     </asp:LinkButton>
-                                    <asp:LinkButton ID="LinkButton3" CssClass="fa fa-trash-alt icon_delete" runat="server" ToolTip="Delete" CommandArgument='<%# Container.ItemIndex%>' OnCommand="LinkButton3_Command">
+                                    <asp:LinkButton ID="LinkButton3" CssClass="fa fa-trash-alt icon_delete" runat="server" ToolTip="Delete" CommandArgument='<%# Container.ItemIndex%>' OnCommand="LinkButton3_Command" OnClientClick="AlertFunction();">
                                     </asp:LinkButton>
-
                                 </div>
                             </div>
 
@@ -289,7 +349,7 @@
                     </asp:Repeater>
             
                 </ContentTemplate>
-            </asp:UpdatePanel>   --%>                     
+            </asp:UpdatePanel>                        
                                     
 
         </div>
@@ -297,11 +357,6 @@
     </div>
 
     </div>
-
-
-
-
-
 
 
     <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT [Seller_ID], [Seller_Name], [Seller_Phone], [Seller_Email], [Seller_IC], [Seller_Details], [Seller_Gender], [Seller_UserName], [Seller_Pass], [Seller_Image] FROM [Seller] WHERE ([Seller_UserName] = @SellerName)">
@@ -312,7 +367,7 @@
     </asp:SqlDataSource>
 
 
-    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT G.Gallery_ID, G.Gallery_Image, G.Gallery_Desc, G.Gallery_Date, G.Gallery_Tag, G.Gallery_Status, G.User_ID, G.TotalLikes, S.Seller_UserName FROM Gallery G join Seller S on G.User_ID = S.Seller_ID WHERE S.Seller_UserName = @SellerName">
+    <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT G.Gallery_ID, G.Gallery_Image, G.Gallery_Desc, G.Gallery_Date, G.Gallery_Tag, G.Gallery_Status, G.User_ID, G.TotalLikes, S.Seller_UserName FROM Gallery AS G INNER JOIN Seller AS S ON G.User_ID = S.Seller_ID WHERE (S.Seller_UserName = @SellerName) AND (G.Gallery_Status = 1) ORDER BY G.Gallery_Date DESC">
         <SelectParameters>
             <asp:CookieParameter CookieName="sellerName" Name="SellerName"></asp:CookieParameter>
 
@@ -320,11 +375,10 @@
     </asp:SqlDataSource>
 
 
-
-
+        <!-- Edit Profile modal -->
     <div class="container">
       <!-- Modal -->
-      <div class="modal fade" id="modal_addProduct" role="dialog" >
+      <div class="modal fade" id="modal_editProfile" role="dialog" data-backdrop="static" >
         <div class="modal-dialog" style="width:60%">
     
           <!-- Modal content-->
@@ -332,60 +386,240 @@
 
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">Add Product</h4>
+              <h4 class="modal-title">Edit Profile</h4>
             </div>
 
-            <div class="modal-body">
-                <table class="table_addProd">
+
+            <div class="modal-body" style="float:left; width:100%;">
+                <table class="table_editProfile" style="width:63%; float:left;">
+
                     <tr>
-                        <th>
-                            <asp:Label ID="lbl_addProd_id" runat="server" Text="Product ID"></asp:Label>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="lbl_editProf_name" runat="server" Text="Name"></asp:Label>
                         </th>
-                        <td>
-                            <asp:Label ID="res_addProd_id" runat="server" Text="Auto-generate prod ID"></asp:Label>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:TextBox ID="editProf_name" runat="server"></asp:TextBox>
                         </td>
                     </tr>
 
                     <tr>
-                        <th>
-                            <asp:Label ID="Label1" runat="server" Text="Product ID"></asp:Label>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label3" runat="server" Text="IC Number"></asp:Label>
                         </th>
-                        <td>
-                            <asp:Label ID="Label2" runat="server" Text="Auto-generate prod ID"></asp:Label>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:TextBox ID="editProf_ic" runat="server" Enabled="false"></asp:TextBox>
                         </td>
                     </tr>
 
                     <tr>
-                        <th>
-                            <asp:Label ID="lbl_addProd_name" runat="server" Text="Name"></asp:Label>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label1" runat="server" Text="Phone Number"></asp:Label>
                         </th>
-                        <td>
-                            <asp:TextBox ID="tbx_addProd_name" runat="server"></asp:TextBox>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:TextBox ID="editProf_phone" runat="server"></asp:TextBox>
                         </td>
                     </tr>
 
                     <tr>
-                        <th>
-                            <asp:Label ID="Label3" runat="server" Text="Product ID"></asp:Label>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label2" runat="server" Text="Email"></asp:Label>
                         </th>
-                        <td>
-                            <asp:Label ID="Label4" runat="server" Text="Auto-generate prod ID"></asp:Label>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:TextBox ID="editProf_email" runat="server"></asp:TextBox>
                         </td>
                     </tr>
 
                     <tr>
-                        <th>
-                            <asp:Label ID="Label5" runat="server" Text="Product ID"></asp:Label>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label5" runat="server" Text="Gender"></asp:Label>
                         </th>
-                        <td>
-                            <asp:Label ID="Label6" runat="server" Text="Auto-generate prod ID"></asp:Label>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:TextBox ID="editProf_gender" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="lbl_editProf_userName" runat="server" Text="Description"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:20px; padding-left:10px; padding-top:5px;">
+                            <textarea id="editProf_desc" runat="server" cols="35" rows="8"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label4" runat="server" Text="Profile Image"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:10px; padding-left:10px;">
+                            <asp:FileUpload ID="editProf_image" runat="server" onchange="readURL1(this)"/>
                         </td>
                     </tr>
                 </table>
+
+                <table style="width:35%; float:left;">
+                    <tr>
+                        <td style="padding-bottom:2%;">
+                            <div id="hdn_img1"><img id="editProf_oriImage" class="profile_pic" src="#" alt="Preview" runat="server"/></div>
+                            <img id="edit_preview_img1" alt="Preview" src="#" class="profile_pic" style="display:none"/>
+                        </td>
+                    </tr>
+                    
+                </table>
+              
+
+            </div>
+                      
+            <div class="modal-footer" style="clear:both;">
+                <asp:Button ID="Button1" CssClass="btn btn-default" data-dismiss="modal" runat="server" Text="Cancel" />
+                <asp:Button ID="Button2" CssClass="btn btn-default" runat="server" Text="Edit" CausesValidation="false" OnClick="Button2_Click"/>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+  
+    </div>
+
+        <!-- Account setting modal -->
+    <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="modal_account" role="dialog" data-backdrop="static" >
+        <div class="modal-dialog" style="width:60%">
+    
+          <!-- Modal content-->
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Account Settings</h4>
             </div>
 
+            <div class="modal-body" style="height:350px;">
+                <table class="table_addPost" style="width:60%; float:left;">
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label6" runat="server" Text="Gallery ID"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:Label ID="Label7" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label8" runat="server" Text="Description"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:20px; padding-left:10px; padding-top:5px;">
+                            <textarea id="Textarea1" runat="server" cols="35" rows="8"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label9" runat="server" Text="Tag"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="Label10" runat="server" Text="Image"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:10px; padding-left:10px;">
+                            <asp:FileUpload ID="FileUpload1" runat="server"/>
+                            <%--<asp:Button ID="Button1" runat="server" Text="Preview" OnCommand="Button1_Command"/>--%>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+                      
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <%--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+                <asp:Button ID="Button3" CssClass="btn btn-default" data-dismiss="modal" runat="server" Text="Cancel" />
+                <asp:Button ID="Button4" CssClass="btn btn-default" runat="server" Text="Done" OnClick="btn_addPost_Click" CausesValidation="false"/>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+  
+    </div>
+
+
+
+    
+    <!-- Add New Post modal -->
+    <div class="container">
+      <!-- Modal -->
+      <div class="modal fade" id="modal_addPost" role="dialog" data-backdrop="static" >
+        <div class="modal-dialog" style="width:60%">
+    
+          <!-- Modal content-->
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">New Post</h4>
+            </div>
+
+            <div class="modal-body" style="height:350px;">
+                <table class="table_addPost" style="width:60%; float:left;">
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="lbl_addPost_id" runat="server" Text="Gallery ID"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:Label ID="res_addPost_id" runat="server"></asp:Label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="lbl_addPost_desc" runat="server" Text="Description"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:20px; padding-left:10px; padding-top:5px;">
+                            <textarea id="res_addPost_desc" runat="server" cols="35" rows="8"></textarea>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="lbl_addPost_tag" runat="server" Text="Tag"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:20px; padding-left:10px;">
+                            <asp:TextBox ID="res_addPost_tag" runat="server"></asp:TextBox>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="vertical-align:top;">
+                            <asp:Label ID="lbl_addPost_image" runat="server" Text="Image"></asp:Label>
+                        </th>
+                        <td style="padding-bottom:10px; padding-left:10px;">
+                            <asp:FileUpload ID="res_addPost_image" runat="server" onchange="readURL2(this)" />
+                        </td>
+                    </tr>
+                </table>
+
+                <table style="width:35%; float:left;">
+                    <tr>
+                        <td style="padding-bottom:2%;">
+                            <img id="addPost_img" height="300" width="225" src="#" alt="Preview"/>
+                        </td>
+                    </tr>
+                    
+                </table>
+              
+
+            </div>
+                      
+            <div class="modal-footer">
+                <asp:Button ID="btn_cancel" CssClass="btn btn-default" data-dismiss="modal" runat="server" Text="Cancel" />
+                <asp:Button ID="btn_addPost" CssClass="btn btn-default" runat="server" Text="Add Post" OnClick="btn_addPost_Click" CausesValidation="false"/>
             </div>
           </div>
       
@@ -402,47 +636,72 @@
 
             else if (id == document.getElementById("transHis").id)
                 window.location.href = "TransactionHistorySell.aspx";
-            else if (id == document.getElementById("changePass").id)
-                window.location.href = "changePassword.aspx";
-
+        }
+        
+        function open_addPost_Modal() {
+            $('#modal_addPost').modal('show');
         }
 
-        //function openModal(id) {
-        //    if (id == document.getElementById("editProfile").id)
-        //        //window.location
-        //}
+        function open_modal_editProfile() {
+            $('#modal_editProfile').modal('show');
+        }
 
-        function changeIcon() {
-            if (document.getElementById("icon_heart").className == "far fa-heart icon_heart") {
-                document.getElementById("icon_heart").className = "fas fa-heart icon_heart";
-                document.getElementById("icon_heart").style.color = "red icon_heart";
+        function open_modal_account() {
+            $('#modal_account').modal('show');
+        }
+
+        function AlertFunction() {
+            if (confirm('Are you sure you want to delete this post?')) {
+                $('#hdn_confirmDelete').val("True");
             } else {
-                document.getElementById("icon_heart").className = "far fa-heart";
-                document.getElementById("icon_heart").style.color = "black";
+                $('#hdn_confirmDelete').val("False");
             }
         }
 
-        function addComment() {
+        function ConfirmApproval(objMsg)
+        {
+            if(confirm(objMsg))
+            {
+                $("hdn_confirmDelete").val("true");
+                return true;
+            }    
+            else
+                return false;    
+        }
+
+        function readURL1(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
             
-            if (document.getElementById("icon_comment").className == "far fa-comment") {
-                document.getElementById("icon_comment").className = "far fa-comment-dots";
-
-
-
-                document.getElementById("tbx_comment").style.visibility = "visible";
-<%--                if (document.getElementById('<%=tbx_comment.ClientID%>').)
-                    document.getElementById("#tbx_comment").style.visibility = "visible";
-
-                else
-                    document.getElementById("#tbx_comment").style.visibility = "hidden";
-            --%>
-            } else {
-                document.getElementById("icon_comment").className = "far fa-comment";
-
-                
-
+                reader.onload = function (e) {
+                    $('#edit_preview_img1').attr('src', e.target.result);
+                    document.getElementById("edit_preview_img1").style.display = 'block';
+                    document.getElementById("hdn_img1").setAttribute("style", "display:none");
+                }
+            
+                reader.readAsDataURL(input.files[0]);
             }
         }
+    
+        $("#editProf_image").change(function(){
+            readURL1(this);
+        });
+
+        function readURL2(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+            
+                reader.onload = function (e) {
+                    $('#addPost_img').attr('src', e.target.result);
+                }
+            
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    
+        $("#res_addPost_image").change(function(){
+            readURL2(this);
+        });
 
     </script>
 

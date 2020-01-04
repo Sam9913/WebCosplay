@@ -19,13 +19,15 @@ namespace Assignment
 
         protected void Login1_LoggedIn(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]))
+            if (Session["ReturnURL"] != null)
             {
-                if (rblRole.SelectedIndex == 1)
-                    Response.Redirect("~/Seller_Profile.aspx");
-                else if (rblRole.SelectedIndex == 0)
-                    Response.Redirect("~/Customer_Profile.aspx");
+                string query = Session["ReturnURL"].ToString();
+                Response.Redirect("~/" + query);
             }
+            else if (rblRole.SelectedIndex == 1)
+                Response.Redirect("~/Seller_Profile.aspx");
+            else if (rblRole.SelectedIndex == 0)
+                Response.Redirect("~/Customer_Profile.aspx");
         }
 
         private bool SellerLogin(string userName, string password)

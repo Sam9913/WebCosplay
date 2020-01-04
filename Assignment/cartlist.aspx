@@ -175,13 +175,13 @@
        </div>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
-          <div style="float:left; width:78%;margin-top:5.7%">
+          <div style="float:left; width:70%;margin-top:5.7%">
             <table style="border-bottom:2px solid black; border-top:2px solid black" class="auto-style5">
                 <tr>
                 <td style="text-align:center;" class="tableheader">Product</td>
-                <td style="padding-right:150px;" class="tableheader">Detail</td>
+                <td style="padding-right:120px;" class="tableheader">Detail</td>
                 <td style="padding-left:10px;width:40px;text-align:center;" class="tableheader">Quantity</td>
-                <td style="padding-right:22px;" class="tableheader">Price(RM)</td>
+                <td style="padding-right:2px;" class="tableheader">Price(RM)</td>
                 <td style="padding-left:5px;text-align:center;" class="tableheader">Delete</td>
              </tr>
                
@@ -239,33 +239,34 @@
             </table>
             <br />
             <br />
-              </ContentTemplate>
-        </asp:UpdatePanel>
+              
             </div>
 
-    <div style="float:right;border:1px solid;margin-right:-6%;margin-top:1%;">
+    <div style="float:right;border:1px solid;margin-right:-7%;margin-top:1%;">
        <table>
           
            <tr><td style="padding:10px;" class="auto-style6"><h3 style="font-size:20px;">Order Summary</h3></td></tr>
           <tr>
                <td style="padding:10px;" class="auto-style6">Subtotal </td>
-               <td style="padding:10px; text-align:left">RM <asp:Label  runat="server" ID="subTotalPrice" Text=""/></td>
+               <td style="padding:10px; text-align:left">RM <asp:Label  runat="server" ID="subTotalPrice" Text="0.00"/></td>
            </tr>
 
            <tr>
                <td style="padding:10px;" class="auto-style6">Shipping Fee</td>
-            <td style="padding:10px;text-align:left">RM<asp:Label ID="shippingfee" runat="server" Text="3.80"></asp:Label></td> 
+            <td style="padding:10px;text-align:left">RM <asp:Label ID="shippingfee" runat="server" Text="0.00"></asp:Label></td> 
            </tr>
 
            <tr>
                <td style="padding:10px;" class="auto-style6">Total</td>
-               <td style="padding:10px;text-align:left">RM<asp:Label ID="totalAmount" runat="server" Text=""></asp:Label></td>
+               <td style="padding:10px;text-align:left">RM <asp:Label ID="totalAmount" runat="server" Text="0.00"></asp:Label></td>
            </tr>
 
          
    </table> 
         <asp:Button ID="ButtonCheckout" runat="server" Text="Checkout" style="border: 1.5px solid #333;font-size:15px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;" class="btn addBtn" OnClick="ButtonCheckout_Click"/>
           </div>
+    </ContentTemplate>
+        </asp:UpdatePanel>
         </div>
         <br />
       

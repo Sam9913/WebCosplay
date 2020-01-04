@@ -13,19 +13,39 @@ namespace Assignment
 {
     public partial class placeOrder : System.Web.UI.Page
     {
-         public static double cart_total;
+        public static double cart_total;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                //retrieve custoer details
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["KosupureEntities"].ToString());
+                SqlCommand selectCust = new SqlCommand("SELECT * from Customer where Cust_UserName=@username", conn);
+                selectCust.Parameters.Add("@username", SqlDbType.NVarChar).Value = Request.Cookies["customerName"].Value;
+                conn.Open();
+                SqlDataReader drcust = selectCust.ExecuteReader();
+                while (drcust.Read())
+                {
+                    string phone = drcust["Cust_Phone"].ToString();
+                    string mail = drcust["Cust_Email"].ToString();
+                    string adds = drcust["Cust_Address"].ToString();
+                    TxtAddress.InnerText = adds;
+                    TxtPhone.Text = phone;
+                    TxtEmail.Text = mail;
+
+                }
+
+                conn.Close();
+            }
         }
 
-       
+
 
         protected void btnplaceOrder_Click(object sender, EventArgs e)
         {
-           
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openModal();", true);
-           
+
             //add requredfield
             RequiredFieldValidator1.Enabled = true;
             RequiredFieldValidator2.Enabled = true;
@@ -102,7 +122,7 @@ namespace Assignment
             }
 
 
-            
+
             //get Pay type
             string type = TxtCreditCard.Text.Substring(0, 1);
             if (type == "4")
@@ -126,13 +146,14 @@ namespace Assignment
             }
 
             //Insert to Payment table
-            SqlCommand insertPayment = new SqlCommand("INSERT INTO Payment (Pay_ID,Pay_Type,Pay_Date,Pay_Amount,Cart_ID,Cust_ID) VALUES (@payID,@payType,@payDate,@payAmount,@cartid,@custid)", con);
+            SqlCommand insertPayment = new SqlCommand("INSERT INTO Payment (Pay_ID,Pay_Type,Pay_Date,Pay_Amount,Cart_ID,Cust_ID,Shipping_Adds,Shipping_PhoneNo) VALUES (@payID,@payType,GETDate(),@payAmount,@cartid,@custid,@adds,@phone)", con);
             insertPayment.Parameters.Add("@payID", SqlDbType.NVarChar).Value = newPayID;
             insertPayment.Parameters.Add("@payType", SqlDbType.NVarChar).Value = payType;
-            insertPayment.Parameters.Add("@payDate", SqlDbType.NVarChar).Value = date;
             insertPayment.Parameters.Add("@payAmount", SqlDbType.NVarChar).Value = cart_total;
             insertPayment.Parameters.Add("cartid", SqlDbType.NVarChar).Value = Request.Cookies["Cart_ID"].Value;
             insertPayment.Parameters.Add("@custid", SqlDbType.NVarChar).Value = custID;
+            insertPayment.Parameters.Add("@adds", SqlDbType.NVarChar).Value = TxtAddress.InnerText;
+            insertPayment.Parameters.Add("@phone", SqlDbType.NVarChar).Value = TxtPhone.Text;
 
             insertPayment.ExecuteNonQuery();
 
@@ -152,7 +173,7 @@ namespace Assignment
                 insertPaymentDetail.Parameters.Add("@sizeid", SqlDbType.NVarChar).Value = size.Text;
 
                 insertPaymentDetail.ExecuteNonQuery();
-                
+
             }
 
 
@@ -160,7 +181,7 @@ namespace Assignment
             SqlCommand insertTrans = new SqlCommand("INSERT INTO [TRANSACTION] (Trans_ID,pay_ID) VALUES (@transid,@payID)", con);
             insertTrans.Parameters.Add("@transid", SqlDbType.NVarChar).Value = newTransID;
             insertTrans.Parameters.Add("@payID", SqlDbType.NVarChar).Value = newPayID;
-            
+
 
             insertTrans.ExecuteNonQuery();
 
@@ -180,6 +201,8 @@ namespace Assignment
             payID.Text = newPayID;
             trans.Text = newTransID;
             date1.Text = date;
+            adds1.Text = TxtAddress.InnerText;
+            phone1.Text = TxtPhone.Text;
 
 
             //ScriptManager.RegisterStartupScript(this, this.Page.GetType(), "Pop", "Closepopup();", true);
@@ -197,20 +220,20 @@ namespace Assignment
 
             Label amount = e.Item.FindControl("LabelTotal") as Label;
 
-            cart_total =Convert.ToDouble(amount.Text);
+            cart_total = Convert.ToDouble(amount.Text);
             amountT.Text = "RM " + string.Format("{0:#,#.00}", amount.Text);
-            LabelTotal.Text= "RM " + string.Format("{0:#,#.00}", amount.Text); 
+            LabelTotal.Text = "RM " + string.Format("{0:#,#.00}", amount.Text);
             sub = (Convert.ToDouble(amount.Text) - fee);
             subtotal.Text = "RM " + " " + string.Format("{0:#,#.00}", sub);
-            LabelsTotal.Text= "RM " + " " + string.Format("{0:#,#.00}", sub);
-            shipping.Text="RM" + string.Format("{0:#,#.00}", fee);
+            LabelsTotal.Text = "RM " + " " + string.Format("{0:#,#.00}", sub);
+            shipping.Text = "RM" + string.Format("{0:#,#.00}", fee);
         }
 
-       
+
 
         protected void ButtonClose_Click(object sender, EventArgs e)
         {
-            Response.Redirect("/Home.aspx");
+            Response.Redirect("/TransactionHistoryCus.aspx");
         }
     }
 }

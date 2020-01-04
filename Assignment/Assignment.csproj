@@ -15,7 +15,7 @@
     <AssemblyName>Assignment</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -84,6 +84,8 @@
     <Content Include="changePassword.aspx" />
     <Content Include="Costume1.aspx" />
     <Content Include="Customer_Profile.aspx" />
+    <Content Include="ErrorPages\FileNotFound.htm" />
+    <Content Include="ErrorPages\GeneralError.aspx" />
     <Content Include="ForgetPassControl.ascx" />
     <Content Include="Front.aspx" />
     <Content Include="Home.aspx" />
@@ -205,6 +207,10 @@
     </Compile>
     <Compile Include="Customer_Profile.aspx.designer.cs">
       <DependentUpon>Customer_Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPages\GeneralError.aspx.cs">
+      <DependentUpon>GeneralError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ForgetPassControl.ascx.cs">
       <DependentUpon>ForgetPassControl.ascx</DependentUpon>

@@ -65,6 +65,18 @@
              font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
        
         }
+         .showDetail{
+             font-size: 15px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .txtAdds{
+            width:50%;
+            border-radius:5px;
+            border:1px solid;
+             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+       
+        }
 
         .lbl{
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -77,13 +89,16 @@
     <div class="table-space">
         
         <div style="margin-left:7%;width: 50%;float:left;">
+
+           
            <h3 style="margin-left:3%;" class="lbl">Shipping Address</h3>
             <table class="tableShipping"style="border:1px solid black;border-radius:5px;">
                 <tr><td><br /><h4 class="lbl">Contact information</h4></td></tr>
                 
                 <tr>
-                    <td>
-                        <asp:TextBox ID="TxtEmail" runat="server" class="txt" placeholder="Email"></asp:TextBox>
+                    <td style="width:20%;">
+                        
+                        <asp:TextBox ID="TxtEmail" runat="server" class="txt" placeholder="Email" ></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorEmail" runat="server" ErrorMessage="Email is Required" ControlToValidate="TxtEmail" Text="*" ForeColor="red"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="RegexEmail" Display="Dynamic" runat="server" ForeColor="red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="TxtEmail" ErrorMessage="Invalid Email" SetFocusOnError="true"></asp:RegularExpressionValidator>
                     </td>
@@ -91,7 +106,7 @@
                 
                     <tr>
                         <td><br />
-                            <asp:TextBox ID="TxtPhone" runat="server" class="txt" placeholder="Phone (+60)"></asp:TextBox>
+                            <asp:TextBox ID="TxtPhone" runat="server" class="txt" placeholder="Phone No"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorPhone" runat="server" ErrorMessage="Phone is Required" ControlToValidate="TxtPhone" Text="*" ForeColor="red"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="RegularExpressionValidatorPhone" Display="Dynamic" runat="server" ForeColor="red" ValidationExpression="^(\+?6?01)[0-46-9]-*[0-9]{7,8}$" ControlToValidate="TxtPhone" ErrorMessage="Invalid Phone Number" SetFocusOnError="true"></asp:RegularExpressionValidator>
                    </td>
@@ -103,7 +118,7 @@
 
                 <tr>
                     <td>
-                        <asp:TextBox ID="TxtName" runat="server" class="txt" placeholder="Full Name"></asp:TextBox>
+                        <asp:TextBox ID="TxtName" runat="server" class="txt1" placeholder="Full Name"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorName" runat="server" ForeColor="red" Text="*" ControlToValidate="TxtName"  ErrorMessage="Name is Required"></asp:RequiredFieldValidator>
                         <asp:RegularExpressionValidator ID="Reg" runat="server" ControlToValidate="TxtName"  ErrorMessage="Enter a valid name" ForeColor="Red" ValidationExpression="^[a-zA-Z'.\s]{1,50}"  SetFocusOnError="true"></asp:RegularExpressionValidator>
                      </td>
@@ -112,7 +127,7 @@
                 <tr>
                     <td>
                         <br />
-                  <asp:TextBox ID="TxtAddress" runat="server" class="txt" placeholder="Address"></asp:TextBox>
+                  <textarea id="TxtAddress" cols="20" rows="5" runat="server" class="txtAdds" placeholder="Address"></textarea>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidatorAddress" runat="server" ErrorMessage="Address is Required" ForeColor="red" ControlToValidate="TxtAddress" Text="*"></asp:RequiredFieldValidator>
                     </td>
                </tr>
@@ -121,65 +136,17 @@
                     <td>
                         <br />
                         <asp:TextBox ID="TxtHtype" runat="server" class="txt" placeholder="Apartment,suite,etc. (Optional)"></asp:TextBox>
+                           <br />
+            <br />
                     </td>
                </tr>
                 
-                <tr>
-                    <td>
-                <br />
-                    <asp:TextBox ID="TxtCity" runat="server" class="txt" placeholder="City"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidatorCity" runat="server" ForeColor="red" Text="*" ControlToValidate="TxtCity"  ErrorMessage="City is Required"></asp:RequiredFieldValidator>
-                       
-                        <asp:RegularExpressionValidator ID="RegularExpressionValidatorCity" runat="server" ControlToValidate="TxtCity" ErrorMessage="Invalid City" ForeColor="Red" ValidationExpression="^[a-zA-Z'@&#.\s]{1,50}$" SetFocusOnError="true"></asp:RegularExpressionValidator>
-                    </td>
-               </tr>
                 
-                <tr>
-                    <td>
-                        <table>
-                            <tr>
-                                <td>
-                                    <asp:DropDownList ID="DropDownList1" runat="server" class="ddl" style="width:105%;">
-                                        <asp:ListItem>Malaysia/ West Malaysia</asp:ListItem>
-                                        <asp:ListItem>Malaysia/ East Malaysia</asp:ListItem>
-                                    </asp:DropDownList>
-                                </td>
-                                <td style="width:30%;">
-                                    <asp:DropDownList ID="DropDownList2" runat="server" class="ddl" style="margin-left:15px;">
-                                        <asp:ListItem>Johor</asp:ListItem>
-                                        <asp:ListItem>Kedah</asp:ListItem>
-                                        <asp:ListItem>Kelantan</asp:ListItem>
-                                        <asp:ListItem>Perak</asp:ListItem>
-                                        <asp:ListItem>Selangor</asp:ListItem>
-                                        <asp:ListItem>Malacca</asp:ListItem>
-                                        <asp:ListItem>Negeri Sembilan</asp:ListItem>
-                                        <asp:ListItem>Pahang</asp:ListItem>
-                                        <asp:ListItem>Perlis</asp:ListItem>
-                                        <asp:ListItem>Penang</asp:ListItem>
-                                        <asp:ListItem>Sabah</asp:ListItem>
-                                        <asp:ListItem>Sarawak</asp:ListItem>
-                                        <asp:ListItem>Terengganu</asp:ListItem>
-                                    </asp:DropDownList>
-                                    
-                                </td>
-                                <td>
-                                    <asp:TextBox ID="TxtPostcode" runat="server" placeholder="Postcode" class="ddl" style="margin-top:20px;margin-left:-20px;"></asp:TextBox>
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidatorPC" runat="server" ForeColor="red" Text="*" ControlToValidate="TxtPostCode"  ErrorMessage="Post Code is Required"></asp:RequiredFieldValidator>
-                       
-                                    <asp:RegularExpressionValidator ID="RegularExpressionPostcode" runat="server" ErrorMessage="Invalid postcode" ControlToValidate="TxtPostCode" ValidationExpression="[0-9]{5}" SetFocusOnError="true" ForeColor="red"></asp:RegularExpressionValidator>
-                                </td>
-                            </tr>
-                        </table>
-
-                </td>
-                </tr>
-
+             
             </table>
             <br />
             <br />
 
-           
-           
         </div>
 
         <div style="float:right;width:45%;margin-right:-9%">
@@ -324,7 +291,7 @@
     </div>
 
 
-   <%-- -------------------receipt-----------------------%>
+   <%-- ------------------------------------------------------------------receipt----------------------------------------------------------------%>
     <div class="container">
       <!-- Modal -->
       <div class="modal fade" id="modal_showDetail" role="dialog"  data-backdrop="static">
@@ -339,22 +306,44 @@
             </div>
 
             <div class="modal-body" style="padding: 25px; margin-left: 10%;">
-                Transaction ID:<asp:Label ID="trans" runat="server"></asp:Label><br />
-                    Date: <asp:Label ID="date1" runat="server"></asp:Label><br /><br />
+                 <table>
+                    <tr style="height:30px;">
+                        <td class="showDetail">Transaction ID:</td>
+                        <td><asp:Label ID="trans" runat="server"></asp:Label></td>
+                        
+                    </tr>
+
+                   <tr style="height:30px;">
+                        <td class="showDetail">Date:</td>
+                        <td><asp:Label ID="date1" runat="server"></asp:Label></td>
+                    </tr>
+
+                   <tr style="height:30px;">
+                        <td style="width:150px;" class="showDetail"> Shipping Address:</td>
+                        <td><asp:Label ID="adds1" runat="server"></asp:Label></td>
+                    </tr>
+
+                    <tr style="height:30px;">
+                        <td class="showDetail"> Phone Number: </td>
+                        <td><asp:Label ID="phone1" runat="server"></asp:Label></td>
+                    </tr>
+                </table>
+              
+                <br />
 
                 <asp:Label ID="payID" runat="server" style="display:none"></asp:Label>
                 <table class="table_showDetail" style="border-bottom:1px solid">
                     <tr style="border-bottom:1px solid">
                         <td>
-                            <asp:Label ID="Label1" runat="server" style="padding-left:10px;">Product</asp:Label></td>
+                            <asp:Label ID="Label1" runat="server" style="padding-left:10px;" class="showDetail">Product</asp:Label></td>
                         <td>
-                            <asp:Label ID="Label2" runat="server" >Size</asp:Label></td>
+                            <asp:Label ID="Label2" runat="server" class="showDetail">Size</asp:Label></td>
                         <td>
-                            <asp:Label ID="Label3" runat="server">Qty</asp:Label></td>
+                            <asp:Label ID="Label3" runat="server" class="showDetail">Qty</asp:Label></td>
                         <td>
-                            <asp:Label ID="Label5" runat="server">U\Price(RM)</asp:Label></td>
+                            <asp:Label ID="Label5" runat="server" class="showDetail">U\Price(RM)</asp:Label></td>
                         <td>
-                            <asp:Label ID="Label4" runat="server">Amount(RM)</asp:Label></td>
+                            <asp:Label ID="Label4" runat="server" class="showDetail">Amount(RM)</asp:Label></td>
                     </tr>
                     <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource2">
                         <ItemTemplate>
@@ -364,6 +353,7 @@
                        <td style="padding:10px;width:100px"><%# Eval("Qty") %></td>
                             <td style="padding:10px;width:150px"><%# Eval("Prod_Price","{0:0.00}") %></td>
                             <td style="padding:10px;width:100px"><%# Eval("num","{0:0.00}") %></td>
+                            <br />
                             </tr>
                         </ItemTemplate>
                     </asp:Repeater>

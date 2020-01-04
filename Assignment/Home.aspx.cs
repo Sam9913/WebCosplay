@@ -12,7 +12,8 @@ namespace Assignment
         int i;
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["ReturnURL"] = "Home.aspx";
+            Session.Timeout = 300;
         }
 
         protected void buttonRight_Click(object sender, ImageClickEventArgs e)

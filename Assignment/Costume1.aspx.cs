@@ -14,18 +14,19 @@ namespace Assignment
     {
         public static string size;
         public static bool wish;
-        public static int count, time = 0;
+        public static int count, time = 0, stockleft;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["ReturnURL"] = "Costume1.aspx?productID=" + Request.QueryString["productID"];
+          
         }
 
         protected void wishButton_Click(object sender, EventArgs e)
         {
             Button wishBtn = null;
             string sizeId = null;
-            if (Request.Cookies["Wish_ID"] != null)
+            if(Request.Cookies["Wish_ID"] != null && Request.Cookies["customerName"] != null)
             {
                 foreach (DataListItem item in DataList1.Items)
                 {
@@ -94,9 +95,13 @@ namespace Assignment
 
                 }
                 conn.Close();
+                size = null;
             }
             else
-                Response.Redirect("/login.aspx");
+            {
+                string str = "You need to login to proceed the action. Do you want to login now ?";
+                ClientScript.RegisterStartupScript(typeof(Page), "Popup", "ConfirmApproval('" + str + "');", true);
+            }
 
         }
 
@@ -106,10 +111,10 @@ namespace Assignment
             int stockleft = 0;
             int cartCount = 0;
             string sizeid;
-            if (Request.Cookies["Cart_ID"] != null)
+            if(Request.Cookies["Cart_ID"] != null && Request.Cookies["customerName"] != null)
             {
                 string cart_ID = Request.Cookies["Cart_ID"].Value;
-                bool checkcart = false;
+                bool checkcart = true;
                 string prod_ID = Request.QueryString["productID"].ToString();
                 foreach (DataListItem dli in DataList1.Items)
                 {
@@ -198,6 +203,8 @@ namespace Assignment
                             updateProdCount.Parameters.Add("@sizeid", SqlDbType.NVarChar).Value = sizeid;
                             updateProdCount.ExecuteNonQuery();
                             checkcart = false;
+                            Response.Write("<script language=javascript>alert('The item had been added to cartlist.')</script>");
+
 
 
                             foreach (DataListItem dli in DataList1.Items)
@@ -254,16 +261,22 @@ namespace Assignment
                         }
 
                         checkcart = false;
+                        size = null;
                     }
                     conn.Close();
                 }
             }
             else
-                Response.Redirect("/login.aspx");
+            {
+                string str = "You need to login to proceed the action. Do you want to login now ?";
+                ClientScript.RegisterStartupScript(typeof(Page), "Popup", "ConfirmApproval('" + str + "');", true);
+            }
+            DataList1.DataBind();
         }
 
         protected void ButtonSize_Command(object sender, CommandEventArgs e)
         {
+            bool isEmpty = false;
             int index = Convert.ToInt32(e.CommandArgument);
             Label countProd = null;
             Repeater repeater1 = null;
@@ -277,7 +290,10 @@ namespace Assignment
                 if (button.CssClass.Equals("changeButton"))
                     button.CssClass = "onChangeButton";
                 else
+                {
                     button.CssClass = "changeButton";
+                    isEmpty = true;
+                }
                 if (time >= 1 && count != index)
                 {
                     Button buttonChange = repeater1.Items[count].FindControl("ButtonSize") as Button;
@@ -289,22 +305,29 @@ namespace Assignment
                 time++;
             }
 
-            SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["KosupureEntities"].ToString());
-
-            SqlCommand selectCon = new SqlCommand("SELECT SD.Prod_Count from SizeDetails SD inner join Size S on SD.Size_ID=S.Size_ID where S.Size_Details=@size and SD.Prod_ID=@prod_id", conn);
-            selectCon.Parameters.Add("@size", SqlDbType.NVarChar).Value = size;
-            selectCon.Parameters.Add("@prod_id", SqlDbType.NVarChar).Value = prod_ID;
-
-            conn.Open();
-            SqlDataReader dr = selectCon.ExecuteReader();
-
-            while (dr.Read())
+            if (isEmpty)
             {
-                string stock = dr["Prod_Count"].ToString();
-                int stockleft = Convert.ToInt32(stock);
-                countProd.Text = Convert.ToString(stockleft) + " stock left";
+                countProd.Text = "";
             }
-            conn.Close();
+            else
+            {
+                SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["KosupureEntities"].ToString());
+
+                SqlCommand selectCon = new SqlCommand("SELECT SD.Prod_Count from SizeDetails SD inner join Size S on SD.Size_ID=S.Size_ID where S.Size_Details=@size and SD.Prod_ID=@prod_id", conn);
+                selectCon.Parameters.Add("@size", SqlDbType.NVarChar).Value = size;
+                selectCon.Parameters.Add("@prod_id", SqlDbType.NVarChar).Value = prod_ID;
+
+                conn.Open();
+                SqlDataReader dr = selectCon.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    string stock = dr["Prod_Count"].ToString();
+                    stockleft = Convert.ToInt32(stock);
+                    countProd.Text = Convert.ToString(stockleft) + " stock left";
+                }
+                conn.Close();
+            }
         }
 
         protected void Image_Click(object sender, ImageClickEventArgs e)
@@ -337,7 +360,10 @@ namespace Assignment
             {
                 TextBox textBox = (TextBox)item.FindControl("txtQty");
                 int quantity = Int32.Parse(textBox.Text);
-                textBox.Text = (quantity + 1).ToString();
+                if (quantity < stockleft)
+                {
+                    textBox.Text = (quantity + 1).ToString();
+                }
             }
         }
 
@@ -371,7 +397,8 @@ namespace Assignment
 
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["KosupureEntities"].ToString());
 
-            if (Request.Cookies["Wish_ID"] != null)
+            if (Request.Cookies["Wish_ID"] != null && Request.Cookies["customerName"] != null)
+
             {
                 wish_ID = Request.Cookies["Wish_ID"].Value;
                 wishB = e.Item.FindControl("wishButton") as Button;

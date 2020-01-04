@@ -22,12 +22,14 @@ namespace Assignment
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-            totalPrice = 0.0;
+
+
+            totalPrice = 0.00;
             subTotal = 0.0;
-            string shippingFee = shippingfee.Text;
+            string shippingFee = "3.80";
             double sf = Convert.ToDouble(shippingFee);
             totalPrice = sf;
+
         }
 
 
@@ -95,7 +97,7 @@ namespace Assignment
                 }
                 else if (qty <= stockleft)
                 {
-                     qty += 1;
+                    qty += 1;
                     qty1.Text = Convert.ToString(qty);
                     priceperItem = Convert.ToDouble(price.Text) * Convert.ToDouble(qty);
                     totalItem.Text = string.Format("{0:#,#.00}", priceperItem);
@@ -114,7 +116,7 @@ namespace Assignment
         protected void ButtonCheckout_Click(object sender, EventArgs e)
         {
             string cart_ID = Request.Cookies["Cart_ID"].Value;
-            string custname= Request.Cookies["customerName"].Value;
+            string custname = Request.Cookies["customerName"].Value;
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["KosupureEntities"].ToString());
 
             //Select Customer
@@ -126,17 +128,27 @@ namespace Assignment
             while (drCust.Read())
             {
                 string custID = drCust["Cust_ID"].ToString();
-                     //Update totalAmount to Cart
+                //Update totalAmount to Cart
                 SqlCommand updateCart = new SqlCommand("Update Cart Set Cart_Total=@cartTotal Where Cart_ID=@cartid and Cust_ID=@custid", conn);
                 updateCart.Parameters.Add("@cartTotal", SqlDbType.Decimal).Value = Convert.ToDecimal(totalAmount.Text);
-               updateCart.Parameters.Add("@cartid", SqlDbType.NVarChar).Value = cart_ID;
-               updateCart.Parameters.Add("@custid", SqlDbType.NVarChar).Value = custID;
+                updateCart.Parameters.Add("@cartid", SqlDbType.NVarChar).Value = cart_ID;
+                updateCart.Parameters.Add("@custid", SqlDbType.NVarChar).Value = custID;
                 updateCart.ExecuteNonQuery();
-               
+
 
             }
             conn.Close();
+            int countRep = Repeater1.Controls.Count;
+            if (countRep == 0)
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('No item to checkout');", true);
+
+
+            }
+            else
+            {
                 Response.Redirect("/placeOrder.aspx");
+            }
         }
 
         protected void updateCart_Click(object sender, EventArgs e)
@@ -149,18 +161,18 @@ namespace Assignment
             int totalleft = 0;
             int count1 = 0;
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["KosupureEntities"].ToString());
-            
-           
-           
-            for (int i = 0; i < count+1; i++)
+
+
+
+            for (int i = 0; i < count + 1; i++)
             {
                 count1 += 1;
                 Label qty1 = Repeater1.Items[i].FindControl("LabelQty") as Label;
                 int qty = Convert.ToInt32(qty1.Text);
                 Label prodID = Repeater1.Items[i].FindControl("prodID") as Label;
                 string prodId = prodID.Text;
-                Label size1= Repeater1.Items[i].FindControl("SizeDetails") as Label;
-                string size=size1.Text;
+                Label size1 = Repeater1.Items[i].FindControl("SizeDetails") as Label;
+                string size = size1.Text;
 
                 SqlCommand selectSize = new SqlCommand("SELECT SD.Prod_Count,S.Size_ID from Size S inner join SizeDetails SD on S.Size_ID=SD.Size_ID where SD.Prod_ID=@prodid and S.Size_Details=@size", conn);
                 selectSize.Parameters.Add("@size", SqlDbType.NVarChar).Value = size1.Text;
@@ -197,20 +209,23 @@ namespace Assignment
                 {
                     totalleft = stockleft - (stockIncart - qty);
                 }
-                else  {
+                else
+                {
                     totalleft = stockleft + (stockIncart - qty);
                 }
-                 
+
                 SqlCommand updateProdCount = new SqlCommand("Update SizeDetails Set Prod_Count=@qty Where Prod_ID=@prod_id and Size_ID=@sizeid", conn);
                 updateProdCount.Parameters.Add("@qty", SqlDbType.Int).Value = totalleft;
                 updateProdCount.Parameters.Add("@prod_id", SqlDbType.NVarChar).Value = prodID.Text;
                 updateProdCount.Parameters.Add("@sizeid", SqlDbType.NVarChar).Value = sizeid;
                 updateProdCount.ExecuteNonQuery();
                 conn.Close();
-                }
-            
-                Response.Write("<script language='javascript'>window.alert('Update Successfully!');</script>");
-            
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('Update Successfully!');", true);
+
+            }
+
+            // Response.Write("<script language='javascript'>window.alert('Update Successfully!');</script>");
+
         }
 
         protected void deleteProduct_Command(object sender, CommandEventArgs e)
@@ -218,9 +233,9 @@ namespace Assignment
             int index = Convert.ToInt32(e.CommandArgument);
             string cart_ID = Request.Cookies["Cart_ID"].Value;
             string sizeid = null;
-            int stockleft = 0;
+            int stockleft = 0, qty1 = 0;
             Label prodID = Repeater1.Items[index].FindControl("ProdID") as Label;
-            Label qty= Repeater1.Items[index].FindControl("LabelQty") as Label;
+            Label qty = Repeater1.Items[index].FindControl("LabelQty") as Label;
             Label size1 = Repeater1.Items[index].FindControl("SizeDetails") as Label;
             SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["KosupureEntities"].ToString());
             SqlCommand selectSize = new SqlCommand("SELECT SD.Prod_Count,S.Size_ID from Size S inner join SizeDetails SD on S.Size_ID=SD.Size_ID where SD.Prod_ID=@prodid and S.Size_Details=@size", conn);
@@ -234,13 +249,25 @@ namespace Assignment
                 string stock = drsize["Prod_Count"].ToString();
                 stockleft = Convert.ToInt32(stock);
             }
+            SqlCommand getqty = new SqlCommand("Select Qty from Cartlist where Cart_ID=@cartid and Prod_ID=@prodid and Size_ID=@size", conn);
+            getqty.Parameters.Add("@cartid", SqlDbType.NVarChar).Value = cart_ID;
+            getqty.Parameters.Add("@prodid", SqlDbType.NVarChar).Value = prodID.Text;
+            getqty.Parameters.Add("@size", SqlDbType.NVarChar).Value = sizeid;
+            SqlDataReader drqty = getqty.ExecuteReader();
+            while (drqty.Read())
+            {
+                string qty2 = drqty["Qty"].ToString();
+                qty1 = Convert.ToInt32(qty2);
+            }
+
+
             SqlCommand deleteCartlist = new SqlCommand(@"Delete from Cartlist Where Prod_ID = @Prod_ID and Cart_ID=@cartid and Size_ID=@sizeid", conn);
             deleteCartlist.Parameters.Add("@Prod_ID", SqlDbType.NVarChar).Value = prodID.Text;
             deleteCartlist.Parameters.Add("@cartid", SqlDbType.NVarChar).Value = cart_ID;
             deleteCartlist.Parameters.Add("@sizeid", SqlDbType.NVarChar).Value = sizeid;
 
 
-            int totalleft = stockleft + Convert.ToInt32(qty.Text);
+            int totalleft = stockleft + qty1;
             SqlCommand updateProdCount = new SqlCommand("Update SizeDetails Set Prod_Count=@qty Where Prod_ID=@prod_id and Size_ID=@sizeid", conn);
             updateProdCount.Parameters.Add("@qty", SqlDbType.Int).Value = totalleft;
             updateProdCount.Parameters.Add("@prod_id", SqlDbType.NVarChar).Value = prodID.Text;
@@ -251,10 +278,20 @@ namespace Assignment
             conn.Close();
             if (result == 1)
             {
-                Response.Write("<script language=javascript>alert('The item had been successfully delete.')</script>");
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(), "alert", "alert('The item have successfully deleted');", true);
+
+                Repeater1.DataBind();
+                int countRep = Repeater1.Controls.Count;
+                if (countRep == 0)
+                {
+                    totalAmount.Text = "0.00";
+                    subTotalPrice.Text = "0.00";
+                    shippingfee.Text = "0.00";
+
+                }
             }
             conn.Close();
-            Repeater1.DataBind();
+
         }
 
         protected void Prod_NameLabel_Click(object sender, EventArgs e)
@@ -265,11 +302,13 @@ namespace Assignment
             Label catID = (Label)item.FindControl("CatID");
 
             Session["Cat_ID"] = catID.Text;
-             Response.Redirect("~/Costume1.aspx?productID=" + prodID.Text.ToString());
+            Response.Redirect("~/Costume1.aspx?productID=" + prodID.Text.ToString());
         }
 
         protected void Repeater1_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
+
+            shippingfee.Text = "3.80";
             Label price1 = (Label)e.Item.FindControl("Prod_PriceLabel");
             Label qty1 = e.Item.FindControl("LabelQty") as Label;
             Label totalPerItem = e.Item.FindControl("totalPerItem") as Label;
@@ -280,9 +319,10 @@ namespace Assignment
             totalPerItem.Text = string.Format("{0:#,#.00}", p1);
             totalAmount.Text = string.Format("{0:#,#.00}", totalPrice);
             subTotalPrice.Text = string.Format("{0:#,#.00}", subTotal);
-           
+
+
         }
- }
+    }
 
 }
 

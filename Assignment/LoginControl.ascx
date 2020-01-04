@@ -7,4 +7,5 @@
 <asp:Login ID="Login1" runat="server"  Font-Names="Verdana" Font-Size="10pt" OnLoggedIn="Login1_LoggedIn" OnAuthenticate="Login1_Authenticate">
     <TitleTextStyle BackColor="#6B696B" Font-Bold="True" ForeColor="#FFFFFF" />
 </asp:Login>
-<asp:LinkButton ID="lbPass" runat="server" OnClick="lbPass_Click">Forgot password press here</asp:LinkButton>
+<br />
+<asp:LinkButton ID="lbPass" runat="server" OnClick="lbPass_Click" style="margin-right:15%;">Forgot password press here</asp:LinkButton>

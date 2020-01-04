@@ -42,6 +42,11 @@
             
         }
 
+        .showDetail{
+             font-size: 15px;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
         .seller_nav td {
             padding: 5%;
             border-top: 1px solid #333;
@@ -125,7 +130,9 @@
                 <td style="padding:10px" class="auto-style1"></td>
              </tr>
 
-            <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT T.Trans_ID,P.Pay_Date,P.Pay_ID,P.Pay_Type,P.Pay_Amount from [TRANSACTION] T join Payment P on T.pay_ID=P.Pay_ID join Customer CU on CU.Cust_ID=P.Cust_ID where CU.Cust_UserName=@username ">
+            <asp:SqlDataSource runat="server" ID="SqlDataSource1" ConnectionString='<%$ ConnectionStrings:ConnectionString %>' SelectCommand="SELECT T.Trans_ID,P.Pay_Date,P.Pay_ID,P.Pay_Type,P.Pay_Amount,P.Shipping_Adds,P.Shipping_phoneNo from [TRANSACTION] T join Payment P on T.pay_ID=P.Pay_ID join Customer CU on CU.Cust_ID=P.Cust_ID where CU.Cust_UserName=@username 
+Order by P.Pay_ID Desc
+">
                 <SelectParameters>
                     <asp:CookieParameter CookieName="customerName" Name="username"></asp:CookieParameter>
 
@@ -133,11 +140,14 @@
                 </asp:SqlDataSource>
             <asp:Repeater ID="Repeater2" runat="server" DataSourceID="SqlDataSource1" OnItemDataBound="Repeater2_ItemDataBound">
                     <ItemTemplate>
+                        <asp:Label ID="payDate" runat="server" Text='<%# Eval("Pay_Date") %>' style="display:none"></asp:Label>
+                        <asp:Label ID="payAdds" runat="server" Text='<%# Eval("Shipping_Adds") %>' style="display:none"></asp:Label>
+                        <asp:Label ID="payPhone" runat="server" Text='<%# Eval("Shipping_PhoneNo") %>' style="display:none"></asp:Label>
                          <tr>
                         <td style="padding:10px;width:40px;" class="auto-style2" >
                             <asp:Label ID="count" runat="server" ></asp:Label></td>
                         <td style="padding:10px;width:120px;" class="auto-style2">
-                            <asp:Label ID="payDate" runat="server" Text='<%# Eval("Pay_Date","{0:dd/MM/yyyy}") %>'></asp:Label></td>
+                            <asp:Label ID="payDate1" runat="server" Text='<%# Eval("Pay_Date","{0:dd/MM/yyyy}") %>'></asp:Label></td>
                              <td style="padding:10px;width:180px;" class="auto-style2">
                                  <asp:Label ID="trans_ID" runat="server" Text='<%# Eval("Trans_ID") %>'></asp:Label></td>
                         <td style="padding:10px; width:170px" class="auto-style2">
@@ -173,26 +183,49 @@
             </div>
 
             <div class="modal-body" style="padding: 25px; margin-left: 10%;">
-                Transaction ID:<asp:Label ID="trans" runat="server"></asp:Label><br />
-                    Date: <asp:Label ID="date" runat="server"></asp:Label><br /><br />
+                <table>
+                    <tr style="height:30px;">
+                        <td class="showDetail">Transaction ID:</td>
+                        <td><asp:Label ID="trans" runat="server"></asp:Label></td>
+                        
+                    </tr>
+
+                   <tr style="height:30px;">
+                        <td class="showDetail">Date:</td>
+                        <td><asp:Label ID="date" runat="server"></asp:Label></td>
+                    </tr>
+
+                   <tr style="height:30px;">
+                        <td style="width:150px;" class="showDetail"> Shipping Address:</td>
+                        <td><asp:Label ID="adds1" runat="server"></asp:Label></td>
+                    </tr>
+
+                    <tr style="height:30px;">
+                        <td class="showDetail"> Phone Number: </td>
+                        <td><asp:Label ID="phone1" runat="server"></asp:Label></td>
+                    </tr>
+                </table>
+              
+                <br />
+
 
                 <asp:Label ID="payID" runat="server" style="display:none"></asp:Label>
                 <table class="table_showDetail" style="border-bottom:1px solid">
                     <tr style="border-bottom:1px solid">
                         <td>
-                            <asp:Label ID="Label1" runat="server" style="padding-left:10px;">Product</asp:Label></td>
+                            <asp:Label ID="Label1" runat="server" style="padding-left:10px;" class="showDetail">Product</asp:Label></td>
                         <td>
-                            <asp:Label ID="Label2" runat="server" >Size</asp:Label></td>
+                            <asp:Label ID="Label2" runat="server" class="showDetail">Size</asp:Label></td>
                         <td>
-                            <asp:Label ID="Label3" runat="server">Qty</asp:Label></td>
+                            <asp:Label ID="Label3" runat="server" class="showDetail">Qty</asp:Label></td>
                         <td>
-                            <asp:Label ID="Label5" runat="server">U\Price(RM)</asp:Label></td>
+                            <asp:Label ID="Label5" runat="server" class="showDetail">U\Price(RM)</asp:Label></td>
                         <td>
-                            <asp:Label ID="Label4" runat="server">Amount(RM)</asp:Label></td>
+                            <asp:Label ID="Label4" runat="server" class="showDetail">Amount(RM)</asp:Label></td>
                     </tr>
                     <asp:Repeater ID="Repeater1" runat="server" DataSourceID="SqlDataSource2">
                         <ItemTemplate>
-                        <tr>
+                        <tr style="height:20px;">
                          <td style="padding:10px;width:180px;"><%# Eval("Prod_Name") %></td>
                         <td style="padding:10px; width:100px"><%# Eval("Size_Details") %></td>
                        <td style="padding:10px;width:100px"><%# Eval("Qty") %></td>
